@@ -9,6 +9,9 @@ package edu.upc.etsetb.archsoft.spreadsheet.blocks;
  *
  * @author Alex
  */
-public class Function {
-    
+public class Function implements content{
+    public void getContent(){
+    }  
+    public void error(){
+    }     
 }

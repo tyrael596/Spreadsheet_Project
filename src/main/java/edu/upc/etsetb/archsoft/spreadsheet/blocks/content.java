@@ -10,5 +10,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.blocks;
  * @author Alex
  */
 public interface content {
-    
+    String value;
+    abstract void getContent();
+    abstract void error();   
 }

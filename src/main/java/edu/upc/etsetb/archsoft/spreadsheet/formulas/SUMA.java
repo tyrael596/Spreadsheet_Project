@@ -10,5 +10,8 @@ package edu.upc.etsetb.archsoft.spreadsheet.formulas;
  * @author Alex
  */
 public class SUMA {
-    
+    public void Calculate(){
+    }
+    public void getError(){
+    }  
 }

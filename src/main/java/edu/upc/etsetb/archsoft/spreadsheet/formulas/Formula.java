@@ -10,5 +10,8 @@ package edu.upc.etsetb.archsoft.spreadsheet.formulas;
  * @author Alex
  */
 public interface Formula {
+    String inside;
+    abstract void Calculate();
+    abstract void getError();
     
 }

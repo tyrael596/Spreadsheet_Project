@@ -9,6 +9,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.blocks;
  *
  * @author Alex
  */
-public class Numeric {
-    
+public class Numeric implements content{
+    public void getContent(){
+    }     
 }

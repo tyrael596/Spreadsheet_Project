@@ -10,5 +10,8 @@ package edu.upc.etsetb.archsoft.spreadsheet.formulas;
  * @author Alex
  */
 public class MAX {
-    
+    public void Calculate(){
+    }
+    public void getError(){
+    }    
 }

@@ -9,6 +9,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.blocks;
  *
  * @author Alex
  */
-public class String {
-    
+public class String implements content{
+    public void getContent(){
+    }       
 }

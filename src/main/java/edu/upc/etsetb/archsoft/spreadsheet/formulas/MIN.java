@@ -9,6 +9,11 @@ package edu.upc.etsetb.archsoft.spreadsheet.formulas;
  *
  * @author Alex
  */
-public class MIN {
+public class MIN implements Formula {
+    public void Calculate(){
+    }
+    public void getError(){
+    }     
+    
     
 }

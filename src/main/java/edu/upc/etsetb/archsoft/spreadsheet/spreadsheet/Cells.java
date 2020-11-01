@@ -5,10 +5,14 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
+
 /**
  *
  * @author Alex
  */
 public class Cells {
-    
+    static int row;
+    static int col;
+    public void getType(){
+    }
 }

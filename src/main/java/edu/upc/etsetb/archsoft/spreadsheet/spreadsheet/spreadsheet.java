@@ -11,4 +11,13 @@ package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
  */
 public class spreadsheet {
     
+    public void exportSp(){
+    }
+    public void importSp(){
+    }
+    public void printSp(){
+    }
+    public void updateSp(){
+    }
 }
+
