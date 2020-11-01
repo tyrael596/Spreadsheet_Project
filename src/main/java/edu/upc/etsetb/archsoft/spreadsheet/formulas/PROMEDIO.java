@@ -9,7 +9,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.formulas;
  *
  * @author Alex
  */
-public class PROMEDIO {
+public class PROMEDIO implements Formula{
     public void Calculate(){
     }
     public void getError(){

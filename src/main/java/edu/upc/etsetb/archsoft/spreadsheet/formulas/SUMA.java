@@ -9,7 +9,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.formulas;
  *
  * @author Alex
  */
-public class SUMA {
+public class SUMA implements Formula{
     public void Calculate(){
     }
     public void getError(){
