@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.formulas;
+package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula;
 
 /**
  *
  * @author Alex
  */
-public interface Formula {
-    String inside;
-    abstract void Calculate();
-    abstract void getError();
+public interface Operador {
+
     
 }

@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
-
+package edu.upc.etsetb.archsoft.spreadsheet.BasicElements;
 
 /**
  *
  * @author Alex
  */
-public class Cells {
-    static int row;
-    static int col;
-   // public void getType(){
-    //}
+public class CellText implements CellContent{
+    CellText value;
+  /*  public void getContent(){
+    }     */  
 }
