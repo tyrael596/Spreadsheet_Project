@@ -3,13 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.blocks;
+package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
+
+import java.lang.reflect.Array;
 
 /**
  *
  * @author Alex
  */
-public class Numeric implements content{
-    public void getContent(){
-    }     
+public class VisualInterface {
+    String userInput;
+    String[] Spreadsheet;
+    //public void askUser(){
+    //}
+    
 }
