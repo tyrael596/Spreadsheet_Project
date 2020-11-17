@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.formulas;
+package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
+
+import java.lang.reflect.Array;
 
 /**
  *
  * @author Alex
  */
-public class MAX implements Formula{
-    public void Calculate(){
-    }
-    public void getError(){
-    }    
+public class VisualInterface {
+    String userInput;
+    String[] Spreadsheet;
+    //public void askUser(){
+    //}
+    
 }

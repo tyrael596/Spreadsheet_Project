@@ -3,21 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
+package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula;
 
 /**
  *
  * @author Alex
  */
-public class spreadsheet {
-    
-    public void exportSp(){
-    }
-    public void importSp(){
-    }
-    public void printSp(){
-    }
-    public void updateSp(){
-    }
-}
+public class Numeric {
 
+    
+}

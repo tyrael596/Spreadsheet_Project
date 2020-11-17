@@ -13,6 +13,6 @@ package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 public class Cells {
     static int row;
     static int col;
-    public void getType(){
-    }
+   // public void getType(){
+    //}
 }

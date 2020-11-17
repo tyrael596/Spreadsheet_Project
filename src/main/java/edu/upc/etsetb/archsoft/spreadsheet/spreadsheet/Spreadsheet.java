@@ -5,16 +5,20 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
-import java.lang.reflect.Array;
-
 /**
  *
  * @author Alex
  */
-public class visualInterface {
-    String userInput;
-    String[] Spreadsheet;
-    public void askUser(){
-    }
+public class Spreadsheet {
     
+/*    public void exportSp(){
+    }
+    public void importSp(){
+    }
+    public void printSp(){
+    }
+    public void updateSp(){
+    } 
+ */
 }
+

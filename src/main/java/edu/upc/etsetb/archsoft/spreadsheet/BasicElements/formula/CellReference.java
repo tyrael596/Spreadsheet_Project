@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.blocks;
+package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula;
 
 /**
  *
  * @author Alex
  */
-public interface content {
-    String value;
-    abstract void getContent();
-    abstract void error();   
+public class CellReference {
+
+    
 }

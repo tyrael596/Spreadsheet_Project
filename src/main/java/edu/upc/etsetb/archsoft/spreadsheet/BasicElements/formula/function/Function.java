@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.formulas;
+package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
 
 /**
  *
  * @author Alex
  */
-public interface Formula {
-    String inside;
-    abstract void Calculate();
+public abstract class Function {
+    static String inside ="";
+    static String range = "";
+    abstract float Calculate();
     abstract void getError();
+
     
 }

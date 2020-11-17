@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.formulas;
+package edu.upc.etsetb.archsoft.spreadsheet.BasicElements;
 
 /**
  *
  * @author Alex
  */
-public class SUMA implements Formula{
-    public void Calculate(){
-    }
-    public void getError(){
-    }  
+public class CellText implements CellContent{
+    String value="";
+  /*  public void getContent(){
+    }     */  
 }
