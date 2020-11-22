@@ -6,6 +6,7 @@
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements;
 
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -16,6 +17,11 @@ public class CellFormula implements CellContent{
     Number value;
     String content="";
     List formulaList;
+    
+    
+    static void getTokens(String dataInput){
+        Scanner scanner = new Scanner(dataInput);
+    }
     
    /* public void getContent(){
     }  
