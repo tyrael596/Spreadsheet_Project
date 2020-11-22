@@ -4,17 +4,27 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
-
+import java.util.LinkedList;
 /**
  *
- * @author Alex
+ * @author Amaya
  */
 
 public class PROMEDIO extends Function{
 
     @Override
-    float Calculate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    float Calculate(LinkedList list) {         
+        float a = 0,aux = 0;
+        int last = list.size();
+        aux = (float) list.peekFirst();
+
+       for (int i = 1; i <= last; i++) {
+            aux = (float) list.pollFirst()+ a;
+       } 
+        a = aux/last;
+       return a;
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

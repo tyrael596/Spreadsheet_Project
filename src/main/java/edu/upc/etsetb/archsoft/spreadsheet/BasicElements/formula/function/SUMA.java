@@ -4,17 +4,26 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
-
+import java.util.LinkedList;
 /**
  *
- * @author Alex
+ * @author Amaya
  */
 
 public class SUMA extends Function{
 
     @Override
-    float Calculate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    float Calculate(LinkedList list) {         
+        float a = 0;
+        int last = list.size();
+        a = (float) list.peekFirst();
+
+       for (int i = 1; i <= last; i++) {
+            a = (float) list.pollFirst()+ a;
+       } 
+       return a;
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

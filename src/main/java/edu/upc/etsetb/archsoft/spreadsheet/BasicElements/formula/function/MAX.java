@@ -4,16 +4,34 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
-
+import java.util.LinkedList;
 /**
  *
- * @author Alex
+ * @author Amaya
  */
-public class MAX extends Function{
 
+
+public class MAX extends Function{
+    /**
+     * MAX class method that calculates the final value
+     * @params arguments: n is the number of parameters contained in the array
+     * list: array of arguments
+     */
     @Override
-    float Calculate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    float Calculate(LinkedList list) {
+        float a,aux = 0;
+        int last = list.size();
+        a = (float) list.peekFirst();
+
+       for (int i = 1; i <= last; i++) {
+            aux = (float) list.pollFirst();
+           if (aux > a){
+               a = aux;
+           }
+       } 
+       return a;
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -26,4 +44,6 @@ public class MAX extends Function{
     }
     public void getError(){
     }    */
+
+    
 }

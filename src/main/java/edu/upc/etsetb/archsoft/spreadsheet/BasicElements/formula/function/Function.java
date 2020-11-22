@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
-
+import java.util.LinkedList;
 /**
  *
  * @author Alex
@@ -12,7 +12,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
 public abstract class Function {
     static String inside ="";
     static String range = "";
-    abstract float Calculate();
+    abstract float Calculate(LinkedList list);
     abstract void getError();
 
     
