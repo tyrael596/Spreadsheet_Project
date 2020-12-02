@@ -9,8 +9,15 @@ package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula;
  *
  * @author Alex
  */
-public interface FormulaElement {
+public class FormulaElement {
+    int token; //Token Variable int,string o otro?
+    String sequence;
 
+    public FormulaElement(int token, String sequence) { //Token Variable int,string o otro?
+        super();
+        this.token = token; //Token Variable int,string o otro?
+        this.sequence = sequence;
+    }
 
     
 }
