@@ -5,13 +5,16 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author Alex
  */
 public class Spreadsheet {
+    LinkedList<Cell> affectedCells = new LinkedList(); //Cells being used by references
     
-/*    public void exportSp(){
+    public void exportSp(){
     }
     public void importSp(){
     }
@@ -19,6 +22,8 @@ public class Spreadsheet {
     }
     public void updateSp(){
     } 
- */
+ 
+    // Metodo ModifyCell +++ 
+    // Tokenizer -> ParserCleaner (formato correcto)  -> Postfixer
 }
 

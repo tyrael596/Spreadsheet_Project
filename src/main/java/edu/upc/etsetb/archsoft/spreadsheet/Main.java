@@ -19,8 +19,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-            CellFormula cellFormula = new CellFormula();
-            
+    /*        CellFormula cellFormula = new CellFormula();
             cellFormula.add("\\(", 1); // open bracket
             cellFormula.add("\\)", 2); // close bracket
             cellFormula.add("[-]", 3); 
@@ -33,6 +32,10 @@ public class Main {
             cellFormula.add("[/]", 10); 
             cellFormula.add("[0-9]+",11); // integer number
             cellFormula.add("[a-zA-Z]{1,}[0-9]{1,}", 12); // CellReference
+            cellFormula.add("[a-zA-Z]{1,}[0-9]{1,}", 13); // CellReference
+        Aqui falta RANGE OF cells A4:B5
+        
+        */
             
     }
 
