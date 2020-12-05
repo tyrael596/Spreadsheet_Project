@@ -6,7 +6,8 @@
 package edu.upc.etsetb.archsoft.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellFormula;
-
+import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Postfixer;
+import java.util.LinkedList;
 /**
  *
  * @author Alex
@@ -17,6 +18,33 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+       //creamos lista
+       
+        LinkedList<String> input = new LinkedList();
+         input.add("(");
+         input.add("5");
+         input.add("*");
+         input.add("4");
+         input.add("+");
+         input.add("3");
+         input.add("*");
+         input.add(")");
+         input.add("-");
+         input.add("1");
+       //  input.add("MAX");
+         //input.add("(");
+         //input.add("3");
+         //input.add(",");
+         //input.add("6");
+         //input.add(")");
+         System.out.println(input);
+         
+         System.out.println(input.size());
+         LinkedList<String> postfix = new LinkedList();
+         
+        postfix = Postfixer.shuntingYardAlgorithm(input);
+         
+        System.out.println(postfix);
         // TODO code application logic here
         
     /*        CellFormula cellFormula = new CellFormula();
