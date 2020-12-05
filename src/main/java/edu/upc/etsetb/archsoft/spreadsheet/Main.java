@@ -6,6 +6,8 @@
 package edu.upc.etsetb.archsoft.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellFormula;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
+import static edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.PostfixEvaluator.evaluator;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Postfixer;
 import java.util.LinkedList;
 /**
@@ -19,32 +21,59 @@ public class Main {
      */
     public static void main(String[] args) {
        //creamos lista
-       
-        LinkedList<String> input = new LinkedList();
-         input.add("(");
-         input.add("5");
-         input.add("*");
-         input.add("4");
-         input.add("+");
-         input.add("3");
-         input.add("*");
-         input.add(")");
-         input.add("-");
-         input.add("1");
+        FormulaElement a = new FormulaElement(1,"(");
+        FormulaElement b = new FormulaElement(11,"5");
+        FormulaElement c = new FormulaElement(10,"/");
+        FormulaElement d = new FormulaElement(11,"2");
+        FormulaElement e = new FormulaElement(2,")");
+        FormulaElement f = new FormulaElement(4,"+");
+        FormulaElement g = new FormulaElement(11,"3");
+        FormulaElement h = new FormulaElement(9,"*");
+        FormulaElement i = new FormulaElement(11,"6");
+        FormulaElement j = new FormulaElement(3,"-");
+        FormulaElement k = new FormulaElement(11,"5");
+        LinkedList<FormulaElement> input = new LinkedList();
+        input.add(a);        
+        input.add(b);
+        input.add(c);
+        input.add(d);        
+
+        input.add(e);
+
+        input.add(f);
+
+        input.add(g); 
+
+        input.add(h);
+
+        input.add(i);
+        input.add(j);
+
+        input.add(k);
+         //input.add("1");
        //  input.add("MAX");
          //input.add("(");
          //input.add("3");
          //input.add(",");
          //input.add("6");
          //input.add(")");
-         System.out.println(input);
+              
          
-         System.out.println(input.size());
-         LinkedList<String> postfix = new LinkedList();
+         System.out.println("size " + input.size());
+         LinkedList<FormulaElement> postfix = new LinkedList();
          
         postfix = Postfixer.shuntingYardAlgorithm(input);
+        /* while(postfix.isEmpty() == false){
+            a = postfix.pop();
+            System.out.println("postfix " + a.getSequence());
+        }    */   
+        float output = evaluator(postfix);
+        System.out.println("output " + output);
+        
+
+        
          
-        System.out.println(postfix);
+       // System.out.println(postfix);
         // TODO code application logic here
         
     /*        CellFormula cellFormula = new CellFormula();

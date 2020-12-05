@@ -19,5 +19,22 @@ public class FormulaElement {
         this.sequence = sequence;
     }
 
+    public FormulaElement() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public String getSequence(){
+        return this.sequence;
+    }
+    public int getToken(){
+        return this.token;
+    }
+    public void changeSequence(String newSequence){
+        this.sequence = newSequence;
+        System.out.println("changed Sequence: " +this.sequence);
+    }
+    public void changeToken(int newToken){
+       this.token = newToken;
+    }
     
 }

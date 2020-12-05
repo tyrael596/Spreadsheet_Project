@@ -5,6 +5,7 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,10 +17,10 @@ public class Postfixer {
       List formulaList; 
     
 //Habra que hacerlo static seguramente
-    public static LinkedList shuntingYardAlgorithm(LinkedList<String> input){ // Consideramos que la función es válida 
-            LinkedList<String> operatorStack = new LinkedList(); 
-            LinkedList<String> numbersQueue = new LinkedList(); 
-            String aux,aux2; 
+    public static LinkedList shuntingYardAlgorithm(LinkedList<FormulaElement> input){ // Consideramos que la función es válida 
+            LinkedList<FormulaElement> operatorStack = new LinkedList(); 
+            LinkedList<FormulaElement> numbersQueue = new LinkedList(); 
+            FormulaElement aux,aux2; 
             int lastPrecedence = 0;
             float number; 
             // si es un simbolo y tiene menos preferencia que el ultimo del stack entonces saco el del stack y lo meto con los numeros y pongo el de menor preferencia en el stack 
@@ -28,40 +29,41 @@ public class Postfixer {
                 aux = input.poll(); 
                 // intentamos convertirlo a un float 
                 try{ 
-                    number = Float.parseFloat(aux); 
+                    number = Float.parseFloat(aux.getSequence()); 
                     numbersQueue.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición 
+       
                 } catch( NumberFormatException e ){ 
                  //significa que no es un numero por lo que procedemos a identificar qué es 
                  //llamamos a la función que nos dic"e lo que es 
-                    int precedence = checkPrecedence(aux); 
+                    int precedence = checkPrecedence(aux.getSequence()); 
                     aux2 = operatorStack.peekFirst(); 
                     if(aux2 != null){//comprueba si la cola está vacia 
-                        lastPrecedence = checkPrecedence(aux2);  
+                        lastPrecedence = checkPrecedence(aux2.getSequence());  
                         if(precedence != 4){
                             if(precedence == 3){
                                //se trata de un parentesis de cierre 
-                                //operatorStack.removeFirst(); 
+              
                                 aux2 = operatorStack.pollFirst(); 
-                                lastPrecedence = checkPrecedence(aux2); 
+                                lastPrecedence = checkPrecedence(aux2.getSequence()); 
                                 while( lastPrecedence != 0){ // Hasta que llega al de apertura 
                                    numbersQueue.addLast(aux2); 
                                    aux2 = operatorStack.pollFirst(); 
-                                   System.out.println("estoy anadiendo cositas");
-                                   System.out.println(numbersQueue);
-                                   System.out.println("lo que queda" + operatorStack);
-                                   lastPrecedence = checkPrecedence(aux2); 
+              
+                                   lastPrecedence = checkPrecedence(aux2.getSequence()); 
                                } 
+                                             
                                 aux2 = operatorStack.pollFirst(); 
                             } 
-                            else{if (precedence > lastPrecedence){ 
+                            else{if (precedence >= lastPrecedence){ 
                                     operatorStack.addFirst(aux);
-                                    System.out.println(operatorStack);
-
-                                }else{ 
+                                    
+                                    
+                                }else if(lastPrecedence > precedence){
+                                          
                                     aux2 = operatorStack.pollFirst(); 
                                     numbersQueue.addLast(aux2); 
-                                    System.out.println(numbersQueue);
                                     operatorStack.addFirst(aux);
+              
                                    
                                     }              
                                 }
@@ -70,7 +72,7 @@ public class Postfixer {
                            while(precedence != 3){
                                 numbersQueue.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición 
                                 aux = input.poll();
-                                precedence = checkPrecedence(aux);
+                                precedence = checkPrecedence(aux.getSequence());
                            }
                                 numbersQueue.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición   
                         }
