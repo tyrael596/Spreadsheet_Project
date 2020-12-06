@@ -36,23 +36,27 @@ public class Postfixer {
                  //significa que no es un numero por lo que procedemos a identificar qué es 
                  //llamamos a la función que nos dic"e lo que es 
                     int precedence = checkPrecedence(aux.getSequence()); 
+                    System.out.println(" Me ha llegado un  " + aux.getSequence());
                     aux2 = operatorStack.peekFirst(); 
                     if(aux2 != null){//comprueba si la cola está vacia 
                         lastPrecedence = checkPrecedence(aux2.getSequence());  
                         if(precedence != 4){
                             if(precedence == 3){
-                               //se trata de un parentesis de cierre 
-              
+                               //se trata de un parentesis de cierre
                                 aux2 = operatorStack.pollFirst(); 
-                                lastPrecedence = checkPrecedence(aux2.getSequence()); 
+                                if(aux2 != null){
+                                    lastPrecedence = checkPrecedence(aux2.getSequence()); 
                                 while( lastPrecedence != 0){ // Hasta que llega al de apertura 
                                    numbersQueue.addLast(aux2); 
                                    aux2 = operatorStack.pollFirst(); 
-              
-                                   lastPrecedence = checkPrecedence(aux2.getSequence()); 
+                                   if(aux2 != null){
+                                       lastPrecedence = checkPrecedence(aux2.getSequence()); 
+                                   }
                                } 
                                              
                                 aux2 = operatorStack.pollFirst(); 
+                                }
+                                
                             } 
                             else{if (precedence >= lastPrecedence){ 
                                     operatorStack.addFirst(aux);
@@ -68,16 +72,26 @@ public class Postfixer {
                                     }              
                                 }
                         }else{ // caso en que tengamos una función compuesta
- 
+ //NO ME COGE LAS FUNCIONES DENTRO DE FUNCIONES
                            while(precedence != 3){
+                               System.out.println("es una funciooon" + aux.getSequence());
                                 numbersQueue.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición 
                                 aux = input.poll();
                                 precedence = checkPrecedence(aux.getSequence());
-                           }
-                                numbersQueue.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición   
+                           }System.out.println("salgo del while" + aux.getSequence());
+                            numbersQueue.addLast(aux); 
+                            System.out.println(" he añadido el ) " + numbersQueue.peekLast().getSequence());
+                            System.out.println(" mis operandos son " + operatorStack.peekFirst().getSequence());
                         }
                     }else {
-                        operatorStack.addFirst(aux);
+                        System.out.println(" es null ");
+                        if(checkPrecedence(aux.getSequence()) == 3){
+                            System.out.println(" es un )" );
+                            numbersQueue.addLast(aux);
+                        }else{
+                            operatorStack.addFirst(aux);
+                        }
+                        
                     } 
                 } 
             }

@@ -6,6 +6,10 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.MAX;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.MIN;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.PROMEDIO;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.SUMA;
 import java.util.LinkedList;
 
 /**
@@ -18,7 +22,9 @@ public class PostfixEvaluator {
     public static float evaluator(LinkedList<FormulaElement> input){
         float output = 0;
         LinkedList<Float> stack = new LinkedList(); 
+        LinkedList<FormulaElement> calculate = new LinkedList(); 
         FormulaElement aux, aux2;
+        boolean end = false;
         float number,operand1, operand2;
         
         while (input.isEmpty() == false) { 
@@ -77,11 +83,68 @@ public class PostfixEvaluator {
                             operand1 = stack.pop();                        
                             output = operand1/operand2;
                         }
-                        break;                       
+                        break;
+                    default:  
+                        
+                        //number = calculateFunction();
+                               
+                        break;
                 }
         }
         
         
         return output;
     }
+    
+   public static float calculateFunction(LinkedList<FormulaElement> input, int type){
+       float output= 0;
+            float   num = 0;
+
+       FormulaElement aux;
+       input.pop();//fuera el primer parentesis
+       aux = input.pop();
+       LinkedList<Float> calculate = new LinkedList();
+                        
+       while ( aux.getToken() != 2){
+                        
+        if(aux.getToken() == 11){
+           calculate.addLast(Float.parseFloat(aux.getSequence()));
+           aux = input.pop();
+        } else  if(aux.getToken()== 1){//me encuentro un (                              
+            num = calculateFunction(input,aux.getToken());
+            calculate.addLast(num);
+            aux = input.pop();                       
+         }else if(aux.getToken() == (14|15)){
+            aux = input.pop(); 
+         }//falta si son referencias pero a tanto ya no llego
+        }
+     switch(type){
+         
+         case 5: 
+             MIN min = new MIN();
+             output = min.Calculate(calculate);
+            
+         break;
+          
+         case 6:
+             MAX max = new MAX();
+             output = max.Calculate(calculate);
+            
+         break;
+          
+         case 7:
+             PROMEDIO promedio = new PROMEDIO();
+             output = promedio.Calculate(calculate);
+            
+         break;
+          
+         case 8: 
+             SUMA suma = new SUMA();
+             output = suma.Calculate(calculate);
+            
+         break;
+   }                   
+       return output;
+   }
+   
 }

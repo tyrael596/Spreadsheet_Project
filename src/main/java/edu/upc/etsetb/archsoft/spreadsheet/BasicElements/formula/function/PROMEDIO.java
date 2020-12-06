@@ -11,9 +11,13 @@ import java.util.LinkedList;
  */
 
 public class PROMEDIO extends Function{
-
+    public static void PROMEDIO() {
+         PROMEDIO myObj = new PROMEDIO(); 
+   
+    }
+    
     @Override
-    float Calculate(LinkedList list) {         
+    public float Calculate(LinkedList list) {         
         float a = 0,aux = 0;
         int last = list.size();
         aux = (float) list.peekFirst();

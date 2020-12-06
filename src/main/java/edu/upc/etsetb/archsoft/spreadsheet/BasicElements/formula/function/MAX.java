@@ -17,8 +17,14 @@ public class MAX extends Function{
      * @params arguments: n is the number of parameters contained in the array
      * list: array of arguments
      */
+    public static void MAX() {
+         MAX myObj = new MAX(); 
+   
+    }
+    
+    
     @Override
-    float Calculate(LinkedList list) {
+    public float Calculate(LinkedList list) {
         float a,aux = 0;
         int last = list.size();
         a = (float) list.peekFirst();
@@ -38,6 +44,8 @@ public class MAX extends Function{
     void getError() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+
 
    /* public void Calculate(){
 >>>>>>> main:src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/function/MAX.java

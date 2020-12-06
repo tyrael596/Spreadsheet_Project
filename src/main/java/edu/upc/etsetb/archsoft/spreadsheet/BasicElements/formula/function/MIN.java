@@ -12,9 +12,14 @@ import java.util.LinkedList;
  * @author Amaya
  */
 public class MIN extends Function {
-
+public static void MIN() {
+         MIN myObj = new MIN(); 
+   
+    }
+        
+    
     @Override
-    float Calculate(LinkedList list) {
+    public float Calculate(LinkedList list) {
         float a,aux = 0;
         int last = list.size();
         a = (float) list.peekFirst();
@@ -38,5 +43,5 @@ public class MIN extends Function {
     public void getError(){
     }     
     */
-    
+
 }

@@ -21,7 +21,7 @@ public class Main {
      */
     public static void main(String[] args) {
        //creamos lista
-        FormulaElement a = new FormulaElement(1,"(");
+       /* FormulaElement a = new FormulaElement(1,"(");
         FormulaElement b = new FormulaElement(11,"5");
         FormulaElement c = new FormulaElement(10,"/");
         FormulaElement d = new FormulaElement(11,"2");
@@ -31,25 +31,39 @@ public class Main {
         FormulaElement h = new FormulaElement(9,"*");
         FormulaElement i = new FormulaElement(11,"6");
         FormulaElement j = new FormulaElement(3,"-");
-        FormulaElement k = new FormulaElement(11,"5");
+        FormulaElement k = new FormulaElement(11,"5");*/
+       
+        FormulaElement a = new FormulaElement(11,"1");
+        FormulaElement b = new FormulaElement(4,"+");
+        FormulaElement c = new FormulaElement(8,"SUMA");
+        FormulaElement d = new FormulaElement(1,"(");
+        FormulaElement e = new FormulaElement(11,"4");
+        FormulaElement f = new FormulaElement(14,";");
+        FormulaElement g = new FormulaElement(11,"3");
+        FormulaElement h = new FormulaElement(14,";");
+        FormulaElement i = new FormulaElement(5,"MINIMO");
+        FormulaElement j = new FormulaElement(1,"(");
+        FormulaElement k = new FormulaElement(11,"1");
+        FormulaElement l = new FormulaElement(14,";");
+        FormulaElement m = new FormulaElement(11,"2");
+        FormulaElement n = new FormulaElement(2,")");
+        FormulaElement o = new FormulaElement(2,")");
         LinkedList<FormulaElement> input = new LinkedList();
         input.add(a);        
         input.add(b);
         input.add(c);
-        input.add(d);        
-
+        input.add(d);       
         input.add(e);
-
         input.add(f);
-
         input.add(g); 
-
         input.add(h);
-
         input.add(i);
         input.add(j);
-
         input.add(k);
+       input.add(l);
+        input.add(m);
+        input.add(n);
+        input.add(o);
          //input.add("1");
        //  input.add("MAX");
          //input.add("(");
@@ -61,14 +75,15 @@ public class Main {
          
          System.out.println("size " + input.size());
          LinkedList<FormulaElement> postfix = new LinkedList();
-         
+          
         postfix = Postfixer.shuntingYardAlgorithm(input);
-        /* while(postfix.isEmpty() == false){
+        System.out.println("holi " );
+         while(postfix.isEmpty() == false){
             a = postfix.pop();
             System.out.println("postfix " + a.getSequence());
-        }    */   
-        float output = evaluator(postfix);
-        System.out.println("output " + output);
+        }      
+        //float output = evaluator(postfix);
+       // System.out.println("output " + output);
         
 
         
@@ -91,6 +106,7 @@ public class Main {
             cellFormula.add("[a-zA-Z]{1,}[0-9]{1,}", 12); // CellReference
             cellFormula.add("[a-zA-Z]{1,}[0-9]{1,}", 13); // CellReference
         Aqui falta RANGE OF cells A4:B5
+        //faltan los : y ; les pongo 14 y 15
         
         */
             

@@ -11,9 +11,13 @@ import java.util.LinkedList;
  */
 
 public class SUMA extends Function{
-
+    public static void SUMA() {
+         SUMA myObj = new SUMA(); 
+   
+    }
+    
     @Override
-    float Calculate(LinkedList list) {         
+    public float Calculate(LinkedList list) {         
         float a = 0;
         int last = list.size();
         a = (float) list.peekFirst();

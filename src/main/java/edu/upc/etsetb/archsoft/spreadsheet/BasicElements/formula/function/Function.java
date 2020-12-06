@@ -10,9 +10,10 @@ import java.util.LinkedList;
  * @author Alex
  */
 public abstract class Function {
+    
     static String inside ="";
     static String range = "";
-    abstract float Calculate(LinkedList list);
+    public abstract float Calculate(LinkedList list);
     abstract void getError();
 
     
