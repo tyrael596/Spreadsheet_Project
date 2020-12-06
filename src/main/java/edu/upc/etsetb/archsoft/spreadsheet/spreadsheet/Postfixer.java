@@ -20,6 +20,7 @@ public class Postfixer {
     public static LinkedList shuntingYardAlgorithm(LinkedList<FormulaElement> input){ // Consideramos que la función es válida 
             LinkedList<FormulaElement> operatorStack = new LinkedList(); 
             LinkedList<FormulaElement> numbersQueue = new LinkedList(); 
+            LinkedList<FormulaElement> auxiliarList = new LinkedList();
             FormulaElement aux,aux2; 
             int lastPrecedence = 0;
             float number; 
@@ -36,7 +37,7 @@ public class Postfixer {
                  //significa que no es un numero por lo que procedemos a identificar qué es 
                  //llamamos a la función que nos dic"e lo que es 
                     int precedence = checkPrecedence(aux.getSequence()); 
-                    System.out.println(" Me ha llegado un  " + aux.getSequence());
+                    
                     aux2 = operatorStack.peekFirst(); 
                     if(aux2 != null){//comprueba si la cola está vacia 
                         lastPrecedence = checkPrecedence(aux2.getSequence());  
@@ -71,22 +72,19 @@ public class Postfixer {
                                    
                                     }              
                                 }
-                        }else{ // caso en que tengamos una función compuesta
- //NO ME COGE LAS FUNCIONES DENTRO DE FUNCIONES
-                           while(precedence != 3){
-                               System.out.println("es una funciooon" + aux.getSequence());
-                                numbersQueue.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición 
-                                aux = input.poll();
-                                precedence = checkPrecedence(aux.getSequence());
-                           }System.out.println("salgo del while" + aux.getSequence());
-                            numbersQueue.addLast(aux); 
-                            System.out.println(" he añadido el ) " + numbersQueue.peekLast().getSequence());
-                            System.out.println(" mis operandos son " + operatorStack.peekFirst().getSequence());
+                        }else{ //para las funciones
+                            numbersQueue.addLast(aux);
+                            auxiliarList = getFunctionArguments(input);   
+                            while(!auxiliarList.isEmpty() && aux != null){
+                                numbersQueue.addLast(auxiliarList.pop());
+                               // aux = input.pop();
+                             }
+
                         }
                     }else {
-                        System.out.println(" es null ");
+                        
                         if(checkPrecedence(aux.getSequence()) == 3){
-                            System.out.println(" es un )" );
+                      
                             numbersQueue.addLast(aux);
                         }else{
                             operatorStack.addFirst(aux);
@@ -97,6 +95,7 @@ public class Postfixer {
             }
             //llegados al final toca pasarlos todos 
             while(!operatorStack.isEmpty()){ 
+                
                 numbersQueue.addLast(operatorStack.pollFirst()); 
             } 
 
@@ -121,6 +120,10 @@ public class Postfixer {
                 break; 
                 case "/": precedence = 2; 
                 break; 
+                case ":": precedence = 5; 
+                break;
+                case ";": precedence = 5; 
+                break;
                 default:  precedence = 4;  
                 break; 
             } 
@@ -130,6 +133,50 @@ public class Postfixer {
         // Codigo para hacer
         float result=0;
         return result;
+    }
+    
+    //falta añadir el caso en el que tengo una función con paréntesis ahí en medio
+    static LinkedList getFunctionArguments(LinkedList<FormulaElement> input){
+        LinkedList<FormulaElement> arguments = new LinkedList();
+        LinkedList<FormulaElement> auxiliarList = new LinkedList();
+        int precedence = 0;
+        FormulaElement aux;
+        aux = input.poll();
+        precedence = checkPrecedence(aux.getSequence());
+        
+        while(precedence != 3){
+            //System.out.println(" printo cosas ");
+            if(precedence == 4){ //tengo una función
+               
+               //auxiliarList = getFunctionArguments(input);
+               
+               while(!auxiliarList.isEmpty()){
+                    arguments.addLast(auxiliarList.pop());
+                    input.pop();
+                }
+                //System.out.println("es una funciooon" + aux.getSequence());
+                
+                arguments.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición 
+                
+                aux = input.poll();
+                
+                if(aux != null){
+                    precedence = checkPrecedence(aux.getSequence());
+                }
+            
+            }
+            
+            arguments.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición 
+            
+            aux = input.poll();
+            if(aux != null){
+                    precedence = checkPrecedence(aux.getSequence());
+             }
+            
+         }
+            arguments.addLast(aux); 
+            
+       return arguments;     
     }
   
 }

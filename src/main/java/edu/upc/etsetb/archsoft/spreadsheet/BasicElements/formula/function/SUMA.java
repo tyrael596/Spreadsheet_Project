@@ -20,11 +20,13 @@ public class SUMA extends Function{
     public float Calculate(LinkedList list) {         
         float a = 0;
         int last = list.size();
-        a = (float) list.peekFirst();
-
-       for (int i = 1; i <= last; i++) {
-            a = (float) list.pollFirst()+ a;
+        a = (float) list.pop();
+       
+       while(!list.isEmpty()) {
+            a = (float) list.pop()+ a;
+            
        } 
+        
        return a;
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

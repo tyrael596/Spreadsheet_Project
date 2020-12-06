@@ -35,13 +35,13 @@ public class Main {
        
         FormulaElement a = new FormulaElement(11,"1");
         FormulaElement b = new FormulaElement(4,"+");
-        FormulaElement c = new FormulaElement(8,"SUMA");
+        FormulaElement c = new FormulaElement(7,"PROMEDIO");
         FormulaElement d = new FormulaElement(1,"(");
         FormulaElement e = new FormulaElement(11,"4");
         FormulaElement f = new FormulaElement(14,";");
         FormulaElement g = new FormulaElement(11,"3");
         FormulaElement h = new FormulaElement(14,";");
-        FormulaElement i = new FormulaElement(5,"MINIMO");
+        FormulaElement i = new FormulaElement(6,"MAX");
         FormulaElement j = new FormulaElement(1,"(");
         FormulaElement k = new FormulaElement(11,"1");
         FormulaElement l = new FormulaElement(14,";");
@@ -73,17 +73,17 @@ public class Main {
          //input.add(")");
               
          
-         System.out.println("size " + input.size());
+      
          LinkedList<FormulaElement> postfix = new LinkedList();
           
         postfix = Postfixer.shuntingYardAlgorithm(input);
-        System.out.println("holi " );
-         while(postfix.isEmpty() == false){
+
+         /*while(postfix.isEmpty() == false){
             a = postfix.pop();
             System.out.println("postfix " + a.getSequence());
-        }      
-        //float output = evaluator(postfix);
-       // System.out.println("output " + output);
+        }  */    
+        float output = evaluator(postfix);
+        System.out.println("output " + output);
         
 
         

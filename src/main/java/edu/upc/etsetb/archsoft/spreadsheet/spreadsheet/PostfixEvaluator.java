@@ -20,15 +20,18 @@ public class PostfixEvaluator {
     // Acceso a lista de cells afectadas en spreadsheet
     
     public static float evaluator(LinkedList<FormulaElement> input){
+        
         float output = 0;
         LinkedList<Float> stack = new LinkedList(); 
         LinkedList<FormulaElement> calculate = new LinkedList(); 
         FormulaElement aux, aux2;
         boolean end = false;
         float number,operand1, operand2;
-        
+        //aux = input.pop(); 
         while (input.isEmpty() == false) { 
+            
                 aux = input.pop(); 
+                 
                 switch (aux.getToken()){
                     case 11: 
                         number = Float.parseFloat(aux.getSequence());
@@ -86,7 +89,8 @@ public class PostfixEvaluator {
                         break;
                     default:  
                         
-                        //number = calculateFunction();
+                        number = calculateFunction(input,aux.getToken());
+                        stack.push(number);
                                
                         break;
                 }
@@ -97,6 +101,8 @@ public class PostfixEvaluator {
     }
     
    public static float calculateFunction(LinkedList<FormulaElement> input, int type){
+       
+       
        float output= 0;
             float   num = 0;
 
@@ -106,45 +112,63 @@ public class PostfixEvaluator {
        LinkedList<Float> calculate = new LinkedList();
                         
        while ( aux.getToken() != 2){
-                        
+                     
         if(aux.getToken() == 11){
            calculate.addLast(Float.parseFloat(aux.getSequence()));
            aux = input.pop();
         } else  if(aux.getToken()== 1){//me encuentro un (                              
-            num = calculateFunction(input,aux.getToken());
+            num = evaluator(input);
             calculate.addLast(num);
             aux = input.pop();                       
-         }else if(aux.getToken() == (14|15)){
-            aux = input.pop(); 
+         } else if(aux.getToken() == 14| aux.getToken() == 15){
+             
+             aux = input.pop(); 
          }//falta si son referencias pero a tanto ya no llego
+         else if(aux.getToken() == 5| aux.getToken() == 6|aux.getToken() == 7| aux.getToken() == 8){
+            num = calculateFunction(input, aux.getToken());
+            calculate.addLast(num);
+            
+            aux = input.pop(); 
+            
         }
-     switch(type){
+            
+        } 
+        
+     if(aux.getToken()== 2){
          
-         case 5: 
-             MIN min = new MIN();
-             output = min.Calculate(calculate);
-            
-         break;
-          
-         case 6:
-             MAX max = new MAX();
-             output = max.Calculate(calculate);
-            
-         break;
-          
-         case 7:
-             PROMEDIO promedio = new PROMEDIO();
-             output = promedio.Calculate(calculate);
-            
-         break;
-          
-         case 8: 
-             SUMA suma = new SUMA();
-             output = suma.Calculate(calculate);
-            
-         break;
-   }                   
-       return output;
+        
+        switch(type){
+
+            case 5: 
+                MIN min = new MIN();
+                output = min.Calculate(calculate);
+                
+
+            break;
+
+            case 6:
+                MAX max = new MAX();
+                output = max.Calculate(calculate);
+
+            break;
+
+            case 7:
+                PROMEDIO promedio = new PROMEDIO();
+                output = promedio.Calculate(calculate);
+
+            break;
+
+            case 8: 
+                SUMA suma = new SUMA();
+                output = suma.Calculate(calculate);
+                
+                
+
+            break;
+      }                   
+       
+   return output;
    }
-   
+   return output;
+}
 }

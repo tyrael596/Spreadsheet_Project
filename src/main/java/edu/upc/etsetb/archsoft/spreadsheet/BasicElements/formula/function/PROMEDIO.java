@@ -20,12 +20,14 @@ public class PROMEDIO extends Function{
     public float Calculate(LinkedList list) {         
         float a = 0,aux = 0;
         int last = list.size();
-        aux = (float) list.peekFirst();
+        //aux = (float) list.peekFirst();
 
        for (int i = 1; i <= last; i++) {
-            aux = (float) list.pollFirst()+ a;
+            aux = (float) list.pollFirst()+ aux;
+           
        } 
         a = aux/last;
+         
        return a;
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
