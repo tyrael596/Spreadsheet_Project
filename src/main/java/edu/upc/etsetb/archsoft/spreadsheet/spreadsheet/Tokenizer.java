@@ -34,8 +34,12 @@ public class Tokenizer {
             tokenInfos.add(new TokenInfo(Pattern.compile("^("+regex+")"), token));
     }
     
+    public void tokenize(String str) {
+    String s = new String(str);
+    tokens.clear(); 
+    }
     
-     
+    
     public void getTokens(String dataInput){
         while (!dataInput.equals("")) {
             boolean match = false;  
@@ -51,6 +55,7 @@ public class Tokenizer {
                     break;
                 }
             }
+            if (!match) throw new RuntimeException("Unexpected character in input: "+dataInput); // There were no matches inside the given string
         } 
     }
      

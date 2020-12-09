@@ -9,7 +9,12 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellFormula;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import static edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.PostfixEvaluator.evaluator;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Postfixer;
+import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Tokenizer;
+import edu.upc.*;
+import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.ExpressionCleaner;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Alex
@@ -20,8 +25,46 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        // TESTING TOKENIZER
+        // MAX(2+B2:A1)*(5+-)
+        // MAX ( 2 + B2:A1 ) * ( 5 + - )
+        String jonasbrothers="1 + 2";
+        Tokenizer jonbonjovi=new Tokenizer();
+        jonbonjovi.add("\\(", 1); // open bracket
+        jonbonjovi.add("\\)", 2); // close bracket
+        jonbonjovi.add("[-]", 3); 
+        jonbonjovi.add("[+]", 4); 
+        jonbonjovi.add("MIN", 5); 
+        jonbonjovi.add("MAX", 6);
+        jonbonjovi.add("PROMEDIO", 7); 
+        jonbonjovi.add("SUMA", 8);
+        jonbonjovi.add("[*]", 9); 
+        jonbonjovi.add("[/]", 10); 
+        jonbonjovi.add("[0-9]+",11); // integer number
+        jonbonjovi.add("[a-zA-Z]{1,}[0-9]{1,}", 12); // CellReference
+        jonbonjovi.add("[a-zA-Z]{1,}[0-9]{1,}:[a-zA-Z]{1,}[0-9]{1,}", 13); // CellRange
+        LinkedList<FormulaElement> joeburgerchallenge = new LinkedList<>();
+        jonbonjovi.getTokens(jonasbrothers);
+        joeburgerchallenge=jonbonjovi.tokens;
+        System.out.print(joeburgerchallenge.getFirst().getSequence());
+        System.out.print(joeburgerchallenge.getLast().getSequence());
+        System.out.print(joeburgerchallenge.getFirst().getToken());
+        System.out.print(joeburgerchallenge.getLast().getToken());
+        //TESTING ExpressionCleaner
+        ExpressionCleaner sezarblue = new ExpressionCleaner();
+        try {
+            sezarblue.check(joeburgerchallenge);
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        /*
        //creamos lista
-       /* FormulaElement a = new FormulaElement(1,"(");
+        FormulaElement a = new FormulaElement(1,"(");
         FormulaElement b = new FormulaElement(11,"5");
         FormulaElement c = new FormulaElement(10,"/");
         FormulaElement d = new FormulaElement(11,"2");
@@ -31,7 +74,7 @@ public class Main {
         FormulaElement h = new FormulaElement(9,"*");
         FormulaElement i = new FormulaElement(11,"6");
         FormulaElement j = new FormulaElement(3,"-");
-        FormulaElement k = new FormulaElement(11,"5");*/
+        FormulaElement k = new FormulaElement(11,"5");
        
         FormulaElement a = new FormulaElement(11,"1");
         FormulaElement b = new FormulaElement(4,"+");
@@ -78,10 +121,10 @@ public class Main {
           
         postfix = Postfixer.shuntingYardAlgorithm(input);
 
-         /*while(postfix.isEmpty() == false){
+         while(postfix.isEmpty() == false){
             a = postfix.pop();
             System.out.println("postfix " + a.getSequence());
-        }  */    
+        }    
         float output = evaluator(postfix);
         System.out.println("output " + output);
         
@@ -91,7 +134,7 @@ public class Main {
        // System.out.println(postfix);
         // TODO code application logic here
         
-    /*        CellFormula cellFormula = new CellFormula();
+            CellFormula cellFormula = new CellFormula();
             cellFormula.add("\\(", 1); // open bracket
             cellFormula.add("\\)", 2); // close bracket
             cellFormula.add("[-]", 3); 
@@ -104,7 +147,7 @@ public class Main {
             cellFormula.add("[/]", 10); 
             cellFormula.add("[0-9]+",11); // integer number
             cellFormula.add("[a-zA-Z]{1,}[0-9]{1,}", 12); // CellReference
-            cellFormula.add("[a-zA-Z]{1,}[0-9]{1,}", 13); // CellReference
+            cellFormula.add("[a-zA-Z]{1,}[0-9]{1,}:[a-zA-Z]{1,}[0-9]{1,}", 13); // CellRange
         Aqui falta RANGE OF cells A4:B5
         //faltan los : y ; les pongo 14 y 15
         
