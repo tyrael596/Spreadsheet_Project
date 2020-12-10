@@ -26,10 +26,11 @@ public class Main {
      */
     public static void main(String[] args) {
         
+        
         // TESTING TOKENIZER
         // MAX(2+B2:A1)*(5+-)
         // MAX ( 2 + B2:A1 ) * ( 5 + - )
-        String jonasbrothers="1 + 2";
+        String jonasbrothers="2+MAX(1+2)**";
         Tokenizer jonbonjovi=new Tokenizer();
         jonbonjovi.add("\\(", 1); // open bracket
         jonbonjovi.add("\\)", 2); // close bracket
@@ -47,20 +48,25 @@ public class Main {
         LinkedList<FormulaElement> joeburgerchallenge = new LinkedList<>();
         jonbonjovi.getTokens(jonasbrothers);
         joeburgerchallenge=jonbonjovi.tokens;
+        System.out.print("Get First:");
         System.out.print(joeburgerchallenge.getFirst().getSequence());
-        System.out.print(joeburgerchallenge.getLast().getSequence());
         System.out.print(joeburgerchallenge.getFirst().getToken());
+        System.out.print("Get Last:");
+        System.out.print(joeburgerchallenge.getLast().getSequence());
         System.out.print(joeburgerchallenge.getLast().getToken());
+        
+       
         //TESTING ExpressionCleaner
         ExpressionCleaner sezarblue = new ExpressionCleaner();
-        try {
+
+        try {  
             sezarblue.check(joeburgerchallenge);
-        } catch (Exception ex) {
+        } catch (ExpressionCleaner.SyntaxErrorException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         
-        
-        
+        System.out.print("hola");
         
         /*
        //creamos lista

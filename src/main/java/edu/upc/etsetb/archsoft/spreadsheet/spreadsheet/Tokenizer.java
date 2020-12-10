@@ -15,10 +15,12 @@ import java.util.regex.Pattern;
  * @author Alex
  */
 public class Tokenizer {
-    public static LinkedList<TokenInfo> tokenInfos;
+    private LinkedList<TokenInfo> tokenInfos;
     public LinkedList<FormulaElement> tokens = new LinkedList<>();
 
-     
+ public Tokenizer() {
+  tokenInfos = new LinkedList<TokenInfo>();
+}    
     private class TokenInfo{
         public final Pattern regex;
         public final int token; //Token Variable int,string o otro?
