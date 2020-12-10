@@ -55,12 +55,18 @@ public class ExpressionCleaner {
                     else{ throw new SyntaxErrorException();}
                     break;
                 case 3: //............................... -
+                    if(aircoma==1){
+                        throw new SyntaxErrorException();
+                    }
                     if (operators==0 && nou==0){
                         operators++;
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
                 case 4: //................................ +
+                    if(aircoma==1){
+                        throw new SyntaxErrorException();
+                    }
                     if (operators==0 && nou==0){
                         operators++;
                     }
@@ -99,12 +105,18 @@ public class ExpressionCleaner {
                     }
                     break;
                 case 9: //................................. *
+                    if(aircoma==1){
+                        throw new SyntaxErrorException();
+                    }
                     if (operators==0 && nou==0){
                         operators++;
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
                 case 10://.................................. /
+                    if(aircoma==1){
+                        throw new SyntaxErrorException();
+                    }
                     if (operators==0 && nou==0){
                         operators++;
                     }
@@ -166,6 +178,9 @@ public class ExpressionCleaner {
                     }
                     break;
                 case 14: //................................... ; 
+                    if(operators>0){
+                        throw new SyntaxErrorException();
+                    }
                     if(j>0 && nou==0){
                         if(aircoma==0){
                             aircoma=1; }
