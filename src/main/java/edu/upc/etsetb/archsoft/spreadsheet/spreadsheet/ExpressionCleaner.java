@@ -31,114 +31,160 @@ public class ExpressionCleaner {
         int operators=0; // +-*/ preceeding token?
         int form=0; //Function? 
         int nou=1; //Start of line or first term after parenthesis
-        
+        int aircoma=0;
+        int fpar=0;
         while (!tokenized.isEmpty()) {  
             
             ttok=tokenized.getFirst().getToken();
-            String testering = tokenized.getFirst().getSequence();
-            System.out.print("->Token:");
-            System.out.print(testering);
-            System.out.print("->Flags:");
+            if(fpar==1 && ttok!=1){
+                throw new SyntaxErrorException();
+            }
+            fpar=0;
             switch(ttok){
-                case 1: // ( 
-                    if (j>0){
-                        j=0; 
-                    }
+                case 1: //.............................. ( 
                     nou=1;
                     parenthesis++;
                     break;
-                case 2: // )
+                case 2: //.............................. )
+                    if (j>0){
+                        j--; 
+                    }
                     if(parenthesis>0){
                         parenthesis--;
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 3: // -
+                case 3: //............................... -
                     if (operators==0 && nou==0){
                         operators++;
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 4: // +
+                case 4: //................................ +
                     if (operators==0 && nou==0){
                         operators++;
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 5: // MIN
+                case 5: //............................... MIN
+                    if(aircoma==1){aircoma=0;}
                     j++;
+                    fpar=1;
                     if (operators>0){
                         operators--;
                     }
                     break;       
-                case 6: // MAX
+                case 6: //............................... MAX
+                    if(aircoma==1){aircoma=0;}
                     j++;
+                    fpar=1;
                     if (operators>0){
                         operators--;
                     }
                     break;
-                case 7: //PROMEDIO
+                case 7: //................................PROMEDIO
+                    if(aircoma==1){aircoma=0;}
                     j++;
+                    fpar=1;
                     if (operators>0){
                         operators--;
                     }
                     break;
-                case 8: //SUMA
+                case 8: //.................................SUMA
+                    if(aircoma==1){aircoma=0;}
                     j++;
+                    fpar=1;
+                    if (operators>0){
+                        operators--;
+                    }
                     break;
-                case 9: // *
+                case 9: //................................. *
                     if (operators==0 && nou==0){
                         operators++;
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 10:// /
+                case 10://.................................. /
                     if (operators==0 && nou==0){
                         operators++;
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 11:// num  
-                    if(nou==1){nou--;}
+                case 11://................................. num
+                    if(aircoma==1){aircoma=0;}
+                    if(nou==1){
+                        nou--;
+                        if(operators>0){
+                            operators--;
+                        }
+                    }
                     else if(operators>0){
                         operators--;
+                    }
+                    else if(j>0){
+                        
                     }
                     else{
                         throw new SyntaxErrorException();
                     }
                     break;
-                case 12:// CellRef
-                    System.out.print("(Case 12)");
-                    if(nou==1){nou--;}
+                case 12://.................................. CellRef
+                    if(aircoma==1){aircoma=0;}
+                    if(nou==1){
+                        nou--;
+                        if(operators>0){
+                            operators--;
+                        }
+                    }
                     else if(operators>0){
                         operators--;
+                    }
+                    else if(j>0){
+                        
                     }
                     else{
                         throw new SyntaxErrorException();
                     }
                     break;
-                case 13:// CellRange
-                    System.out.print("(Case 13)");
-                    if(nou==1){nou--;}
-                    else if(operators>0){
+                case 13://.................................. CellRange
+                    if(aircoma==1){aircoma=0;}
+                    
+                    if(nou==1){
+                        if(operators>0){
+                            operators--;
+                        }
+                        nou--;
+                    }
+                    else if(operators>0 || j>0){
                         operators--;
+                    }
+                    else if(j>0){
+                        
                     }
                     else{
                         throw new SyntaxErrorException();
                     }
+                    break;
+                case 14: //................................... ; 
+                    if(j>0 && nou==0){
+                        if(aircoma==0){
+                            aircoma=1; }
+                        else{throw new SyntaxErrorException();}
+                    }
+                    
+                    else{throw new SyntaxErrorException();}
                     break;
                 default: 
                     System.out.print("WEIRD Syntax Error");
                     break;
                 }
+
+            System.out.print(tokenized.getFirst().getSequence());
             tokenized.removeFirst();
-            System.out.print(nou);
-            System.out.print(operators);
-            System.out.print(parenthesis);
-            System.out.print(j);
+            
             
         }
-        if (parenthesis > 0 || j==2 || operators>0) {
+        if (parenthesis > 0 || j>0 || operators>0 || aircoma>0) {
             throw new SyntaxErrorException();  
         } 
     }

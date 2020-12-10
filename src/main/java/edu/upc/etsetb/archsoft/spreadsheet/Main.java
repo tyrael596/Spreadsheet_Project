@@ -30,7 +30,7 @@ public class Main {
         // TESTING TOKENIZER
         // MAX(2+B2:A1)*(5+-)
         // MAX ( 2 + B2:A1 ) * ( 5 + - )
-        String jonasbrothers="2+MAX(1+2)**";
+        String jonasbrothers="1+A1*((SUMA(A2;PROMEDIO(B6);C1;27)/4)+(D6-D8))";
         Tokenizer jonbonjovi=new Tokenizer();
         jonbonjovi.add("\\(", 1); // open bracket
         jonbonjovi.add("\\)", 2); // close bracket
@@ -45,6 +45,7 @@ public class Main {
         jonbonjovi.add("[0-9]+",11); // integer number
         jonbonjovi.add("[a-zA-Z]{1,}[0-9]{1,}", 12); // CellReference
         jonbonjovi.add("[a-zA-Z]{1,}[0-9]{1,}:[a-zA-Z]{1,}[0-9]{1,}", 13); // CellRange
+        jonbonjovi.add("[;]", 14); // function delimiter
         LinkedList<FormulaElement> joeburgerchallenge = new LinkedList<>();
         jonbonjovi.getTokens(jonasbrothers);
         joeburgerchallenge=jonbonjovi.tokens;
