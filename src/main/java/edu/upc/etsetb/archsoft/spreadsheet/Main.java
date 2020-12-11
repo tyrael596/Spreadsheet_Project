@@ -30,7 +30,7 @@ public class Main {
         // TESTING TOKENIZER
         // MAX(2+B2:A1)*(5+-)
         // MAX ( 2 + B2:A1 ) * ( 5 + - )
-        String jonasbrothers="1+A1*((SUMA(A2;PROMEDIO(B6);C1;27)/4)+(D6-D8))";
+        String jonasbrothers="1+A1*((SUMA(A2:H4;PROMEDIO(B6);C1;27)/4)+(D6-D8))";
         Tokenizer jonbonjovi=new Tokenizer();
         jonbonjovi.add("\\(", 1); // open bracket
         jonbonjovi.add("\\)", 2); // close bracket
