@@ -5,14 +5,24 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellContent;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellFormula;
+
 
 /**
  *
  * @author Alex
  */
-public class Cell {
+public class Cell{
+    public CellContent content;
     static int row;
     static int col;
    // public void getType(){
     //}
+    
+    public Cell(){
+        content = new CellFormula();
+        
+    }
+    
 }

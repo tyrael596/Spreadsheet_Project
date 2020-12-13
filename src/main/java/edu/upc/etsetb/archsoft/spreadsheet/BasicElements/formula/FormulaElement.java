@@ -31,7 +31,7 @@ public class FormulaElement {
     }
     public void changeSequence(String newSequence){
         this.sequence = newSequence;
-        System.out.println("changed Sequence: " +this.sequence);
+        //System.out.println("changed Sequence: " +this.sequence);
     }
     public void changeToken(int newToken){
        this.token = newToken;

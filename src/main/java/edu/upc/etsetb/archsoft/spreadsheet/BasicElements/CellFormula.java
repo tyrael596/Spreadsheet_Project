@@ -16,9 +16,29 @@ import java.util.regex.Pattern;
  * 
  * @author Alex 
  */ 
-public class CellFormula implements CellContent{ 
+public class CellFormula extends CellContent{ 
    
-    Number value; 
+    Number value;
+    LinkedList <FormulaElement> list; // expresión postfix
 
+    @Override
+    public String getContent(){
+        
+        return this.content;
+    }
+    @Override
+    public void setContent(String newContent){
+
+        this.content = newContent;
+
+    }
+    
+   public void setCellFormula(String content, LinkedList list){
+       this.content = content;
+       this.list = (LinkedList) list.clone();
+   }
+     public LinkedList getFormula (){
+       return this.list;
+   }
 
 } 

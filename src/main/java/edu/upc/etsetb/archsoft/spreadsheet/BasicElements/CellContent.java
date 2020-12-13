@@ -9,8 +9,12 @@ package edu.upc.etsetb.archsoft.spreadsheet.BasicElements;
  *
  * @author Alex
  */
-public interface CellContent {
+public abstract class CellContent {
+    public String content = ".";
+    
 
-    //abstract void getContent();
+    
+   public abstract  String getContent();
+   public abstract  void setContent(String newContent);
     //abstract void error();   
 }

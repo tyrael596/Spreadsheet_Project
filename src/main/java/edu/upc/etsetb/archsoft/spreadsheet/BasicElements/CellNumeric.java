@@ -11,8 +11,18 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Numeric;
  *
  * @author Alex
  */
-public class CellNumeric implements CellContent{
+public  class CellNumeric extends CellContent{
     Numeric value;
   //  public void getContent(){
   //  }     
+
+    @Override
+    public String getContent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setContent(String newContent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

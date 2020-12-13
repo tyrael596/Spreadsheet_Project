@@ -9,8 +9,18 @@ package edu.upc.etsetb.archsoft.spreadsheet.BasicElements;
  *
  * @author Alex
  */
-public class CellText implements CellContent{
+public class CellText extends CellContent{
     String value="";
   /*  public void getContent(){
     }     */  
+
+    @Override
+    public String getContent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setContent(String newContent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

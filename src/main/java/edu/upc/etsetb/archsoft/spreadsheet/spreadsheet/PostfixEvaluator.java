@@ -31,7 +31,8 @@ public class PostfixEvaluator {
         while (input.isEmpty() == false) { 
             
                 aux = input.pop(); 
-                 
+                 System.out.println( aux.getSequence());
+                 System.out.println("soy un  " + aux.getSequence() + "Mi token es " + aux.getToken()); 
                 switch (aux.getToken()){
                     case 11: 
                         number = Float.parseFloat(aux.getSequence());
@@ -39,7 +40,7 @@ public class PostfixEvaluator {
                         break;
                     case 9:
                         if(input.isEmpty() == false){
-
+                            
                             operand2 = stack.pop();
                             operand1 = stack.pop();
                             number = operand1*operand2;

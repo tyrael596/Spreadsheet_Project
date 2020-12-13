@@ -11,6 +11,7 @@ import static edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.PostfixEvaluator.e
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Postfixer;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Tokenizer;
 import edu.upc.*;
+import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Cell;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.ExpressionCleaner;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -26,11 +27,28 @@ public class Main {
      */
     public static void main(String[] args) {
         
+        Cell[][] spreadsheet = new Cell[43][43];
+        for(int col = 0; col < 43; col ++){
+            for (int row = 0;row < 43; row ++ ){
+                spreadsheet[row][col] = new Cell();
+                spreadsheet[row][col].content.setContent(String.valueOf(row + 3));
+               
+            }
+        }
+       // System.out.println("El spreadsheet es");
+        
+       /* for(int col = 0; col < 3; col ++){
+            for (int row = 0;row < 3; row ++ ){
+                
+                System.out.println( row+col+" contengo" + spreadsheet[row][col].content.getContent());
+            }
+        }*/
         
         // TESTING TOKENIZER
         // MAX(2+B2:A1)*(5+-)
         // MAX ( 2 + B2:A1 ) * ( 5 + - )
-        String jonasbrothers="1+A1*((SUMA(A2:H4;PROMEDIO(B6);C1;27)/4)+(D6-D8))";
+        //String jonasbrothers="1+A1*((SUMA(A2;H4;PROMEDIO(B6);C1;27)/4)+(D6-D8))";
+        String jonasbrothers="1+SUMA(A2;H4;PROMEDIO(6;8))";
         Tokenizer jonbonjovi=new Tokenizer();
         jonbonjovi.add("\\(", 1); // open bracket
         jonbonjovi.add("\\)", 2); // close bracket
@@ -49,14 +67,16 @@ public class Main {
         LinkedList<FormulaElement> joeburgerchallenge = new LinkedList<>();
         jonbonjovi.getTokens(jonasbrothers);
         joeburgerchallenge=jonbonjovi.tokens;
-        System.out.print("Get First:");
+        /*System.out.print("Get First:");
         System.out.print(joeburgerchallenge.getFirst().getSequence());
         System.out.print(joeburgerchallenge.getFirst().getToken());
         System.out.print("Get Last:");
         System.out.print(joeburgerchallenge.getLast().getSequence());
-        System.out.print(joeburgerchallenge.getLast().getToken());
+        System.out.print(joeburgerchallenge.getLast().getToken());*/
         
-       
+       LinkedList<FormulaElement> auxiliar = new LinkedList<>(joeburgerchallenge);
+       LinkedList<FormulaElement> auxiliar2 = new LinkedList<>(joeburgerchallenge);
+ 
         //TESTING ExpressionCleaner
         ExpressionCleaner sezarblue = new ExpressionCleaner();
 
@@ -65,10 +85,25 @@ public class Main {
         } catch (ExpressionCleaner.SyntaxErrorException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.print("Te entra ");
+          while(auxiliar2.isEmpty() == false){
+            FormulaElement a = auxiliar2.pop();
+            System.out.print(a.getSequence());
+        } 
+        LinkedList<FormulaElement> postfix = new LinkedList();
+        postfix = Postfixer.shuntingYardAlgorithm(auxiliar,spreadsheet);
+            LinkedList<FormulaElement> postfixaux = new LinkedList<>(postfix);
+            System.out.print("Postfix ");
+        while(postfixaux.isEmpty() == false){
+            FormulaElement a = postfixaux.pop();
+            System.out.print(a.getSequence());
+        }    
+        
 
-        
-        System.out.print("hola");
-        
+              
+         
+        float output = evaluator(postfix);
+        System.out.println("output " + output);        
         /*
        //creamos lista
         FormulaElement a = new FormulaElement(1,"(");
