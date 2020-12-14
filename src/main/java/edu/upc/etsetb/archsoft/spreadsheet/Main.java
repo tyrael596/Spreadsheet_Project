@@ -5,14 +5,12 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellFormula;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
-import static edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.PostfixEvaluator.evaluator;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Postfixer;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Tokenizer;
-import edu.upc.*;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Cell;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.ExpressionCleaner;
+import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.PostfixEvaluator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,8 +23,8 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws Exception {
+        SpreadsheetFactory factory = new SpreadsheetFactory();        
         Cell[][] spreadsheet = new Cell[43][43];
         for(int col = 0; col < 43; col ++){
             for (int row = 0;row < 43; row ++ ){
@@ -47,9 +45,11 @@ public class Main {
         // TESTING TOKENIZER
         // MAX(2+B2:A1)*(5+-)
         // MAX ( 2 + B2:A1 ) * ( 5 + - )
-        //String jonasbrothers="1+A1*((SUMA(A2;H4;PROMEDIO(B6);C1;27)/4)+(D6-D8))";
-        String jonasbrothers="1+SUMA(A2;H4;PROMEDIO(6;8))";
+       String jonasbrothers="1+A1*((SUMA(A2;H4;PROMEDIO(B6;B8);C1;27)/4)+(D6-D8))";
+        //String jonasbrothers="1+SUMA(A2;H4;PROMEDIO(6;8))";
+        
         Tokenizer jonbonjovi=new Tokenizer();
+        jonbonjovi.setFactory(factory);
         jonbonjovi.add("\\(", 1); // open bracket
         jonbonjovi.add("\\)", 2); // close bracket
         jonbonjovi.add("[-]", 3); 
@@ -93,7 +93,7 @@ public class Main {
         LinkedList<FormulaElement> postfix = new LinkedList();
         postfix = Postfixer.shuntingYardAlgorithm(auxiliar,spreadsheet);
             LinkedList<FormulaElement> postfixaux = new LinkedList<>(postfix);
-            System.out.print("Postfix ");
+            System.out.println("Postfix ");
         while(postfixaux.isEmpty() == false){
             FormulaElement a = postfixaux.pop();
             System.out.print(a.getSequence());
@@ -101,8 +101,10 @@ public class Main {
         
 
               
-         
-        float output = evaluator(postfix);
+       
+        PostfixEvaluator evaluator = new PostfixEvaluator();
+        evaluator.setFactory(factory);
+        float output = evaluator.evaluate(postfix);
         System.out.println("output " + output);        
         /*
        //creamos lista

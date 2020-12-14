@@ -31,7 +31,7 @@ public class Postfixer {
               
                 aux = input.poll(); 
                 // intentamos convertirlo a un float 
-                System.out.println("soy un " + aux.getSequence()); 
+                //System.out.println("primer  soy un " + aux.getSequence()); 
                 try{ 
                     number = Float.parseFloat(aux.getSequence()); 
                     numbersQueue.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición 
@@ -85,18 +85,18 @@ public class Postfixer {
                         }else{ //para las funciones
                             numbersQueue.addLast(aux);
                             auxiliarList = getFunctionArguments(input,spreadsheet);  
-                            System.out.println("He vuelto "); 
+                            //System.out.println("He vuelto "); 
                             while(!auxiliarList.isEmpty() && aux != null){
                                 aux = auxiliarList.pop();
                                 numbersQueue.addLast(aux);
-                               System.out.println("Me dispongo a vaciar la lista " + aux.getSequence()); 
+                               //System.out.println("Me dispongo a vaciar la lista " + aux.getSequence()); 
                                 //numbersQueue.addLast(auxiliarList.pop());
                               
                              }
-                            System.out.println("Lista Vaciada! " + aux.getSequence());
+                            //System.out.println("Lista Vaciada! " + aux.getSequence());
                         }
                     }else {
-                        System.out.println("Entro en el else ");
+                       // System.out.println("Entro en el else ");
                         if(checkPrecedence(aux.getSequence()) == 3){
                       
                             numbersQueue.addLast(aux);
@@ -108,10 +108,10 @@ public class Postfixer {
                 } 
             }
             //llegados al final toca pasarlos todos 
-            System.out.println("vacio operadores" + operatorStack.size());
+          //  System.out.println("vacio operadores" + operatorStack.size());
             while(!operatorStack.isEmpty()){ 
-                System.out.println("vacio operadores");
-                System.out.println("el último es " + numbersQueue.peekLast().getSequence() );
+                //System.out.println("vacio operadores");
+                //System.out.println("el último es " + numbersQueue.peekLast().getSequence() );
                 numbersQueue.addLast(operatorStack.pollFirst()); 
             } 
 
@@ -159,23 +159,26 @@ public class Postfixer {
         FormulaElement aux; 
         aux = input.poll(); 
         precedence = checkPrecedence(aux.getSequence()); 
-         
+
         while(precedence != 3){ 
             //System.out.println(" printo cosas "); 
-            
-            if(precedence == 4 && aux.getToken() != 12){ //tengo una función 
-                
-               //auxiliarList = getFunctionArguments(input); 
+                //System.out.println("Segundo  soy un " + aux.getSequence());             
+            if(precedence == 4 && aux.getToken() != 12 && aux.getToken() != 11){ //tengo una función 
+                //System.out.println("es una funciooon" + aux.getSequence());
+                arguments.addLast(aux);
+                auxiliarList = getFunctionArguments(input,spreadsheet); 
                 
                while(!auxiliarList.isEmpty()){ 
                     arguments.addLast(auxiliarList.pop()); 
-                    input.pop(); 
+                  
+                   // System.out.println("voy vaciando el promedio "); 
                 } 
                 //System.out.println("es una funciooon" + aux.getSequence()); 
                  
-                arguments.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición  
+                //arguments.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición  
                  
                 aux = input.poll(); 
+                //System.out.println("Despues de vaciar saco un " + aux.getSequence());
                  
                 if(aux != null){ 
                     precedence = checkPrecedence(aux.getSequence()); 
@@ -194,6 +197,7 @@ public class Postfixer {
              } 
              
          } 
+//System.out.println("Tercer soy un " + aux.getSequence()); 
             arguments.addLast(aux); 
       return arguments;      
     } 

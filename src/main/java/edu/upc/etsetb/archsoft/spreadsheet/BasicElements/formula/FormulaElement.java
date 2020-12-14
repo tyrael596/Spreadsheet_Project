@@ -5,11 +5,14 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula;
 
+import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Visitador;
+import java.util.LinkedList;
+
 /**
  *
  * @author Alex
  */
-public class FormulaElement {
+public abstract class FormulaElement {
     int token; //Token Variable int,string o otro?
     String sequence;
 
@@ -37,4 +40,6 @@ public class FormulaElement {
        this.token = newToken;
     }
     
+    public abstract float acceptVisitor (Visitador visitador,LinkedList input);
 }
+

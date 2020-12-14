@@ -6,6 +6,9 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
+import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
+import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
+import edu.upc.etsetb.archsoft.spreadsheet.UnknownTypeException;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,6 +20,13 @@ import java.util.regex.Pattern;
 public class Tokenizer {
     private LinkedList<TokenInfo> tokenInfos;
     public LinkedList<FormulaElement> tokens = new LinkedList<>();
+    private SpreadsheetFactory factory;
+ 
+    
+    public void setFactory(SpreadsheetFactory factory){
+        this.factory = factory;
+    }    
+    
 
  public Tokenizer() {
   tokenInfos = new LinkedList<TokenInfo>();
@@ -42,7 +52,7 @@ public class Tokenizer {
     }
     
     
-    public void getTokens(String dataInput){
+    public void getTokens(String dataInput) throws UnknownTypeException, UnknownFunctionException{
         while (!dataInput.equals("")) {
             boolean match = false;  
             for (TokenInfo info : tokenInfos) {
@@ -51,7 +61,7 @@ public class Tokenizer {
                     match = true;
 
                     String tok = m.group().trim();
-                    tokens.add(new FormulaElement(info.token, tok));
+                    tokens.add(factory.createFormulaElement(info.token, tok));
 
                     dataInput = m.replaceFirst("");
                     break;
