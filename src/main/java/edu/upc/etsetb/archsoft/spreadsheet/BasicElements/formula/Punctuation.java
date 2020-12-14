@@ -19,29 +19,8 @@ public class Punctuation extends FormulaElement{
         super(token, sequence);
     }
 
-    public Punctuation() {
-    }
-    
-    public Punctuation(String op) {
-        
-        this.sequence = op;
-    }
-    
-    public float calculate(float operand1, float operand2){
-        
-       switch(sequence){
-           case "+":
-                return operand1 + operand2;
-           case "-":
-                return operand1 - operand2; 
-            case "*":
-                return operand1 * operand2;  
-            default: 
-                return operand1 / operand2;  
-       }
-           
-    }
-    
+
+  
         @Override
     public float acceptVisitor(Visitador visitador,LinkedList input) {
         return visitador.visitaPunctuation(this,input);

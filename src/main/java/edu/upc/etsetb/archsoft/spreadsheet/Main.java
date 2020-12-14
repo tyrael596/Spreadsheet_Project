@@ -46,7 +46,7 @@ public class Main {
         // MAX(2+B2:A1)*(5+-)
         // MAX ( 2 + B2:A1 ) * ( 5 + - )
        //String jonasbrothers="1+A1*((SUMA(A2;H4;PROMEDIO(B6;B8);C1;27)/4)+(D6-D8))";
-        String jonasbrothers="1+3*4-2";
+        String jonasbrothers="1+3*(4-2)";
         
         Tokenizer jonbonjovi=new Tokenizer();
         jonbonjovi.setFactory(factory);
@@ -73,7 +73,9 @@ public class Main {
         System.out.print("Get Last:");
         System.out.print(joeburgerchallenge.getLast().getSequence());
         System.out.print(joeburgerchallenge.getLast().getToken());*/
-        
+        System.out.print("-->");
+        System.out.print(joeburgerchallenge.getLast().getToken());
+         System.out.print("<--");
        LinkedList<FormulaElement> auxiliar = new LinkedList<>(joeburgerchallenge);
        LinkedList<FormulaElement> auxiliar2 = new LinkedList<>(joeburgerchallenge);
  

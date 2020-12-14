@@ -67,14 +67,14 @@ public class SpreadsheetFactory {
             case 1:
             case 2:
             case 14:
-                return this.createPunctuation(tok);
+                return this.createPunctuation(token, tok);
             default:
                 throw new UnknownTypeException();
         }
     }
 
-    private FormulaElement createPunctuation(String op) {
-        return new Punctuation(op);
+    private FormulaElement createPunctuation(int token, String op) {
+        return new Punctuation(token, op);
     }
 
 }
