@@ -20,7 +20,7 @@ import java.util.LinkedList;
  * @author amayabalaguer
  */
 public class Visitador {
-    private SpreadsheetFactory factory;
+    private SpreadsheetFactory factory = new SpreadsheetFactory();
     LinkedList<Float> stack = new LinkedList();
     private FormulaElement aux;
     public float visitaCellReference(CellReference aThis, LinkedList<FormulaElement> input) {

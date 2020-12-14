@@ -1,4 +1,1 @@
-edu\upc\etsetb\archsoft\spreadsheet\SpreadsheetFactory.class
-edu\upc\etsetb\archsoft\spreadsheet\UnknownTypeException.class
-edu\upc\etsetb\archsoft\spreadsheet\spreadsheet\Visitador.class
-edu\upc\etsetb\archsoft\spreadsheet\UnknownFunctionException.class
+edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/Punctuation.class

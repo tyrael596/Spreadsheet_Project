@@ -22,8 +22,8 @@ import java.util.LinkedList;
  */
 public class PostfixEvaluator {
     // Acceso a lista de cells afectadas en spreadsheet
-    private SpreadsheetFactory factory;
-    private Visitador visitador;
+    private SpreadsheetFactory factory = new SpreadsheetFactory();
+    private Visitador visitador = new Visitador();
     
     public void setFactory(SpreadsheetFactory factory){
         this.factory = factory;
@@ -38,7 +38,7 @@ public class PostfixEvaluator {
         LinkedList<Float> stack = new LinkedList(); 
         FormulaElement aux;
 
- 
+;
         //aux = input.pop(); 
         while (input.isEmpty() == false) { 
             
