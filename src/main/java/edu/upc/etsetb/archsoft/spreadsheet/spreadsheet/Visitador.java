@@ -10,6 +10,7 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Numeric;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Operador;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.Function;
+import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import java.util.LinkedList;
 
@@ -18,7 +19,7 @@ import java.util.LinkedList;
  * @author amayabalaguer
  */
 public class Visitador {
-
+    private SpreadsheetFactory factory;
     LinkedList<Float> stack = new LinkedList();
     private FormulaElement aux;
     public float visitaCellReference(CellReference aThis, LinkedList<FormulaElement> input) {
@@ -73,7 +74,7 @@ public class Visitador {
            calculate.addLast(Float.parseFloat(aux.getSequence()));
            aux = input.pop();
         } else  if(aux.getToken()== 1){//me encuentro un (                              
-            num = evaluate(input);
+            //num = evaluate(input);
             calculate.addLast(num);
             aux = input.pop();                       
          } else if(aux.getToken() == 14| aux.getToken() == 15){
