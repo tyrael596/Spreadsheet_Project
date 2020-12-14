@@ -9,6 +9,7 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Numeric;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Operador;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Punctuation;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.Function;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
@@ -98,5 +99,9 @@ public class Visitador {
         }
    return output;
 }
+
+    public float visitaPunctuation(Punctuation aThis, LinkedList input) {
+        return 1;
+    }
 
 }
