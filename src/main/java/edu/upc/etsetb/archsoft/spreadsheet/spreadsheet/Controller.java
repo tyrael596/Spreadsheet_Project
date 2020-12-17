@@ -8,6 +8,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.Main;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
+import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownTypeException;
 import java.util.LinkedList;
@@ -70,5 +71,18 @@ public class Controller {
             Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public static void validCell(String input) throws UnknownReferenceException{
+        int[] coordinates = new int[2];
+        
+        coordinates = SpreadsheetToolkit.getCoordinates(input);
+                    
+        if(coordinates[1] > SpreadsheetToolkit.MAXCOL || coordinates[0] > SpreadsheetToolkit.MAXROW){
+            
+            throw  new UnknownReferenceException();
+        }
+        
+        
     }
 }

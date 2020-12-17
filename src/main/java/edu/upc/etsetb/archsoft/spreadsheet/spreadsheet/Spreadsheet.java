@@ -30,13 +30,13 @@ public class Spreadsheet {
     public void updateSp() {
     }
 
-    public void createSpreadsheet() {
+    public void createSpreadsheet( ) {
         SpreadsheetFactory factory = new SpreadsheetFactory();
-        Cell[][] spreadsheet = new Cell[SpreadsheetToolkit.MAXROW][SpreadsheetToolkit.MAXCOL];
+        spreadsheet = new Cell[SpreadsheetToolkit.MAXROW][SpreadsheetToolkit.MAXCOL];
         for (int col = 0; col < SpreadsheetToolkit.MAXCOL; col++) {
             for (int row = 0; row < SpreadsheetToolkit.MAXROW; row++) {
-                spreadsheet[row][col] = new Cell();
-                spreadsheet[row][col].content.setContent(String.valueOf(row + 3));
+                this.spreadsheet[row][col] = new Cell();
+                this.spreadsheet[row][col].content.setContent(String.valueOf(row + 3));
 
             }
         }

@@ -42,10 +42,16 @@ public class VisualInterface {
                 break;
             case "C":
                 Controller.create();
+                
                 break;
             case "E":
                 // Falta comprobar que lo que me entran son coordenadas válidas pero supongamos que si
-                
+                try{
+                    Controller.validCell(parts[1]);
+                }catch(UnknownReferenceException e){
+                    System.out.println("Enter a valid cell Reference ");
+                    break;
+                }
                 Controller.editCell(parts);
 
                 break;

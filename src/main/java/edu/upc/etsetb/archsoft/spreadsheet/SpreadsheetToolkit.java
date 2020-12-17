@@ -36,10 +36,18 @@ public class SpreadsheetToolkit {
 
     public static String getContent(String reference, Cell[][] spreadsheet) {
 
+        int[] coordinates= new int[2];
+        coordinates = getCoordinates(reference);
+
+        return spreadsheet[coordinates[0]][coordinates[1]].content.getContent();
+
+    }
+
+    public static int[] getCoordinates(String reference) {
         StringBuffer letter = new StringBuffer();
         StringBuffer num = new StringBuffer();
-        int row, col = 0, aux;
-
+        int aux, col = 0, row = 0;
+        int coordinates[] = new int[2];
         for (int i = 0; i < reference.length(); i++) {
             if (Character.isDigit(reference.charAt(i))) {
                 num.append(reference.charAt(i));
@@ -54,9 +62,9 @@ public class SpreadsheetToolkit {
         }
 
         row = Integer.parseInt(num.toString());
-
-
-        return spreadsheet[row][col].content.getContent();
-
+        coordinates[0] = row;
+        coordinates[1] = col;
+        return coordinates;
     }
+
 }
