@@ -18,12 +18,14 @@
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/function/MAX.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/Numeric.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/spreadsheet/Spreadsheet.java
+/Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/spreadsheet/UnknownOptionException.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/CellReference.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/UnknownTypeException.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/SpreadsheetToolkit.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/function/MIN.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/function/RangeOfCell.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/function/PROMEDIO.java
+/Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/spreadsheet/Controller.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/SpreadsheetFactory.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/function/SUMA.java
 /Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/CellContent.java
