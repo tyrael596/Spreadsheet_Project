@@ -27,16 +27,17 @@ public class SpreadsheetFactory {
         switch (functionName.toLowerCase()) {
 
             case "min":
-                return new MIN();
+                return new MIN(functionName);
             case "max":
-                return new MAX();
+                return new MAX(functionName);
 
             case "promedio":
-                return new PROMEDIO();
+                return new PROMEDIO(functionName);
 
             case "suma":
-                return new SUMA();
+                return new SUMA(functionName);
             default:
+                
                 throw new UnknownFunctionException("Function " + functionName + " is unknown");
 
         }
@@ -50,7 +51,7 @@ public class SpreadsheetFactory {
 
     public FormulaElement createFormulaElement(int token, String tok) throws UnknownTypeException, UnknownFunctionException {
         switch (token) {
-            case 12:
+            case 13:
                 return new CellReference(token, tok);
             case 11:
                 return new Numeric(token, tok);

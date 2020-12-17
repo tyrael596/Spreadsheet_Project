@@ -10,7 +10,8 @@ package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
  * @author Alex
  */
 public interface FunctionArgument {
-    static String inside="";
+    static String sequence="";
+
   /*  abstract void Calculate();
     abstract void getError(); */
     

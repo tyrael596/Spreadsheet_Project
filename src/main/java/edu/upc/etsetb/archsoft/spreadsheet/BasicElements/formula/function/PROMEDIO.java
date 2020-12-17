@@ -11,10 +11,14 @@ import java.util.LinkedList;
  */
 
 public class PROMEDIO extends Function{
-    public static void PROMEDIO() {
+  /* public static void PROMEDIO() {
          PROMEDIO myObj = new PROMEDIO(); 
    
+    }*/
+    public PROMEDIO (String sequence) {
+        super(7, sequence);
     }
+    
     
     @Override
     public float Calculate(LinkedList list) {         

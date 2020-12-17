@@ -11,9 +11,13 @@ import java.util.LinkedList;
  */
 
 public class SUMA extends Function{
-    public static void SUMA() {
+    /*public static void SUMA() {
          SUMA myObj = new SUMA(); 
    
+    }*/
+
+    public SUMA(String sequence) {
+        super(8, sequence);
     }
     
     @Override

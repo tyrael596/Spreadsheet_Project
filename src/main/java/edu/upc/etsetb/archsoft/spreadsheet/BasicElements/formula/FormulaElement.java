@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public abstract class FormulaElement {
     int token; //Token Variable int,string o otro?
     String sequence;
-
+    boolean isFunction;
     public FormulaElement(int token, String sequence) { //Token Variable int,string o otro?
         super();
         this.token = token; //Token Variable int,string o otro?
@@ -39,6 +39,12 @@ public abstract class FormulaElement {
     public void changeToken(int newToken){
        this.token = newToken;
     }
+       public boolean isfunction(){
+       return this.isFunction;
+   }
+     public void setIsFunction(){
+       this.isFunction = true;
+   }
     
     public abstract float acceptVisitor (Visitador visitador,LinkedList input);
 }

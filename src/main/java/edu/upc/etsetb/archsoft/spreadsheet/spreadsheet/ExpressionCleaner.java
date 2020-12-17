@@ -140,7 +140,7 @@ public class ExpressionCleaner {
                         throw new SyntaxErrorException();
                     }
                     break;
-                case 12://.................................. CellRef
+                case 13://.................................. CellRef
                     if(aircoma==1){aircoma=0;}
                     if(nou==1){
                         nou--;
@@ -158,7 +158,7 @@ public class ExpressionCleaner {
                         throw new SyntaxErrorException();
                     }
                     break;
-                case 13://.................................. CellRange
+                case 12://.................................. CellRange
                     if(aircoma==1){aircoma=0;}
                     
                     if(nou==1){

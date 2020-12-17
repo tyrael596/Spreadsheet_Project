@@ -24,7 +24,11 @@ public class Visitador {
     LinkedList<Float> stack = new LinkedList();
     private FormulaElement aux;
     public float visitaCellReference(CellReference aThis, LinkedList<FormulaElement> input) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       aux = input.pop();
+        float number = Float.parseFloat(aux.getSequence());
+        stack.push(number);
+        return number;
+        
     }
 
     public float visitaNumeric(Numeric aThis,LinkedList<FormulaElement> input) {
@@ -104,4 +108,5 @@ public class Visitador {
         return 1;
     }
 
+    
 }
