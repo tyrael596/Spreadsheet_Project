@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author Amaya
+ * @author amayabalaguer
  */
 
 public class MAX extends Function {
@@ -41,7 +41,7 @@ public class MAX extends Function {
                 a = aux;
             }
         }
-
+        
         return a;
 
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

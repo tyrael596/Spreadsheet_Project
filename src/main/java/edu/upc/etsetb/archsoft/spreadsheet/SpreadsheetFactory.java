@@ -51,24 +51,25 @@ public class SpreadsheetFactory {
 
     public FormulaElement createFormulaElement(int token, String tok) throws UnknownTypeException, UnknownFunctionException {
         switch (token) {
-            case 13:
+            case SpreadsheetToolkit.TOKENCELLREF:
                 return new CellReference(token, tok);
-            case 11:
+            case SpreadsheetToolkit.TOKENNUM:
                 return new Numeric(token, tok);
-            case 3:
-            case 4:
-            case 9:
-            case 10:
+            case SpreadsheetToolkit.TOKENDIV:
+            case SpreadsheetToolkit.TOKENMINUS:
+            case SpreadsheetToolkit.TOKENMULT:
+            case SpreadsheetToolkit.TOKENPLUS:
                 return new Operador(token, tok);
-            case 5:
-            case 6:
-            case 7:
-            case 8:
+            case SpreadsheetToolkit.TOKENPROMEDIO:
+            case SpreadsheetToolkit.TOKENSUMA:
+            case SpreadsheetToolkit.TOKENMAX:
+            case SpreadsheetToolkit.TOKENMIN:
                 return this.createFunction(tok);
-            case 1:
-            case 2:
-            case 14:
+            case SpreadsheetToolkit.TOKENPUNCT:
+            case SpreadsheetToolkit.TOKENCLOSE:
+            case SpreadsheetToolkit.TOKENOPEN:
                 return this.createPunctuation(token, tok);
+             
             default:
                 throw new UnknownTypeException();
         }

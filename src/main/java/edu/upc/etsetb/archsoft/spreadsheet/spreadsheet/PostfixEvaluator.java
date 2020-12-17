@@ -6,49 +6,43 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Operador;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.Function;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.MAX;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.MIN;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.PROMEDIO;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.SUMA;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import java.util.LinkedList;
 
 /**
  *
- * @author Amaya
+ * @author amayabalaguer
  */
 public class PostfixEvaluator {
+
     // Acceso a lista de cells afectadas en spreadsheet
     private SpreadsheetFactory factory = new SpreadsheetFactory();
-    private Visitador visitador = new Visitador();
-    
-    public void setFactory(SpreadsheetFactory factory){
+    private static Visitador visitador = new Visitador();
+
+    public void setFactory(SpreadsheetFactory factory) {
         this.factory = factory;
     }
-    public void setVisitador(Visitador visitador){
+
+    public void setVisitador(Visitador visitador) {
         this.visitador = visitador;
     }
-    
-    public float evaluate(LinkedList<FormulaElement> input) throws UnknownFunctionException{
-        
-        float output = 0;
-        LinkedList<Float> stack = new LinkedList(); 
+
+    public static float evaluate(LinkedList<FormulaElement> input) throws UnknownFunctionException {
+
+         float  output = 0;
+        LinkedList<Float> stack = new LinkedList();
         FormulaElement aux;
 
-;
         //aux = input.pop(); 
-        while (input.isEmpty() == false) { 
-            
-                aux = input.peekFirst(); 
-                output = aux.acceptVisitor(visitador,input);
-                
+        while (input.isEmpty() == false) {
+
+            aux = input.peekFirst();
+
+             output = aux.acceptVisitor(visitador, input);
         }
-   
+
         return output;
     }
-    
-  
+
 }
