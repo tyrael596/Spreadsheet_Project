@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class Controller {
 
    static SpreadsheetFactory factory = new SpreadsheetFactory();
-   static Spreadsheet spreadsheet;
+   static Spreadsheet spreadsheet = new Spreadsheet();
 
    
    public static void create(){

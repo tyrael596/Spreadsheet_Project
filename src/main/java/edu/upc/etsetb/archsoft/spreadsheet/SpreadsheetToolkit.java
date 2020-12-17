@@ -27,13 +27,15 @@ public class SpreadsheetToolkit {
     public static final int TOKENCELLREF = 13;
     public static final int TOKENCELLRANGE = 12;
     public static final int TOKENPUNCT = 14;
+    public static final int MAXCOL = 100;
+    public static final int MAXROW = 100;
 
     public SpreadsheetToolkit() {
     }
     //Obtiene el contenido de una referencia y lo retorna como un string
 
     public static String getContent(String reference, Cell[][] spreadsheet) {
-        
+
         StringBuffer letter = new StringBuffer();
         StringBuffer num = new StringBuffer();
         int row, col = 0, aux;
@@ -53,13 +55,7 @@ public class SpreadsheetToolkit {
 
         row = Integer.parseInt(num.toString());
 
-        //col = Integer.parseInt(letter.toString());
-        //System.out.println("number " + num); 
-        //System.out.println("letter " + letter);
-       // System.out.println(" Row " + row);
-        //System.out.println("col " + col);
-       // System.out.println("content " + spreadsheet[row][col].content.getContent());
-        //System.out.println("convertedCol " + col); 
+
         return spreadsheet[row][col].content.getContent();
 
     }

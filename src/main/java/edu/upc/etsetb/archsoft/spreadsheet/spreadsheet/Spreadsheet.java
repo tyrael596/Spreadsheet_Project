@@ -6,6 +6,7 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
+import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import java.util.LinkedList;
 
 /**
@@ -13,7 +14,6 @@ import java.util.LinkedList;
  * @author Alex
  */
 public class Spreadsheet {
-
 
     LinkedList<Cell> affectedCells = new LinkedList(); //Cells being used by references
     Cell[][] spreadsheet;
@@ -30,11 +30,11 @@ public class Spreadsheet {
     public void updateSp() {
     }
 
-    public  void createSpreadsheet() {
+    public void createSpreadsheet() {
         SpreadsheetFactory factory = new SpreadsheetFactory();
-        Cell[][] spreadsheet = new Cell[43][43];
-        for (int col = 0; col < 43; col++) {
-            for (int row = 0; row < 43; row++) {
+        Cell[][] spreadsheet = new Cell[SpreadsheetToolkit.MAXROW][SpreadsheetToolkit.MAXCOL];
+        for (int col = 0; col < SpreadsheetToolkit.MAXCOL; col++) {
+            for (int row = 0; row < SpreadsheetToolkit.MAXROW; row++) {
                 spreadsheet[row][col] = new Cell();
                 spreadsheet[row][col].content.setContent(String.valueOf(row + 3));
 
