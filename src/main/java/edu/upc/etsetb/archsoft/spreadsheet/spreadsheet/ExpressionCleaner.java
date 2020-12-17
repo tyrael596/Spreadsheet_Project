@@ -6,6 +6,7 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
+import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -41,11 +42,11 @@ public class ExpressionCleaner {
             }
             fpar=0;
             switch(ttok){
-                case 1: //.............................. ( 
+                case SpreadsheetToolkit.TOKENOPEN: //.............................. ( 
                     nou=1;
                     parenthesis++;
                     break;
-                case 2: //.............................. )
+                case SpreadsheetToolkit.TOKENCLOSE: //.............................. )
                     if (j>0){
                         j--; 
                     }
@@ -54,7 +55,7 @@ public class ExpressionCleaner {
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 3: //............................... -
+                case SpreadsheetToolkit.TOKENMINUS: //............................... -
                     if(aircoma==1){
                         throw new SyntaxErrorException();
                     }
@@ -63,7 +64,7 @@ public class ExpressionCleaner {
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 4: //................................ +
+                case SpreadsheetToolkit.TOKENPLUS: //................................ +
                     if(aircoma==1){
                         throw new SyntaxErrorException();
                     }
@@ -72,7 +73,7 @@ public class ExpressionCleaner {
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 5: //............................... MIN
+                case SpreadsheetToolkit.TOKENMIN: //............................... MIN
                     if(aircoma==1){aircoma=0;}
                     j++;
                     fpar=1;
@@ -80,7 +81,7 @@ public class ExpressionCleaner {
                         operators--;
                     }
                     break;       
-                case 6: //............................... MAX
+                case SpreadsheetToolkit.TOKENMAX: //............................... MAX
                     if(aircoma==1){aircoma=0;}
                     j++;
                     fpar=1;
@@ -88,7 +89,7 @@ public class ExpressionCleaner {
                         operators--;
                     }
                     break;
-                case 7: //................................PROMEDIO
+                case SpreadsheetToolkit.TOKENPROMEDIO: //................................PROMEDIO
                     if(aircoma==1){aircoma=0;}
                     j++;
                     fpar=1;
@@ -96,7 +97,7 @@ public class ExpressionCleaner {
                         operators--;
                     }
                     break;
-                case 8: //.................................SUMA
+                case SpreadsheetToolkit.TOKENSUMA: //.................................SUMA
                     if(aircoma==1){aircoma=0;}
                     j++;
                     fpar=1;
@@ -104,7 +105,7 @@ public class ExpressionCleaner {
                         operators--;
                     }
                     break;
-                case 9: //................................. *
+                case SpreadsheetToolkit.TOKENMULT: //................................. *
                     if(aircoma==1){
                         throw new SyntaxErrorException();
                     }
@@ -113,7 +114,7 @@ public class ExpressionCleaner {
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 10://.................................. /
+                case SpreadsheetToolkit.TOKENDIV://.................................. /
                     if(aircoma==1){
                         throw new SyntaxErrorException();
                     }
@@ -122,7 +123,7 @@ public class ExpressionCleaner {
                     }
                     else{ throw new SyntaxErrorException();}
                     break;
-                case 11://................................. num
+                case SpreadsheetToolkit.TOKENNUM://................................. num
                     if(aircoma==1){aircoma=0;}
                     if(nou==1){
                         nou--;
@@ -140,7 +141,7 @@ public class ExpressionCleaner {
                         throw new SyntaxErrorException();
                     }
                     break;
-                case 13://.................................. CellRef
+                case SpreadsheetToolkit.TOKENCELLREF://.................................. CellRef
                     if(aircoma==1){aircoma=0;}
                     if(nou==1){
                         nou--;
@@ -158,7 +159,7 @@ public class ExpressionCleaner {
                         throw new SyntaxErrorException();
                     }
                     break;
-                case 12://.................................. CellRange
+                case SpreadsheetToolkit.TOKENCELLRANGE://.................................. CellRange
                     if(aircoma==1){aircoma=0;}
                     
                     if(nou==1){
@@ -177,7 +178,7 @@ public class ExpressionCleaner {
                         throw new SyntaxErrorException();
                     }
                     break;
-                case 14: //................................... ; 
+                case SpreadsheetToolkit.TOKENPUNCT: //................................... ; 
                     if(operators>0){
                         throw new SyntaxErrorException();
                     }
