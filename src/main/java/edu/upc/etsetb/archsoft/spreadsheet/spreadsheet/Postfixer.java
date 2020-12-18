@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author Amaya
+ * @author amayabalaguer
  */
 public class Postfixer {
 
@@ -60,14 +60,18 @@ public class Postfixer {
                     aux2 = operatorStack.peekFirst();
                     if (aux2 != null) {
                         //si hay algo hay que mirar las precedencias
-                        if (aux.getToken() >= aux2.getToken()) {
+                        if (aux.getToken() >= aux2.getToken() || aux.getToken() == SpreadsheetToolkit.TOKENOPEN) {
+
                             operatorStack.push(aux);
-                        } else {
+
+                        } else if (aux.getToken() < aux2.getToken()) {
+
                             aux2 = operatorStack.pop();
                             numbersQueue.addLast(aux2);
                             operatorStack.push(aux);
                         }
                     } else {
+
                         operatorStack.push(aux);
                     }
                 }

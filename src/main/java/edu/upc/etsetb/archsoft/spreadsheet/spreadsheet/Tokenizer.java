@@ -70,6 +70,23 @@ public class Tokenizer {
             if (!match) throw new RuntimeException("Unexpected character in input: "+dataInput); // There were no matches inside the given string
         } 
     }
+    
+    public void addTokens(Tokenizer tokenizer ){
+        tokenizer.add("\\(", 1); // open bracket
+        tokenizer.add("\\)", 2); // close bracket
+        tokenizer.add("[-]", 3); 
+        tokenizer.add("[+]", 4); 
+        tokenizer.add("MIN", 5); 
+        tokenizer.add("MAX", 6);
+        tokenizer.add("PROMEDIO", 7); 
+        tokenizer.add("SUMA", 8);
+        tokenizer.add("[*]", 9); 
+        tokenizer.add("[/]", 10); 
+        tokenizer.add("[0-9]+",11); // integer number
+        tokenizer.add("[a-zA-Z]{1,}[0-9]{1,}:[a-zA-Z]{1,}[0-9]{1,}", 12); // CellRange
+        tokenizer.add("[a-zA-Z]{1,}[0-9]{1,}", 13); // CellReference       
+        tokenizer.add("[;]", 14); // function delimiter
+    }
      
    
 }

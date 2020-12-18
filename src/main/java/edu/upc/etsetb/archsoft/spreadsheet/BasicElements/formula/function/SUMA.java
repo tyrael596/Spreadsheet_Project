@@ -7,7 +7,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
 import java.util.LinkedList;
 /**
  *
- * @author Amaya
+ * @author amayabalaguer
  */
 
 public class SUMA extends Function{

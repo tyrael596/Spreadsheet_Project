@@ -33,6 +33,7 @@ public class Operador extends FormulaElement{
            case "+":
                 return operand1 + operand2;
            case "-":
+               
                 return operand1 - operand2; 
             case "*":
                 return operand1 * operand2;  
