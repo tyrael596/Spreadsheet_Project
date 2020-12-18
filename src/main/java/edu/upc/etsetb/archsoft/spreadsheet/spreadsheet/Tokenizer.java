@@ -61,7 +61,7 @@ public class Tokenizer {
                     match = true;
 
                     String tok = m.group().trim();
-                    tokens.add(factory.createFormulaElement(info.token, tok));
+                    tokens.add(factory.createFormulaElement(info.token, tok,tokens));
 
                     dataInput = m.replaceFirst("");
                     break;
