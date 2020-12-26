@@ -5,16 +5,25 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements;
 
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
+import java.util.LinkedList;
+
 /**
  *
  * @author Alex
  */
 public abstract class CellContent {
-    public String content = ".";
-    
 
-    
-   public abstract  String getContent();
-   public abstract  void setContent(String newContent);
+    public String content = ".";
+
+    public abstract String getContent();
+
+    public abstract void setContent(String newContent);
+
+    public abstract void setContent(String newContent, LinkedList<FormulaElement> list);
+
+    public abstract void modifyContent(String newContent);
+
+    public abstract void modifyContent(String newContent, LinkedList<FormulaElement> list);
     //abstract void error();   
 }

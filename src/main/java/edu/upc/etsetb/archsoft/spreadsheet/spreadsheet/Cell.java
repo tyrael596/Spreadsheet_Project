@@ -24,5 +24,8 @@ public class Cell{
         content = new CellFormula();
         
     }
+    public void modifyContent(String newContent){
+        this.content.setContent(newContent);
+    }
     
 }

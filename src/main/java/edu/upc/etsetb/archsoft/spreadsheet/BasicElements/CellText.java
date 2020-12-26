@@ -5,22 +5,43 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements;
 
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
+import java.util.LinkedList;
+
 /**
  *
  * @author Alex
  */
-public class CellText extends CellContent{
-    String value="";
-  /*  public void getContent(){
-    }     */  
+public class CellText extends CellContent {
+
+    String value = "";
+
+    /*  public void getContent(){
+    }     */
 
     @Override
     public String getContent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.value;
     }
 
     @Override
     public void setContent(String newContent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void modifyContent(String newContent) {
+        this.value = newContent;
+    }
+
+    @Override
+    public void modifyContent(String newContent, LinkedList<FormulaElement> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setContent(String newContent, LinkedList<FormulaElement> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

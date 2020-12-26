@@ -36,11 +36,17 @@ public class SpreadsheetToolkit {
 
     public static String getContent(String reference, Cell[][] spreadsheet) {
 
-        int[] coordinates= new int[2];
+        int[] coordinates = new int[2];
         coordinates = getCoordinates(reference);
+        String content = "";
+        try {
+            content = spreadsheet[coordinates[0]][coordinates[1]].content.getContent();
+        } catch (NullPointerException e) {
+            System.out.println("Please cretae or load an spreadsheet");
+            throw new NullPointerException();
+        }
 
-        return spreadsheet[coordinates[0]][coordinates[1]].content.getContent();
-
+        return content;
     }
 
     public static int[] getCoordinates(String reference) {

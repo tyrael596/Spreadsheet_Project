@@ -5,6 +5,7 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import java.util.LinkedList;
@@ -44,6 +45,14 @@ public class Spreadsheet {
 
     public Cell[][] getSpreadsheet() {
         return spreadsheet;
+    }
+    
+    public void modifyCell(int row, int col, String content){
+        this.spreadsheet[row][col].content.modifyContent(content);
+    }
+   public void modifyCell(int row, int col, String content, LinkedList<FormulaElement> postfix){
+        this.spreadsheet[row][col].content.modifyContent(content,postfix);
+        
     }
 
     // Metodo ModifyCell +++ 

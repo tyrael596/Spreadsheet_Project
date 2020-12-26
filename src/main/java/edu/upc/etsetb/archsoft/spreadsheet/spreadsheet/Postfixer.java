@@ -54,8 +54,14 @@ public class Postfixer {
                         aux2 = operatorStack.pop();
                     }
                 } else if (aux.getToken() == SpreadsheetToolkit.TOKENCELLREF) {
-                    aux2 = new Numeric(11, String.valueOf(SpreadsheetToolkit.getContent(aux.getSequence(), spreadsheet)));
-                    numbersQueue.addLast(aux2);
+                    try {
+                        aux2 = new Numeric(11, String.valueOf(SpreadsheetToolkit.getContent(aux.getSequence(), spreadsheet)));
+                        numbersQueue.addLast(aux2);
+                    } catch (NullPointerException ex) {
+                        System.out.println("Please cretae or load an spreadsheet");
+                        throw new NullPointerException();
+                    }
+
                 } else {
                     aux2 = operatorStack.peekFirst();
                     if (aux2 != null) {
