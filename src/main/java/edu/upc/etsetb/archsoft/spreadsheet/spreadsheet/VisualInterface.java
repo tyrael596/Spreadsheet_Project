@@ -45,6 +45,7 @@ public class VisualInterface {
                 
                 break;
             case "E":
+                System.out.println("Good ");
                 // Falta comprobar que lo que me entran son coordenadas válidas pero supongamos que si
                 try{
                     Controller.validCell(parts[1]);
@@ -52,6 +53,7 @@ public class VisualInterface {
                     System.out.println("Enter a valid cell Reference ");
                     break;
                 }
+                System.out.println("Llamemos a lo que toca ");
                 Controller.editCell(parts);
 
                 break;

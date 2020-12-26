@@ -26,7 +26,7 @@ public class CellNumeric extends CellContent {
 
     @Override
     public void setContent(String newContent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.value = newContent;
     }
 
     @Override

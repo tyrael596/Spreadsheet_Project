@@ -18,7 +18,6 @@ public class CellText extends CellContent {
 
     /*  public void getContent(){
     }     */
-
     @Override
     public String getContent() {
         return this.value;
@@ -26,7 +25,7 @@ public class CellText extends CellContent {
 
     @Override
     public void setContent(String newContent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.value = newContent;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class CellText extends CellContent {
 
     @Override
     public void setContent(String newContent, LinkedList<FormulaElement> list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.value = newContent;
     }
 
 }
