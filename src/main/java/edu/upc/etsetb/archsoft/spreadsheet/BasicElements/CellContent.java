@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public abstract class CellContent {
 
-    public String content = ".";
+    public String content = " ";
 
     public abstract String getContent();
 

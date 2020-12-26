@@ -34,22 +34,22 @@ public class Controller {
     }
 
     public static void editCell(String[] parts) {
-        System.out.print("Enro aquí" + parts[2].charAt(0));
+
         
         int[] coordinates = SpreadsheetToolkit.getCoordinates(parts[1]);
         try {
             float number = Float.parseFloat(parts[2]);//miramos si es un numero
-            System.out.print("Number");
+
             editNumeric(parts[2], coordinates);
         } catch (NumberFormatException e) {
-            System.out.print("not a nmber");
+
 
             if (parts[2].charAt(0) == '='){
                 
-                System.out.print("parts" + parts[2]);
+
                 editFormula(parts, coordinates);
             } else {
-                System.out.print("String");
+
                 editText(parts[2], coordinates);
             }
 
@@ -62,7 +62,7 @@ public class Controller {
 
         coordinates = SpreadsheetToolkit.getCoordinates(input);
 
-        if (coordinates[1] > SpreadsheetToolkit.MAXCOL || coordinates[0] > SpreadsheetToolkit.MAXROW) {
+        if ((coordinates[1] > SpreadsheetToolkit.MAXCOL  || coordinates[0] > SpreadsheetToolkit.MAXROW) && coordinates[0] != 0 && coordinates[1] != 0) {
 
             throw new UnknownReferenceException();
         }
@@ -125,5 +125,14 @@ public class Controller {
         spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new CellText();
         spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
 
+    }
+    
+    public static void printSpreadsheet(){
+        for (int i = 0; i < SpreadsheetToolkit.MAXROW; i++) {
+    for (int j = 0; j < SpreadsheetToolkit.MAXCOL; j++) {
+        System.out.print(spreadsheet.spreadsheet[i][j].content.getContent() + " ");
+    }
+    System.out.println();
+}
     }
 }

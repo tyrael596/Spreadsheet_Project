@@ -27,8 +27,8 @@ public class SpreadsheetToolkit {
     public static final int TOKENCELLREF = 13;
     public static final int TOKENCELLRANGE = 12;
     public static final int TOKENPUNCT = 14;
-    public static final int MAXCOL = 100;
-    public static final int MAXROW = 100;
+    public static final int MAXCOL = 10;
+    public static final int MAXROW = 10;
 
     public SpreadsheetToolkit() {
     }

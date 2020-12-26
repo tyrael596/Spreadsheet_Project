@@ -20,12 +20,15 @@ public class CellText extends CellContent {
     }     */
     @Override
     public String getContent() {
+       // System.out.println("getContent " + this.value);
         return this.value;
+        
     }
 
     @Override
     public void setContent(String newContent) {
         this.value = newContent;
+       // System.out.println(this.value);
     }
 
     @Override
