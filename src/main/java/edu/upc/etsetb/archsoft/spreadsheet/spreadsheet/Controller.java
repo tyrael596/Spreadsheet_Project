@@ -12,6 +12,7 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.Main;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
+import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownTypeException;
 import java.util.LinkedList;
@@ -35,7 +36,6 @@ public class Controller {
 
     public static void editCell(String[] parts) {
 
-        
         int[] coordinates = SpreadsheetToolkit.getCoordinates(parts[1]);
         try {
             float number = Float.parseFloat(parts[2]);//miramos si es un numero
@@ -43,11 +43,14 @@ public class Controller {
             editNumeric(parts[2], coordinates);
         } catch (NumberFormatException e) {
 
+            if (parts[2].charAt(0) == '=') {
 
-            if (parts[2].charAt(0) == '='){
-                
-
-                editFormula(parts, coordinates);
+                try {
+                    editFormula(parts, coordinates);
+                } catch (SyntaxErrorException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Erroneous Formula Syntax");
+                }
             } else {
 
                 editText(parts[2], coordinates);
@@ -62,20 +65,19 @@ public class Controller {
 
         coordinates = SpreadsheetToolkit.getCoordinates(input);
 
-        if ((coordinates[1] > SpreadsheetToolkit.MAXCOL  || coordinates[0] > SpreadsheetToolkit.MAXROW) && coordinates[0] != 0 && coordinates[1] != 0) {
+        if ((coordinates[1] > SpreadsheetToolkit.MAXCOL || coordinates[0] > SpreadsheetToolkit.MAXROW) && coordinates[0] != 0 && coordinates[1] != 0) {
 
             throw new UnknownReferenceException();
         }
 
     }
 
-    private static void editFormula(String[] parts, int[] coordinates) {
+    private static void editFormula(String[] parts, int[] coordinates) throws SyntaxErrorException {
         ExpressionCleaner exp = new ExpressionCleaner();
         PostfixEvaluator evaluator = new PostfixEvaluator();
         //comprobamos que las coordenadas son validas
         //realizamos el cálculo
         String formula = parts[2].substring(1);;
-        
 
         Tokenizer token = new Tokenizer();
         token.setFactory(factory);
@@ -86,32 +88,29 @@ public class Controller {
 
         } catch (UnknownTypeException | UnknownFunctionException ex) {
             Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Linea 90 for Controller");
         }
+        exp.check(tokenList);
+        tokenList = token.tokens;
+        LinkedList<FormulaElement> auxTokens = new LinkedList<>(tokenList);
+        LinkedList<FormulaElement> postfix = null;
+
+        postfix = Postfixer.shuntingYardAlgorithm(auxTokens, spreadsheet.getSpreadsheet());
+
+        evaluator.setFactory(factory);
+        float output;
         try {
-            exp.check(tokenList);
-            tokenList = token.tokens;
-            LinkedList<FormulaElement> auxTokens = new LinkedList<>(tokenList);
-            LinkedList<FormulaElement> postfix = null;
+            output = evaluator.evaluate(postfix);
+            System.out.println("output " + output);
 
-            postfix = Postfixer.shuntingYardAlgorithm(auxTokens, spreadsheet.getSpreadsheet());
+            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new CellFormula();
+            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), postfix);
 
-            evaluator.setFactory(factory);
-            float output;
-            try {
-                output = evaluator.evaluate(postfix);
-                System.out.println("output " + output);
-
-                spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new CellFormula();
-                spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), postfix);
-
-            } catch (UnknownFunctionException ex) {
-                Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            //store the new value
-
-        } catch (ExpressionCleaner.SyntaxErrorException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnknownFunctionException ex2) {
+            Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
+            System.out.println("Linea 110 for Controller");
         }
+        //store the new value
 
     }
 
@@ -126,13 +125,13 @@ public class Controller {
         spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
 
     }
-    
-    public static void printSpreadsheet(){
+
+    public static void printSpreadsheet() {
         for (int i = 0; i < SpreadsheetToolkit.MAXROW; i++) {
-    for (int j = 0; j < SpreadsheetToolkit.MAXCOL; j++) {
-        System.out.print(spreadsheet.spreadsheet[i][j].content.getContent() + " ");
-    }
-    System.out.println();
-}
+            for (int j = 0; j < SpreadsheetToolkit.MAXCOL; j++) {
+                System.out.print(spreadsheet.spreadsheet[i][j].content.getContent() + " ");
+            }
+            System.out.println();
+        }
     }
 }

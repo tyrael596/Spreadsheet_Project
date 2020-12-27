@@ -15,8 +15,6 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.MAX;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.MIN;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.PROMEDIO;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.SUMA;
-import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.ExpressionCleaner.SyntaxErrorException;
-import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Tokenizer;
 import static java.lang.Integer.parseInt;
 import java.util.LinkedList;
 import java.util.regex.Matcher;

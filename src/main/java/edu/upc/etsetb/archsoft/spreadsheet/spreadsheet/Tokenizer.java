@@ -7,6 +7,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
+import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownTypeException;
 import java.util.LinkedList;
@@ -52,7 +53,7 @@ public class Tokenizer {
     }
     
     
-    public void getTokens(String dataInput) throws UnknownTypeException, UnknownFunctionException{
+    public void getTokens(String dataInput) throws UnknownTypeException, UnknownFunctionException, SyntaxErrorException{
         while (!dataInput.equals("")) {
             boolean match = false;  
             for (TokenInfo info : tokenInfos) {
@@ -67,7 +68,7 @@ public class Tokenizer {
                     break;
                 }
             }
-            if (!match) throw new RuntimeException("Unexpected character in input: "+dataInput); // There were no matches inside the given string
+            if (!match) throw new SyntaxErrorException("Unexpected character in input: "+dataInput); // There were no matches inside the given string
         } 
     }
     
@@ -82,7 +83,7 @@ public class Tokenizer {
         tokenizer.add("SUMA", 8);
         tokenizer.add("[*]", 9); 
         tokenizer.add("[/]", 10); 
-        tokenizer.add("[0-9]+",11); // integer number
+        tokenizer.add("[0-9]\\d{0,9}(\\.\\d{1,})?%?",11);
         tokenizer.add("[a-zA-Z]{1,}[0-9]{1,}:[a-zA-Z]{1,}[0-9]{1,}", 12); // CellRange
         tokenizer.add("[a-zA-Z]{1,}[0-9]{1,}", 13); // CellReference       
         tokenizer.add("[;]", 14); // function delimiter

@@ -7,6 +7,7 @@ package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
+import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -201,18 +202,11 @@ public class ExpressionCleaner {
             
         }
         if (parenthesis > 0 || j>0 || operators>0 || aircoma>0) {
-            throw new SyntaxErrorException();  
+            throw new SyntaxErrorException("Unexpected character in input: "+tokenized.getFirst().getSequence());  
         } 
     }
 
-    public  class SyntaxErrorException  extends RuntimeException {
-           public SyntaxErrorException(String msg) {super(msg);
-    }
-        private SyntaxErrorException() {
-            System.out.print("Syntax Error");
-        }
-        
-   }
+
 
 }
 
