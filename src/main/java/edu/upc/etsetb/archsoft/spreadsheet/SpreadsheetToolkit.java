@@ -66,10 +66,13 @@ public class SpreadsheetToolkit {
             aux = (int) letter.charAt(e);
             col = col * 26 + (aux - 'A') + 1;
         }
-
-        row = Integer.parseInt(num.toString());
-        coordinates[0] = row;
-        coordinates[1] = col;
+        try {
+            row = Integer.parseInt(num.toString());
+            coordinates[0] = row;
+            coordinates[1] = col;
+        } catch (java.lang.NumberFormatException e) {
+            return null;
+        }
         return coordinates;
     }
 

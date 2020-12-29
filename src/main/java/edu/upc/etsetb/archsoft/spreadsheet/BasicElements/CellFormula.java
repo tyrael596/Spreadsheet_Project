@@ -48,7 +48,7 @@ public class CellFormula extends CellContent {
     @Override
     public void setContent(String newContent, LinkedList<FormulaElement> list) {
        this.value = newContent;
-       this.list = (LinkedList) list.clone(); 
+       this.list = list; 
 
     }
 
