@@ -5,8 +5,11 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
+import java.io.File;
+import java.util.Scanner;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import static edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Controller.spreadsheet;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -40,8 +43,9 @@ public class VisualInterface {
     private void performAction(String option) throws UnknownOptionException {
         String[] parts = option.split("\\ ");
 
-        switch (parts[0]) {
+        switch (parts[0].toUpperCase()) {
             case "RF":
+                ReadFromFileUsingScanner();
                 break;
             case "C":
                 Controller.create();
@@ -82,7 +86,7 @@ public class VisualInterface {
         System.out.println();
 
         System.out.println("------------------------------------");
-  
+
         System.out.println();
         for (int i = 0; i < SpreadsheetToolkit.MAXROW; i++) {
             for (int j = 0; j < SpreadsheetToolkit.MAXCOL; j++) {
@@ -96,5 +100,20 @@ public class VisualInterface {
 
         System.out.println("------------------------------------");
         System.out.println();
+    }
+
+
+    public void ReadFromFileUsingScanner() {
+        // pass the path to the file as a parameter 
+        File file = new File("Users/amayabalaguer/Desktop/commands.txt⁩");
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                System.out.println(sc.nextLine());
+            }
+        } catch (FileNotFoundException es) {
+            System.out.println("Empty file");
+        }
+
     }
 }

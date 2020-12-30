@@ -6,7 +6,6 @@
 package edu.upc.etsetb.archsoft.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Cell;
-import static java.lang.Math.*;
 
 /**
  *
@@ -77,15 +76,15 @@ public class SpreadsheetToolkit {
         return coordinates;
     }
 
-    static String str(int i) {
-        return i < 0 ? "" : str((i / 26) -1 ) + (char) (65 + i % 26);
+    static String letter(int i) {
+        return i < 0 ? "" : letter((i / 26) -1 ) + (char) (65 + i % 26);
     }
 
     public static String[] getString() {
         int i;
         String [] content = new String[MAXCOL];
         for (i = 0; i <  MAXCOL-1; ++i) {
-            content[i +1] = str(i);
+            content[i +1] = letter(i);
         }
         return content;
     }
