@@ -36,6 +36,8 @@ public class Spreadsheet {
     public void createSpreadsheet() {
         SpreadsheetFactory factory = new SpreadsheetFactory();
         spreadsheet = new Cell[SpreadsheetToolkit.MAXROW][SpreadsheetToolkit.MAXCOL];
+        String[] a = SpreadsheetToolkit.getString();
+        
         for (int col = 0; col < SpreadsheetToolkit.MAXCOL; col++) {
             for (int row = 0; row < SpreadsheetToolkit.MAXROW; row++) {
                 this.spreadsheet[row][col] = new Cell();
@@ -49,9 +51,9 @@ public class Spreadsheet {
                     }
                 } else {
                     if (row == 0 && col != 0) {
-                       //System.out.println("row " + row + " col " + col +(char) ('A' + col-1));
                         this.spreadsheet[row][col].content = new CellText();
-                        this.spreadsheet[row][col].content.setContent(String.valueOf((char) ('A' + col-1)));
+                        this.spreadsheet[row][col].content.setContent(a[col]);
+                        //this.spreadsheet[row][col].content.setContent(String.valueOf((char) ('A' + col-1)));
                     } else {
                         
                         this.spreadsheet[row][col].content = new CellNumeric();
@@ -78,4 +80,6 @@ public class Spreadsheet {
 
     // Metodo ModifyCell +++ 
     // Tokenizer -> ParserCleaner (formato correcto)  -> Postfixer
+    
 }
+
