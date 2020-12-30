@@ -119,16 +119,18 @@ public class Controller {
 
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new CellFormula();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), postfix);
+            
+           // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
         } catch (UnknownFunctionException ex2) {
             Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
             System.out.println("Linea 110 for Controller");
         }
-        //store the new value
-
+      
     }
 
     private static void editNumeric(String value, int[] coordinates) {
         try {
+            System.out.println("numero");
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new CellNumeric();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
         } catch (java.lang.NullPointerException e) {
@@ -140,6 +142,7 @@ public class Controller {
 
     private static void editText(String value, int[] coordinates) {
         try {
+            System.out.println("texto");
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new CellText();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
         } catch (java.lang.NullPointerException e) {

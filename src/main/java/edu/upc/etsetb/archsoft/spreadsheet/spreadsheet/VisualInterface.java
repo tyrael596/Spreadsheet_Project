@@ -40,58 +40,59 @@ public class VisualInterface {
     private void performAction(String option) throws UnknownOptionException {
         String[] parts = option.split("\\ ");
 
-        if (parts.length < 3) {
-            throw new UnknownOptionException();
-        } else {
-            switch (parts[0]) {
-                case "RF":
-                    break;
-                case "C":
-                    Controller.create();
-
-                    break;
-                case "E":
-
-                // Falta comprobar que lo que me entran son coordenadas válidas pero supongamos que si
-            try {
-                    Controller.validCell(parts[1]);
-                    Controller.editCell(parts);
-                } catch (UnknownReferenceException e) {
-                    System.out.println("Enter a valid cell Reference ");
-                    break;
-                }
+        switch (parts[0]) {
+            case "RF":
+                break;
+            case "C":
+                Controller.create();
 
                 break;
-
-                case "L":
-                    break;
-                case "S":
-                    break;
-                default:
+            case "E":
+                if (parts.length < 3) {
                     throw new UnknownOptionException();
-            }
+                } else {
+                    // Falta comprobar que lo que me entran son coordenadas válidas pero supongamos que si
+                    try {
+                        Controller.validCell(parts[1]);
+                        Controller.editCell(parts);
+                    } catch (UnknownReferenceException e) {
+                        System.out.println("Enter a valid cell Reference ");
+                        break;
+                    }
+                }
+                break;
 
-            try {
-                printSpreadsheet();
-            } catch (java.lang.NullPointerException ex) {
-
-            }
+            case "L":
+                break;
+            case "S":
+                break;
+            default:
+                throw new UnknownOptionException();
         }
+
+        try {
+            printSpreadsheet();
+        } catch (java.lang.NullPointerException ex) {
+
+        }
+
     }
 
     private static void printSpreadsheet() {
         System.out.println();
 
         System.out.println("------------------------------------");
+  
         System.out.println();
         for (int i = 0; i < SpreadsheetToolkit.MAXROW; i++) {
             for (int j = 0; j < SpreadsheetToolkit.MAXCOL; j++) {
                 System.out.print(spreadsheet.spreadsheet[i][j].content.getContent() + "    ");
+
             }
             System.out.println();
+
         }
         System.out.println();
-        //System.out.println(Arrays.deepToString(spreadsheet.spreadsheet));
 
         System.out.println("------------------------------------");
         System.out.println();

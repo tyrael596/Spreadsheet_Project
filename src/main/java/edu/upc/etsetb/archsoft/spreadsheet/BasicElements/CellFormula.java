@@ -15,12 +15,11 @@ import java.util.LinkedList;
  */ 
 public class CellFormula extends CellContent { 
    
-    String value;
+    String value = "";
     LinkedList <FormulaElement> list; // expresión postfix
 
     @Override
     public String getContent()  {
-        System.out.println(this.value);
         return this.value;
     }
     @Override
@@ -47,6 +46,7 @@ public class CellFormula extends CellContent {
 
     @Override
     public void setContent(String newContent, LinkedList<FormulaElement> list) {
+        System.out.println("content " + newContent);
        this.value = newContent;
        this.list = list; 
 
