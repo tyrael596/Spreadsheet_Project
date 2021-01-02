@@ -6,7 +6,6 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellContent;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellFormula;
 
 
 /**
@@ -15,13 +14,12 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellFormula;
  */
 public class Cell{
     public CellContent content;
-    static int row;
-    static int col;
-   // public void getType(){
-    //}
+    int row;
+    int col;
+  
     
-    public Cell(){
-        content = new CellFormula();
+    public Cell(CellContent content){
+        this.content = content;
         
     }
     public void modifyContent(String newContent){

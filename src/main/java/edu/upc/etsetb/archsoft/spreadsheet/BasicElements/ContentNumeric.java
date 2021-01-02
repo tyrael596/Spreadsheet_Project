@@ -13,7 +13,7 @@ import java.util.LinkedList;
  *
  * @author Alex
  */
-public class CellNumeric extends CellContent {
+public class ContentNumeric extends CellContent {
 
     String value;
     //  public void getContent(){

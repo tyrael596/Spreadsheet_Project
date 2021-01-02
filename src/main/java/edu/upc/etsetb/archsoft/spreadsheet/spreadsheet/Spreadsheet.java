@@ -5,8 +5,9 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellNumeric;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellText;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentNumeric;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentText;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
@@ -36,14 +37,14 @@ public class Spreadsheet {
     public void createSpreadsheet() {
         SpreadsheetFactory factory = new SpreadsheetFactory();
         spreadsheet = new Cell[SpreadsheetToolkit.MAXROW][SpreadsheetToolkit.MAXCOL];
-        String[] a = SpreadsheetToolkit.getString();
+        String[] a = CellReference.getString();
         
         for (int col = 0; col < SpreadsheetToolkit.MAXCOL; col++) {
             for (int row = 0; row < SpreadsheetToolkit.MAXROW; row++) {
-                this.spreadsheet[row][col] = new Cell();
+                this.spreadsheet[row][col] = new Cell(new ContentNumeric());
                 if (col == 0) {
                     
-                    this.spreadsheet[row][col].content = new CellText();
+                    this.spreadsheet[row][col].content = new ContentText();
                     if (row == 0) {
                         this.spreadsheet[row][col].content.setContent(" ");
                     } else {
@@ -51,12 +52,12 @@ public class Spreadsheet {
                     }
                 } else {
                     if (row == 0 && col != 0) {
-                        this.spreadsheet[row][col].content = new CellText();
+                        this.spreadsheet[row][col].content = new ContentText();
                         this.spreadsheet[row][col].content.setContent(a[col]);
                         //this.spreadsheet[row][col].content.setContent(String.valueOf((char) ('A' + col-1)));
                     } else {
                         
-                        this.spreadsheet[row][col].content = new CellNumeric();
+                        this.spreadsheet[row][col].content = new ContentNumeric();
                         this.spreadsheet[row][col].content.setContent(String.valueOf(row + 3));
                     }
                 }

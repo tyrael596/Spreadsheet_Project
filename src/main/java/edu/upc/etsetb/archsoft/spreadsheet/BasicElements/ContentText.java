@@ -12,7 +12,7 @@ import java.util.LinkedList;
  *
  * @author Alex
  */
-public class CellText extends CellContent {
+public class ContentText extends CellContent {
 
     String value = "";
 

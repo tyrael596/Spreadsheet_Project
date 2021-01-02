@@ -102,11 +102,12 @@ public class VisualInterface {
         System.out.println();
     }
 
-
     public void ReadFromFileUsingScanner() {
-        // pass the path to the file as a parameter 
-        File file = new File("Users/amayabalaguer/Desktop/commands.txt⁩");
+        // pass the path to the file as a parameter
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
         try {
+            File file = new File("/Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/commands.txt⁩");
+
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 System.out.println(sc.nextLine());

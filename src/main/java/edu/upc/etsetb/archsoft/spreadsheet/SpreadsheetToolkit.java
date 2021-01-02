@@ -5,6 +5,7 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet;
 
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Cell;
 
 /**
@@ -37,7 +38,7 @@ public class SpreadsheetToolkit {
     public static String getContent(String reference, Cell[][] spreadsheet) {
 
         int[] coordinates = new int[2];
-        coordinates = getCoordinates(reference);
+        coordinates = CellReference.getCoordinates(reference);
         String content = "";
         try {
             content = spreadsheet[coordinates[0]][coordinates[1]].content.getContent();
@@ -49,43 +50,4 @@ public class SpreadsheetToolkit {
         return content;
     }
 
-    public static int[] getCoordinates(String reference) {
-        StringBuffer letter = new StringBuffer();
-        StringBuffer num = new StringBuffer();
-        int aux, col = 0, row = 0;
-        int coordinates[] = new int[2];
-        for (int i = 0; i < reference.length(); i++) {
-            if (Character.isDigit(reference.charAt(i))) {
-                num.append(reference.charAt(i));
-            } else if (Character.isAlphabetic(reference.charAt(i))) {
-                letter.append(reference.charAt(i));
-            }
-
-        }
-        for (int e = 0; e < letter.length(); e++) {
-            aux = (int) letter.charAt(e);
-            col = col * 26 + (aux - 'A') + 1;
-        }
-        try {
-            row = Integer.parseInt(num.toString());
-            coordinates[0] = row;
-            coordinates[1] = col;
-        } catch (java.lang.NumberFormatException e) {
-            return null;
-        }
-        return coordinates;
-    }
-
-    static String letter(int i) {
-        return i < 0 ? "" : letter((i / 26) -1 ) + (char) (65 + i % 26);
-    }
-
-    public static String[] getString() {
-        int i;
-        String [] content = new String[MAXCOL];
-        for (i = 0; i <  MAXCOL-1; ++i) {
-            content[i +1] = letter(i);
-        }
-        return content;
-    }
 }

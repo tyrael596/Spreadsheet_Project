@@ -13,7 +13,7 @@ import java.util.LinkedList;
  * 
  * @author Alex 
  */ 
-public class CellFormula extends CellContent { 
+public class ContentFormula extends CellContent { 
    
     String value = "";
     LinkedList <FormulaElement> list; // expresión postfix

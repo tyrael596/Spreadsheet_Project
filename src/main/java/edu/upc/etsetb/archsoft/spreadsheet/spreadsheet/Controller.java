@@ -5,9 +5,10 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellFormula;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellNumeric;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellText;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentFormula;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentNumeric;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentText;
+import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.Main;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
@@ -38,7 +39,7 @@ public class Controller {
     public static void editCell(String[] parts)throws UnknownReferenceException {
         int[] coordinates = null;
         try {
-            coordinates = SpreadsheetToolkit.getCoordinates(parts[1]);
+            coordinates = CellReference.getCoordinates(parts[1]);
         } catch (java.lang.NumberFormatException e) {
 
         }
@@ -54,7 +55,7 @@ public class Controller {
                     try {
                         editFormula(parts, coordinates);
                     } catch (SyntaxErrorException ex) {
-                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                         System.out.println("Erroneous Formula Syntax");
                     }
                 } else {
@@ -74,7 +75,7 @@ public class Controller {
     public static void validCell(String input) throws UnknownReferenceException {
         int[] coordinates = new int[2];
         try {
-            coordinates = SpreadsheetToolkit.getCoordinates(input);
+            coordinates = CellReference.getCoordinates(input);
         } catch (java.lang.NumberFormatException e) {
 
         }
@@ -101,7 +102,7 @@ public class Controller {
             token.getTokens(formula);
 
         } catch (UnknownTypeException | UnknownFunctionException ex) {
-            Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Linea 90 for Controller");
         }
         exp.check(tokenList);
@@ -117,12 +118,12 @@ public class Controller {
             output = evaluator.evaluate(postfix);
             System.out.println("output " + output);
 
-            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new CellFormula();
+            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentFormula();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), postfix);
             
            // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
         } catch (UnknownFunctionException ex2) {
-            Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
+            //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
             System.out.println("Linea 110 for Controller");
         }
       
@@ -131,7 +132,7 @@ public class Controller {
     private static void editNumeric(String value, int[] coordinates) {
         try {
             System.out.println("numero");
-            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new CellNumeric();
+            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentNumeric();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
         } catch (java.lang.NullPointerException e) {
             System.out.println("There is no spreadsheet in use");
@@ -143,7 +144,7 @@ public class Controller {
     private static void editText(String value, int[] coordinates) {
         try {
             System.out.println("texto");
-            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new CellText();
+            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentText();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
         } catch (java.lang.NullPointerException e) {
             System.out.println("There is no spreadsheet in use");

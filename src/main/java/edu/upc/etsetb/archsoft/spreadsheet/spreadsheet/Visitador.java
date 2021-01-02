@@ -12,6 +12,7 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Operador;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Punctuation;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.Function;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
+import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import java.util.LinkedList;
 
@@ -62,9 +63,7 @@ public class Visitador {
         return number;
     }
     
-    private float calculateFunction(LinkedList<FormulaElement> input, String type) throws UnknownFunctionException{
-       
-       
+    private float calculateFunction(LinkedList<FormulaElement> input, String type) throws UnknownFunctionException{   
        float output= 0;
             float   num = 0;
 
@@ -73,30 +72,27 @@ public class Visitador {
        aux = input.pop();
        LinkedList<Float> calculate = new LinkedList();
                         
-       while ( aux.getToken() != 2){
+       while ( aux.getToken() != SpreadsheetToolkit.TOKENCLOSE){
                      
-        if(aux.getToken() == 11){
+        if(aux.getToken() == SpreadsheetToolkit.TOKENNUM){
            calculate.addLast(Float.parseFloat(aux.getSequence()));
            aux = input.pop();
-        } else  if(aux.getToken()== 1){//me encuentro un (                              
-            //num = evaluate(input);
+        } else  if(aux.getToken()== SpreadsheetToolkit.TOKENOPEN){//me encuentro un (                              
             calculate.addLast(num);
             aux = input.pop();                       
-         } else if(aux.getToken() == 14| aux.getToken() == 15){
-             
+         } else if(aux.getToken() == SpreadsheetToolkit.TOKENPUNCT){
              aux = input.pop(); 
-         }//falta si son referencias pero a tanto ya no llego
-         else if(aux.getToken() == 5| aux.getToken() == 6|aux.getToken() == 7| aux.getToken() == 8){
+         }
+         else if(aux.getToken() == SpreadsheetToolkit.TOKENMIN| aux.getToken() == SpreadsheetToolkit.TOKENMAX|aux.getToken() == SpreadsheetToolkit.TOKENPROMEDIO| aux.getToken() == SpreadsheetToolkit.TOKENSUMA){
             num = calculateFunction(input, aux.getSequence());
             calculate.addLast(num);
-            
             aux = input.pop(); 
             
         }
             
         } 
         
-     if(aux.getToken()== 2){       
+     if(aux.getToken()== SpreadsheetToolkit.TOKENCLOSE){       
          Function function = this.factory.createFunction(type);
          output = function.Calculate(calculate);
      
