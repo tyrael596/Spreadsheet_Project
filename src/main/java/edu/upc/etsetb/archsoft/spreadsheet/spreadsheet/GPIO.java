@@ -6,9 +6,12 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +31,7 @@ public class GPIO {
                 for (int j = 0; j < SpreadsheetToolkit.MAXCOL; j++) {
                     bw.write(excel.spreadsheet[i][j] + ((j == excel.spreadsheet[i].length - 1) ? "" : ","));
                 }
-                
+
                 bw.newLine();
             }
             bw.flush();
@@ -38,6 +41,25 @@ public class GPIO {
     }
 
     public void loadSpreadsheet(Spreadsheet excel) {
+
+    }
+
+    public static void readTextfile(String location, LinkedList<String> commands){
+        // pass the path to the file as a parameter 
+
+        try {
+            FileReader reader = new FileReader(location);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                commands.addLast(line);
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+
+            System.out.println("File not found");
+        }
 
     }
 }

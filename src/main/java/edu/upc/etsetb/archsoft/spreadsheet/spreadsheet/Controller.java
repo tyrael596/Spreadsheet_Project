@@ -10,16 +10,15 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentNumeric;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentText;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
-import edu.upc.etsetb.archsoft.spreadsheet.Main;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownTypeException;
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -32,8 +31,36 @@ public class Controller {
 
     public static void create() {
 
-        spreadsheet.createSpreadsheet();
+        if (Controller.spreadsheet.spreadsheet == null) {
+            spreadsheet.createSpreadsheet();
 
+        } else {
+            char conf = VisualInterface.askConfirmation();
+
+            if (Character.toUpperCase(conf) == 'Y') {
+                System.out.println("voy a crear ");
+                spreadsheet.createSpreadsheet();
+            } else if (conf == 'x') {
+                while (conf == 'x') {
+                    System.out.println();
+                    System.out.println("Plase enter a valid answer ");
+                    conf = VisualInterface.askConfirmation();
+                }
+            }
+
+        }
+    }
+
+    public static void readCommands(String file) throws UnknownOptionException {
+        String command;
+        LinkedList<String> commands = new LinkedList();
+        GPIO.readTextfile(file, commands);
+        command = commands.poll();
+        while (command  != null) {
+            performAction(command);
+            command = commands.poll();
+
+        }
     }
 
     public static void editCell(String[] parts) throws UnknownReferenceException {
@@ -154,8 +181,46 @@ public class Controller {
 
     public static void saveSpreadsheet(String filename) {
         GPIO output = new GPIO();
-        output.exportSpreadsheet(spreadsheet,filename);
+        output.exportSpreadsheet(spreadsheet, filename);
 
     }
 
+    private static void performAction(String option) throws UnknownOptionException {
+        String[] parts = option.split("\\ ");
+
+        switch (parts[0].toUpperCase()) {
+            case "C":
+                  spreadsheet.createSpreadsheet();
+                break;
+            case "E":
+                if (parts.length < 3) {
+                    throw new UnknownOptionException();
+                } else {
+                    // Falta comprobar que lo que me entran son coordenadas válidas pero supongamos que si
+                    try {
+                        Controller.validCell(parts[1]);
+                        Controller.editCell(parts);
+                    } catch (UnknownReferenceException e) {
+                        System.out.println("Enter a valid cell Reference ");
+                        break;
+                    }
+                }
+                break;
+
+            case "L":
+                break;
+            case "S":
+                Controller.saveSpreadsheet(parts[1]);
+                break;
+            default:
+                throw new UnknownOptionException();
+        }
+
+        try {
+            VisualInterface.printSpreadsheet();
+        } catch (java.lang.NullPointerException ex) {
+
+        }
+
+    }
 }

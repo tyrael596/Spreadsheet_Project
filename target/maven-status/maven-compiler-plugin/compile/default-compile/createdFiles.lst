@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
 edu/upc/etsetb/archsoft/spreadsheet/SyntaxErrorException.class
 edu/upc/etsetb/archsoft/spreadsheet/BasicElements/ContentFormula.class
 edu/upc/etsetb/archsoft/spreadsheet/BasicElements/ContentNumeric.class
 edu/upc/etsetb/archsoft/spreadsheet/BasicElements/ContentText.class
-=======
-edu\upc\etsetb\archsoft\spreadsheet\SyntaxErrorException.class
->>>>>>> Stashed changes
+edu/upc/etsetb/archsoft/spreadsheet/spreadsheet/GPIO.class
