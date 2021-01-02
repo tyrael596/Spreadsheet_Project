@@ -103,14 +103,8 @@ public class VisualInterface {
     }
 
     public void ReadFromFileUsingScanner() {
-<<<<<<< Updated upstream
-        // pass the path to the file as a parameter
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
-=======
         // pass the path to the file as a parameter 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        File file = new File("C:\\Users\\Usuario\\Desktop\\commands.txt⁩");
->>>>>>> Stashed changes
         try {
             File file = new File("/Users/amayabalaguer/Documents/MEGAsync/MEGAsync/UPC/ARQSOFT/Spreadsheet/Spreadsheet_Project/commands.txt⁩");
 
