@@ -36,7 +36,7 @@ public class Controller {
 
     }
 
-    public static void editCell(String[] parts)throws UnknownReferenceException {
+    public static void editCell(String[] parts) throws UnknownReferenceException {
         int[] coordinates = null;
         try {
             coordinates = CellReference.getCoordinates(parts[1]);
@@ -67,7 +67,7 @@ public class Controller {
         } else {
             System.out.println("Enter a valid coordinate");
             throw new UnknownReferenceException();
-            
+
         }
 
     }
@@ -80,7 +80,7 @@ public class Controller {
 
         }
 
-        if (coordinates == null || ((coordinates[1] > SpreadsheetToolkit.MAXCOL || coordinates[0] > SpreadsheetToolkit.MAXROW) && coordinates[0] != 0 && coordinates[1] != 0 )) {
+        if (coordinates == null || ((coordinates[1] > SpreadsheetToolkit.MAXCOL || coordinates[0] > SpreadsheetToolkit.MAXROW) && coordinates[0] != 0 && coordinates[1] != 0)) {
 
             throw new UnknownReferenceException();
         }
@@ -120,13 +120,13 @@ public class Controller {
 
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentFormula();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), postfix);
-            
-           // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
+
+            // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
         } catch (UnknownFunctionException ex2) {
             //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
             System.out.println("Linea 110 for Controller");
         }
-      
+
     }
 
     private static void editNumeric(String value, int[] coordinates) {
@@ -150,6 +150,12 @@ public class Controller {
             System.out.println("There is no spreadsheet in use");
 
         }
+    }
+
+    public static void saveSpreadsheet(String filename) {
+        GPIO output = new GPIO();
+        output.exportSpreadsheet(spreadsheet,filename);
+
     }
 
 }

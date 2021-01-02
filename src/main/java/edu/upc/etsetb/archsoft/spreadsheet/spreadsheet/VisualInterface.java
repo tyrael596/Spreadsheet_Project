@@ -69,6 +69,7 @@ public class VisualInterface {
             case "L":
                 break;
             case "S":
+                Controller.saveSpreadsheet(parts[1]);
                 break;
             default:
                 throw new UnknownOptionException();

@@ -27,14 +27,12 @@ public class ExpressionCleaner {
     
     public void check(LinkedList<FormulaElement> tokenized) throws SyntaxErrorException {
         int ttok;
-        int i = 0; //Word count
         int j = 0; //Detect formula without parenthesis afterwards
-        int parenthesis=0; //Number of open parenthesises
+        int parenthesis=0; //Number of open parenthesises in total
         int operators=0; // +-*/ preceeding token?
-        int form=0; //Function? 
         int nou=1; //Start of line or first term after parenthesis
-        int aircoma=0;
-        int fpar=0;
+        int aircoma=0; //Coma left hanging?
+        int fpar=0; //Check function parenthesis are correctly paired 
         while (!tokenized.isEmpty()) {  
             
             ttok=tokenized.getFirst().getToken();
