@@ -25,6 +25,11 @@ public class ContentNumeric extends CellContent {
     }
 
     @Override
+    public String getInput() {
+        return this.value;
+    }
+
+    @Override
     public void setContent(String newContent) {
         this.value = newContent;
     }

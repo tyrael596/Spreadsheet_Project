@@ -97,6 +97,7 @@ public class VisualInterface {
                 break;
 
             case "L":
+                Controller.load(parts[1]);
                 break;
             case "S":
                 Controller.saveSpreadsheet(parts[1]);

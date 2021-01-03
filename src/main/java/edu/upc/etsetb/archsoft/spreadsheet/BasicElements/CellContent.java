@@ -17,6 +17,8 @@ public abstract class CellContent {
     public String content = " ";
 
     public abstract String getContent();
+    
+    public abstract String getInput();
 
     public abstract void setContent(String newContent);
 

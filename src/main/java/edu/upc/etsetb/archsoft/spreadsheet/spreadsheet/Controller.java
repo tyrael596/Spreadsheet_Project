@@ -16,9 +16,12 @@ import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownTypeException;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -51,12 +54,45 @@ public class Controller {
         }
     }
 
+    public static void load(String filename) {
+
+        if (Controller.spreadsheet.spreadsheet == null) {
+            try {
+                GPIO input = new GPIO();
+                spreadsheet.createSpreadsheet();
+                input.loadSpreadsheet(spreadsheet,filename);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            char conf = VisualInterface.askConfirmation();
+
+            if (Character.toUpperCase(conf) == 'Y') {
+                try {
+                    GPIO input = new GPIO();
+                    spreadsheet.createSpreadsheet();
+                    input.loadSpreadsheet(spreadsheet,filename);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (conf == 'x') {
+                while (conf == 'x') {
+                    System.out.println();
+                    System.out.println("Plase enter a valid answer ");
+                    conf = VisualInterface.askConfirmation();
+                }
+            }
+
+        }
+    }
+
     public static void readCommands(String file) throws UnknownOptionException {
         String command;
         LinkedList<String> commands = new LinkedList();
         GPIO.readTextfile(file, commands);
         command = commands.poll();
-        while (command  != null) {
+        while (command != null) {
             performAction(command);
             command = commands.poll();
 
@@ -136,7 +172,7 @@ public class Controller {
         tokenList = token.tokens;
         LinkedList<FormulaElement> auxTokens = new LinkedList<>(tokenList);
         LinkedList<FormulaElement> postfix = null;
-
+        LinkedList<FormulaElement> contentList = tokenList;
         postfix = Postfixer.shuntingYardAlgorithm(auxTokens, spreadsheet.getSpreadsheet());
 
         evaluator.setFactory(factory);
@@ -146,7 +182,7 @@ public class Controller {
             System.out.println("output " + output);
 
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentFormula();
-            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), postfix);
+            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), contentList);
 
             // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
         } catch (UnknownFunctionException ex2) {
@@ -190,7 +226,7 @@ public class Controller {
 
         switch (parts[0].toUpperCase()) {
             case "C":
-                  spreadsheet.createSpreadsheet();
+                spreadsheet.createSpreadsheet();
                 break;
             case "E":
                 if (parts.length < 3) {
