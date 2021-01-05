@@ -21,26 +21,28 @@ import java.util.LinkedList;
  * @author amayabalaguer
  */
 public class Visitador {
+
     private SpreadsheetFactory factory = new SpreadsheetFactory();
     LinkedList<Float> stack = new LinkedList();
     private FormulaElement aux;
+
     public float visitaCellReference(CellReference aThis, LinkedList<FormulaElement> input) {
-       aux = input.pop();
+        aux = input.pop();
         float number = Float.parseFloat(aux.getSequence());
         stack.push(number);
         return number;
-        
+
     }
 
-    public float visitaNumeric(Numeric aThis,LinkedList<FormulaElement> input) {
+    public float visitaNumeric(Numeric aThis, LinkedList<FormulaElement> input) {
         aux = input.pop();
         float number = Float.parseFloat(aux.getSequence());
         stack.push(number);
         return number;
     }
 
-    public float visitaOperador(Operador aThis,LinkedList<FormulaElement> input) {
-        aux = input.pop();        
+    public float visitaOperador(Operador aThis, LinkedList<FormulaElement> input) {
+        aux = input.pop();
         float output = 0;
         Operador operador = this.factory.createOperador(aux.getSequence());
         float operand2 = stack.pop();
@@ -51,58 +53,50 @@ public class Visitador {
             stack.push(number);
         } else {
 
-             output = operador.calculate(operand1, operand2);
+            output = operador.calculate(operand1, operand2);
         }
         return output;
     }
 
-    public float visitaFunction(Function aThis,LinkedList<FormulaElement> input) throws UnknownFunctionException {
+    public float visitaFunction(Function aThis, LinkedList<FormulaElement> input) throws UnknownFunctionException {
         aux = input.pop();
         float number = calculateFunction(input, aux.getSequence());
         stack.push(number);
         return number;
     }
-    
-    private float calculateFunction(LinkedList<FormulaElement> input, String type) throws UnknownFunctionException{   
-       float output= 0;
-            float   num = 0;
 
-       FormulaElement aux;
-       input.pop();//fuera el primer parentesis
-       aux = input.pop();
-       LinkedList<Float> calculate = new LinkedList();
-                        
-       while ( aux.getToken() != SpreadsheetToolkit.TOKENCLOSE){
-                     
-        if(aux.getToken() == SpreadsheetToolkit.TOKENNUM){
-           calculate.addLast(Float.parseFloat(aux.getSequence()));
-           aux = input.pop();
-        } else  if(aux.getToken()== SpreadsheetToolkit.TOKENOPEN){//me encuentro un (                              
-            calculate.addLast(num);
-            aux = input.pop();                       
-         } else if(aux.getToken() == SpreadsheetToolkit.TOKENPUNCT){
-             aux = input.pop(); 
-         }
-         else if(aux.getToken() == SpreadsheetToolkit.TOKENMIN| aux.getToken() == SpreadsheetToolkit.TOKENMAX|aux.getToken() == SpreadsheetToolkit.TOKENPROMEDIO| aux.getToken() == SpreadsheetToolkit.TOKENSUMA){
-            num = calculateFunction(input, aux.getSequence());
-            calculate.addLast(num);
-            aux = input.pop(); 
-            
-        }
-            
-        } 
-        
-     if(aux.getToken()== SpreadsheetToolkit.TOKENCLOSE){       
-         Function function = this.factory.createFunction(type);
-         output = function.Calculate(calculate);
-     
-        }
-   return output;
-}
+    private float calculateFunction(LinkedList<FormulaElement> input, String type) throws UnknownFunctionException {
+        float output = 0;
+        float num = 0;
+        FormulaElement aux;
+        input.pop();//fuera el primer parentesis
+        aux = input.pop();
+        LinkedList<Float> calculate = new LinkedList();
 
+        while (aux.getToken() != SpreadsheetToolkit.TOKENCLOSE) {
+
+            if (aux.getToken() == SpreadsheetToolkit.TOKENNUM) {
+                calculate.addLast(Float.parseFloat(aux.getSequence()));
+                aux = input.pop();
+            } else if (aux.getToken() == SpreadsheetToolkit.TOKENOPEN) {//me encuentro un (                              
+                calculate.addLast(num);
+                aux = input.pop();
+            } else if (aux.getToken() == SpreadsheetToolkit.TOKENPUNCT) {
+                aux = input.pop();
+            } else if (aux.getToken() == SpreadsheetToolkit.TOKENMIN | aux.getToken() == SpreadsheetToolkit.TOKENMAX | aux.getToken() == SpreadsheetToolkit.TOKENPROMEDIO | aux.getToken() == SpreadsheetToolkit.TOKENSUMA) {
+                num = calculateFunction(input, aux.getSequence());
+                calculate.addLast(num);
+                aux = input.pop();
+            }
+        }
+        if (aux.getToken() == SpreadsheetToolkit.TOKENCLOSE) {
+            Function function = this.factory.createFunction(type);
+            output = function.Calculate(calculate);
+        }
+        return output;
+    }
     public float visitaPunctuation(Punctuation aThis, LinkedList input) {
         return 1;
     }
 
-    
 }

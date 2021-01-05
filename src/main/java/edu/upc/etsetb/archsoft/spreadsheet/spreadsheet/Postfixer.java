@@ -25,7 +25,8 @@ public class Postfixer {
         LinkedList<FormulaElement> operatorStack = new LinkedList();
         LinkedList<FormulaElement> numbersQueue = new LinkedList();
         LinkedList<FormulaElement> auxiliarList = new LinkedList();
-        FormulaElement aux, aux2;
+        FormulaElement aux;
+        FormulaElement aux2;
 
         float number;
         // si es un simbolo y tiene menos preferencia que el ultimo del stack entonces saco el del stack y lo meto con los numeros y pongo el de menor preferencia en el stack 
