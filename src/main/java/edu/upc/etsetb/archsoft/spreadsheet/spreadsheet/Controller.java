@@ -24,14 +24,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author amayabalaguer
+ * Class that controls the general behavior of the system. It is in charge of calling the right functions at every step
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class Controller {
 
     static SpreadsheetFactory factory = new SpreadsheetFactory();
     static Spreadsheet spreadsheet = new Spreadsheet();
-
+/**
+ * Function called when the user wants to create a new spreadsheet. When called, it checks if a spreadsheet is already in use before asking or not for confirmation.
+ */
     public static void create() {
 
         if (Controller.spreadsheet.spreadsheet == null) {
@@ -53,7 +55,10 @@ public class Controller {
 
         }
     }
-
+/**
+ * Function that loads a new spreadsheet
+ * @param filename  String that contains the path of the to-be-loaded file
+ */
     public static void load(String filename) {
 
         if (Controller.spreadsheet.spreadsheet == null) {
@@ -86,7 +91,12 @@ public class Controller {
 
         }
     }
-
+/**
+ * Function called when the user wants to read all the following commands from a text file. 
+ * This function reads the file that contains the commands and sends them to the PerformAction function one by one. 
+ * @param file String containing the path of the file containing the commands to execute. 
+ * @throws UnknownOptionException Exception thrown whenever there is an unknown command in the file. 
+ */
     public static void readCommands(String file) throws UnknownOptionException {
         String command;
         LinkedList<String> commands = new LinkedList();
@@ -98,7 +108,11 @@ public class Controller {
 
         }
     }
-
+/**
+ * Function checks if the coordinates are valid and edits the content of the cell according to it's new type. 
+ * @param parts String containing the whole user's input. This string contains the cell reference as well as the new value or formula. 
+ * @throws UnknownReferenceException 
+ */
     public static void editCell(String[] parts) throws UnknownReferenceException {
         int[] coordinates = null;
         try {
@@ -134,7 +148,11 @@ public class Controller {
         }
 
     }
-
+/**
+ * Function call to check if the coordinates are valid. 
+ * @param input Coordinate inputed by the user
+ * @throws UnknownReferenceException 
+ */
     public static void validCell(String input) throws UnknownReferenceException {
         int[] coordinates = new int[2];
         try {
@@ -149,7 +167,12 @@ public class Controller {
         }
 
     }
-
+/**
+ * Void that manages the process of computing a formula. It first checks if it is correct, then calls the tokenizer and the functions needed to perform the calculations.  
+ * @param value String that contains the to-be-stored value
+ * @param coordinates Array that contains the cell coordinates
+ * @throws SyntaxErrorException Exception thrown when there is an error in the formula. 
+ */
     private static void editFormula(String[] parts, int[] coordinates) throws SyntaxErrorException {
         ExpressionCleaner exp = new ExpressionCleaner();
         PostfixEvaluator evaluator = new PostfixEvaluator();
@@ -191,7 +214,11 @@ public class Controller {
         }
 
     }
-
+/**
+ *  Function called whenever the user wants to input a number in a cell. It edits the cell content type to be CotentNumeric and stores the indicated value in it.
+ * @param value String that contains the to-be-stored value
+ * @param coordinates Array that contains the cell coordinates
+ */
     private static void editNumeric(String value, int[] coordinates) {
         try {
             System.out.println("numero");
@@ -203,7 +230,11 @@ public class Controller {
         }
 
     }
-
+/**
+ * Function called whenever the user wants to input text in a cell. It edits the cell content type to be CotentText and stores the indicated value in it.
+ * @param value String that contains the to-be-stored value
+ * @param coordinates Array that contains the cell coordinates
+ */
     private static void editText(String value, int[] coordinates) {
         try {
             System.out.println("texto");
@@ -214,13 +245,20 @@ public class Controller {
 
         }
     }
-
+/**
+ * Void that saves the current spreadsheet
+ * @param filename String containing the file name given by the user/ 
+ */
     public static void saveSpreadsheet(String filename) {
         GPIO output = new GPIO();
         output.exportSpreadsheet(spreadsheet, filename);
 
     }
-
+/**
+ * Void in charge of calling the right function according to the action read on the file.
+ * @param option action read on the file
+ * @throws UnknownOptionException exception thrown when the action is unknown
+ */
     private static void performAction(String option) throws UnknownOptionException {
         String[] parts = option.split("\\ ");
 
@@ -244,6 +282,7 @@ public class Controller {
                 break;
 
             case "L":
+                Controller.load(parts[1]);
                 break;
             case "S":
                 Controller.saveSpreadsheet(parts[1]);

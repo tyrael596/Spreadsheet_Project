@@ -18,14 +18,19 @@ import java.util.LinkedList;
 
 /**
  *
- * @author amayabalaguer
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class Visitador {
 
     private SpreadsheetFactory factory = new SpreadsheetFactory();
     LinkedList<Float> stack = new LinkedList();
     private FormulaElement aux;
-
+/**
+ * Visitador of the Cell Reference object. It returns the value contained in that cell reference
+ * @param aThis 
+ * @param input
+ * @return 
+ */
     public float visitaCellReference(CellReference aThis, LinkedList<FormulaElement> input) {
         aux = input.pop();
         float number = Float.parseFloat(aux.getSequence());
@@ -33,14 +38,24 @@ public class Visitador {
         return number;
 
     }
-
+/**
+ * 
+ * @param aThis
+ * @param input
+ * @return 
+ */
     public float visitaNumeric(Numeric aThis, LinkedList<FormulaElement> input) {
         aux = input.pop();
         float number = Float.parseFloat(aux.getSequence());
         stack.push(number);
         return number;
     }
-
+/**
+ * 
+ * @param aThis
+ * @param input
+ * @return 
+ */
     public float visitaOperador(Operador aThis, LinkedList<FormulaElement> input) {
         aux = input.pop();
         float output = 0;
@@ -57,14 +72,26 @@ public class Visitador {
         }
         return output;
     }
-
+/**
+ * 
+ * @param aThis
+ * @param input
+ * @return
+ * @throws UnknownFunctionException 
+ */
     public float visitaFunction(Function aThis, LinkedList<FormulaElement> input) throws UnknownFunctionException {
         aux = input.pop();
         float number = calculateFunction(input, aux.getSequence());
         stack.push(number);
         return number;
     }
-
+/**
+ * 
+ * @param input
+ * @param type
+ * @return
+ * @throws UnknownFunctionException 
+ */
     private float calculateFunction(LinkedList<FormulaElement> input, String type) throws UnknownFunctionException {
         float output = 0;
         float num = 0;
@@ -95,6 +122,11 @@ public class Visitador {
         }
         return output;
     }
+/**
+* 
+* @param aThis
+* @return 
+ */
     public float visitaPunctuation(Punctuation aThis, LinkedList input) {
         return 1;
     }

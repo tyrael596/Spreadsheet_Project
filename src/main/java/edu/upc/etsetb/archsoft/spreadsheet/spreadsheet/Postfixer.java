@@ -12,15 +12,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
- * @author amayabalaguer
+ * Class in charge of performing the postfixer of the formula introduced by the user
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class Postfixer {
 
     List formulaList;
     static SpreadsheetToolkit toolkit = new SpreadsheetToolkit();
-//Habra que hacerlo static seguramente
-
+/**
+ *  This functions implements the Shunting Yard Algorithm to return a list containing all the different elements in the proper order to be calculated. 
+ * @param input Linked List containing all the tokens of the formula to be computed. 
+ * @param spreadsheet Cell object matrix containing the current Spreadsheet.
+ * @return  Linked list with the tokens rearranged according to the Shunting Yard Algorithm.
+ */
     public static LinkedList shuntingYardAlgorithm(LinkedList<FormulaElement> input, Cell[][] spreadsheet) { // Consideramos que la función es válida 
         LinkedList<FormulaElement> operatorStack = new LinkedList();
         LinkedList<FormulaElement> numbersQueue = new LinkedList();
@@ -94,7 +98,13 @@ public class Postfixer {
         return numbersQueue;
     }
 
-    //falta añadir el caso en el que tengo una función con paréntesis ahí en medio
+/**
+ * Function called whenever a function is found and that returns a list of all the arguments of that function. 
+ * If a reference is found, the value of the cell content is returned in that list. 
+ * @param input Linked list of the tokens of the formula inputed by the user. 
+ * @param spreadsheetCell object matrix containing the current Spreadsheet.
+ * @return list of all the arguments of that function
+ */
     static LinkedList getFunctionArguments(LinkedList<FormulaElement> input, Cell[][] spreadsheet) {
         LinkedList<FormulaElement> arguments = new LinkedList();
         LinkedList<FormulaElement> auxiliarList = new LinkedList();

@@ -9,11 +9,13 @@ import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Cell;
 
 /**
- *
- * @author amayabalaguer
+ *Class that contains all the tools for the spreadsheet. 
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class SpreadsheetToolkit {
-
+/**
+ * Set of constants containing the token given to each type of possible given values
+ */
     public static final int TOKENOPEN = 1;
     public static final int TOKENCLOSE = 2;
     public static final int TOKENMINUS = 3;
@@ -30,11 +32,18 @@ public class SpreadsheetToolkit {
     public static final int TOKENPUNCT = 14;
     public static final int MAXCOL = 10;
     public static final int MAXROW = 10;
-
+/**
+ * Class Setter
+ */
     public SpreadsheetToolkit() {
     }
-    //Obtiene el contenido de una referencia y lo retorna como un string
 
+/**
+ * This class returns the value stored in the given cell regardless of it's type.
+ * @param reference String that contains the cell coordinate
+ * @param spreadsheet matrix of cell objects that form the Spreadsheet
+ * @return String containing the value stored in the given cell. 
+ */
     public static String getContent(String reference, Cell[][] spreadsheet) {
 
         int[] coordinates = new int[2];

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package edu.upc.etsetb.archsoft.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
@@ -21,13 +17,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
- * @author amayabalaguer
+ * Factory class of the project. It Creates all the different elements in this project
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class SpreadsheetFactory {
-
+/**
+ * Returns a Function of the given type. The type is defined by the String entered by the user. If the type does not exist, it throws the unknown type exception
+ * @param functionName the name of the function type
+ * @return Function object of the specified type.
+ * @throws UnknownFunctionException 
+ */
     public Function createFunction(String functionName) throws UnknownFunctionException {
-        //Switch que discrimina lo que viene
+
         switch (functionName.toLowerCase()) {
 
             case "min":
@@ -47,12 +48,24 @@ public class SpreadsheetFactory {
         }
 
     }
-
+/**
+ * Function that creates an Operador type object.
+ * @param op String that contains the type of operand. 
+ * @return an Operador object containing the operand type. 
+ */
     public Operador createOperador(String op) {
 
         return new Operador(op);
     }
-
+/**
+ * Function that returns a FormulaElement object containing the given information. 
+ * @param token
+ * @param tok
+ * @param tokens
+ * @return
+ * @throws UnknownTypeException
+ * @throws UnknownFunctionException 
+ */
     public FormulaElement createFormulaElement(int token, String tok, LinkedList tokens) throws UnknownTypeException, UnknownFunctionException {
         switch (token) {
             case SpreadsheetToolkit.TOKENCELLREF:
@@ -80,11 +93,21 @@ public class SpreadsheetFactory {
                 throw new UnknownTypeException();
         }
     }
-
+/**
+ * Function that creates a Punctuation type object.
+ * @param token integer containing the assigned token. 
+ * @param op String that contains the type of punctuation sign. 
+ * @return Punctuation type object containing said arguments. 
+ */
     private FormulaElement createPunctuation(int token, String op) {
         return new Punctuation(token, op);
     }
-
+/**
+ * 
+ * @param sequence
+ * @param tokens
+ * @return 
+ */
     private FormulaElement addCellRange(String sequence, LinkedList tokens) {
         Pattern p = Pattern.compile("[a-zA-Z]{1,}[0-9]{1,}");
         Matcher m = p.matcher(sequence);    
@@ -132,7 +155,11 @@ public class SpreadsheetFactory {
         }
         return last;
     }
-
+/**
+ * 
+ * @param str
+ * @return 
+ */
     String incrementCell(String str) {
         char[] digits = str.toCharArray();
         for (int i = str.length() - 1; i >= 0; --i) {
