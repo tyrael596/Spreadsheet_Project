@@ -13,24 +13,39 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Alex
+ * Class that represents a type of Formula Element containing a formula. 
+ * @author Alex Eslava and Amaya Balaguer
  */
 public abstract class Function extends FormulaElement {
 
     static String sequence = "";
     static String range = "";
-
+/**
+ * Function that calculates the result of the given formula
+ * @param list list containing all the formula parameters. 
+ * @return float representing the result of the given formula. 
+ */
     public abstract float Calculate(LinkedList list);
-
+/**
+ * Void that indicates that an error was found in that formula. 
+ */
     abstract void getError();
-
+/**
+ * function that returns a Function object containing the given token and string
+ * @param token integer with the numeric representation of the given function type. 
+ * @param sequence String containing all the function elements. 
+ */
     public Function(int token, String sequence) {
 
         super(token, sequence);
         setIsFunction();
     }
-
+/**
+ * function implementing the Visitador function. 
+ * @param visitador
+ * @param input
+ * @return 
+ */
     @Override
     public float acceptVisitor(Visitador visitador, LinkedList input) {
         try {

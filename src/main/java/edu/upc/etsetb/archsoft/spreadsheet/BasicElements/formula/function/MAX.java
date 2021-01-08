@@ -5,30 +5,28 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
 
+import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import java.util.LinkedList;
 
 /**
- *
- * @author amayabalaguer
+ * Class containing all the MAX Function's methods 
+ * @author Alex Eslava and Amaya Balaguer
  */
 
 public class MAX extends Function {
 
-    /**
-     * MAX class method that calculates the final value
-     *
-     * @params arguments: n is the number of parameters contained in the array
-     * list: array of arguments
-     */
-    /*public static void MAX() {
-         MAX myObj = new MAX(); 
-   
-    }*/
-
+/**
+ * Function that returns a MAX object. It assigns the correct token and the function sequence
+ * @param sequence String that contains the parameters of that function
+ */
     public MAX(String sequence) {
-        super(6, sequence);
+        super(SpreadsheetToolkit.TOKENMAX, sequence);
     }
-
+/**
+ * Function that calculates the final value of the MAX function introduced by the user from a list of floats.
+ * @param list List of floats containing all the values to consider when computing a MAX function
+ * @return float with the maximum float contained in the introduced list. 
+ */
     @Override
     public float Calculate(LinkedList list) {
         float a, aux = 0;
@@ -46,15 +44,13 @@ public class MAX extends Function {
 
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+/**
+ * Function that returns an error when a max function has been introduced incorrectly. 
+ */
     @Override
     void getError() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /* public void Calculate(){
->>>>>>> main:src/main/java/edu/upc/etsetb/archsoft/spreadsheet/BasicElements/formula/function/MAX.java
-    }
-    public void getError(){
-    }    */
+
 }

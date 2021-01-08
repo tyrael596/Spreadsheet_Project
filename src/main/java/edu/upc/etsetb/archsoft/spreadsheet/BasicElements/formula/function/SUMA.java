@@ -4,22 +4,27 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
+import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import java.util.LinkedList;
+
 /**
- *
- * @author amayabalaguer
+ * Class containing all the SUMA Function's methods 
+ * @author Alex Eslava and Amaya Balaguer
  */
-
 public class SUMA extends Function{
-    /*public static void SUMA() {
-         SUMA myObj = new SUMA(); 
-   
-    }*/
 
+/**
+ * Function that returns a SUMA object. It assigns the correct token and the function sequence
+ * @param sequence String that contains the parameters of that function
+ */
     public SUMA(String sequence) {
-        super(8, sequence);
+        super(SpreadsheetToolkit.TOKENSUMA, sequence);
     }
-    
+  /**
+ * Function that calculates the final value of the SUMA function introduced by the user from a list of floats.
+ * @param list List of floats containing all the values to consider when computing a SUMA function
+ * @return float with the sum of all the floats contained in the introduced list. 
+ */  
     @Override
     public float Calculate(LinkedList list) {         
         float a = 0;
@@ -35,7 +40,9 @@ public class SUMA extends Function{
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+/**
+ * Function that returns an error when a SUMA function has been introduced incorrectly. 
+ */
     @Override
     void getError() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

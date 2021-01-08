@@ -15,17 +15,37 @@ import java.util.LinkedList;
 public abstract class CellContent {
 
     public String content = " ";
-
+/**
+ * 
+ * @return 
+ */
     public abstract String getContent();
-    
+  /**
+   * 
+   * @return 
+   */  
     public abstract String getInput();
-
+/**
+ * 
+ * @param newContent 
+ */
     public abstract void setContent(String newContent);
-
+/**
+ * 
+ * @param newContent
+ * @param list 
+ */
     public abstract void setContent(String newContent, LinkedList<FormulaElement> list);
-
+/**
+ * 
+ * @param newContent 
+ */
     public abstract void modifyContent(String newContent);
-
+/**
+ * 
+ * @param newContent
+ * @param list 
+ */
     public abstract void modifyContent(String newContent, LinkedList<FormulaElement> list);
-    //abstract void error();   
+
 }

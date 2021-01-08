@@ -4,22 +4,28 @@
  * and open the template in the editor.
  */
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
+import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import java.util.LinkedList;
 /**
- *
- * @author Amaya
+ ** Class containing all the PPROMEDIO Function's methods 
+ * @author Alex Eslava and Amaya Balaguer
  */
 
 public class PROMEDIO extends Function{
-  /* public static void PROMEDIO() {
-         PROMEDIO myObj = new PROMEDIO(); 
-   
-    }*/
+
+ /**
+ * Function that returns a PROMEDIO object. It assigns the correct token and the function sequence
+ * @param sequence String that contains the parameters of that function
+ */
     public PROMEDIO (String sequence) {
-        super(7, sequence);
+        super(SpreadsheetToolkit.TOKENPROMEDIO, sequence);
     }
     
-    
+  /**
+ * Function that calculates the final value of the PROMEDIO function introduced by the user from a list of floats.
+ * @param list List of floats containing all the values to consider when computing a PROMEDIO function
+ * @return float with the average of all the floats contained in the list.
+ */  
     @Override
     public float Calculate(LinkedList list) {         
         float a = 0,aux = 0;
@@ -36,7 +42,10 @@ public class PROMEDIO extends Function{
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+/**
+ * Function that returns an error when a PROMEDIO function has been introduced incorrectly. 
+ */
+    
     @Override
     void getError() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
