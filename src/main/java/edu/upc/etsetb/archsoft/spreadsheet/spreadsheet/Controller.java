@@ -15,6 +15,7 @@ import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownTypeException;
+import static edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Postfixer.dependencies;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -227,8 +228,11 @@ public class Controller {
         try {
 
             output = evaluator.evaluate(postfix);
+            dependencies = new LinkedList();
+            dependencies=spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentFormula();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), contentList);
+            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setDependencies(dependencies);
             //Update de todas las demas celdas
             updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies(), coordinates[0], coordinates[1]);
             // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
@@ -341,7 +345,6 @@ public class Controller {
         Postfixer newPostfixer = new Postfixer();
         
         LinkedList<String> auxDependencies = new LinkedList<>(dependencies);
-        System.out.println(auxDependencies);
         int[] coordinates;
         float output;
         LinkedList<FormulaElement> postfix = null;

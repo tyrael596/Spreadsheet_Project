@@ -66,4 +66,8 @@ public abstract class CellContent {
         return this.dependencies;
     }
 
+    public void setDependencies(LinkedList<String> depens) {
+        this.dependencies=depens;
+    }
+
 }
