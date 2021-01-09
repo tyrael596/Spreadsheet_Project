@@ -59,11 +59,11 @@ public class SpreadsheetFactory {
     }
 /**
  * Function that returns a FormulaElement object containing the given information. 
- * @param token
- * @param tok
- * @param tokens
- * @return
- * @throws UnknownTypeException
+ * @param token numeric identifier corresponding to each type of possible token.
+ * @param tok sequence from original input 
+ * @param tokens list containing all tokens. Used by CellRange to break down into small CellReferences
+ * @return an object (or objects) of type corresponding to given "token" with "tok" sequence content
+ * @throws UnknownTypeException 
  * @throws UnknownFunctionException 
  */
     public FormulaElement createFormulaElement(int token, String tok, LinkedList tokens) throws UnknownTypeException, UnknownFunctionException {
@@ -103,9 +103,13 @@ public class SpreadsheetFactory {
         return new Punctuation(token, op);
     }
 /**
- * 
- * @param sequence
- * @param tokens
+ * Here we break down a CellRange sequence into it's top-left cell reference and 
+ * it's bottom-right cell reference. All the cells inbetween are then added into the
+ * "tokens" linked list in an iterating loop across the dimensions of the CellRange
+ * lastly the final cell reference is returned and added to the list on the function
+ * that called this method
+ * @param sequence sequence containing top-left cell : bottom-right cell for a cell range
+ * @param tokens linked list of tokens where we add all cells within cell range extracted
  * @return 
  */
     private FormulaElement addCellRange(String sequence, LinkedList tokens) {
@@ -156,9 +160,9 @@ public class SpreadsheetFactory {
         return last;
     }
 /**
- * 
- * @param str
- * @return 
+ * This method does the alphabetical iteration for addCellRange 
+ * @param str current alphanetical column that needs to be increased
+ * @return nextmost alphabetical counting value 
  */
     String incrementCell(String str) {
         char[] digits = str.toCharArray();

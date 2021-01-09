@@ -7,7 +7,7 @@ package edu.upc.etsetb.archsoft.spreadsheet;
 
 /**
  *
- * @author amayabalaguer
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class UnknownTypeException extends Exception {
 

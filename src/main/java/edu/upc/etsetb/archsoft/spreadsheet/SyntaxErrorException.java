@@ -7,10 +7,14 @@ package edu.upc.etsetb.archsoft.spreadsheet;
 
 /**
  *
- * @author Usuario
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class SyntaxErrorException extends Exception {
-
+/**
+ * This exception is called when we detect an user input has a syntax error 
+ * such errors can be from invalid token or from syntactically nonsensical input
+ */
+    
     public SyntaxErrorException(String msg) {
         super(msg);
     }
