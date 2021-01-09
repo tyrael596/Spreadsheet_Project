@@ -24,9 +24,7 @@ public class CircularReferencer {
         int[] coordinates;
         LinkedList<String> auxDependencies = new LinkedList<>(dependencies);
         String reference;
-
         while (!auxDependencies.isEmpty()) {
-
             reference = auxDependencies.pop();
             try {
                 Controller.validCell(reference);

@@ -16,7 +16,7 @@ public abstract class CellContent {
 
     public String content = " ";
     LinkedList<FormulaElement> list = new LinkedList(); // expresión
-    static LinkedList<String> dependencies = new LinkedList();
+    LinkedList<String> dependencies = new LinkedList();
 
     /**
      *
@@ -60,7 +60,6 @@ public abstract class CellContent {
 
     public void modifyDependencies(String newContent) {
         this.dependencies.push(newContent);
-        System.out.println("lo he guardado bien! " + dependencies);
     }
 
     public LinkedList<String> getDependencies() {

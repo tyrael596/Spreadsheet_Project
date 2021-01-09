@@ -227,8 +227,6 @@ public class Controller {
         try {
 
             output = evaluator.evaluate(postfix);
-            System.out.println("output " + output);
-            System.out.println("tengo lo siguiente en " + cellReference + spreadsheet.spreadsheet[5][5].content.getDependencies());
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentFormula();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), contentList);
             //Update de todas las demas celdas
@@ -341,31 +339,25 @@ public class Controller {
 
     private static void updateDependentCells(LinkedList<String> dependencies, int row, int col) {
         Postfixer newPostfixer = new Postfixer();
+        
         LinkedList<String> auxDependencies = new LinkedList<>(dependencies);
+        System.out.println(auxDependencies);
         int[] coordinates;
         float output;
         LinkedList<FormulaElement> postfix = null;
-        System.out.println("Las dependencias de la celda " + row + col + " son " + auxDependencies.size());
         while (!auxDependencies.isEmpty()) {
-
             String cell = auxDependencies.pop();
-            System.out.println("dependencia " + cell);
             coordinates = CellReference.getCoordinates(cell);
             newPostfixer = new Postfixer();
             if (spreadsheet.getSpreadsheet()[row][col].content.getFormula()!= null) {
-                output = 0;
-
-                System.out.println("formulita que tiene " + spreadsheet.getSpreadsheet()[row][col].content.getInput());
+                output = 0; 
                 LinkedList<FormulaElement> aux = new LinkedList<>(spreadsheet.getSpreadsheet()[row][col].content.getFormula());
-
                 postfix = newPostfixer.shuntingYardAlgorithm(aux, spreadsheet.getSpreadsheet());
-
                 try {
                     output = PostfixEvaluator.evaluate(postfix); //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
                 } catch (UnknownFunctionException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("resultado " + output);
                 spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output));
                 if (newPostfixer.getDependencies().isEmpty() == false && newPostfixer.getDependencies() != null) {
                     updateDependentCells(newPostfixer.getDependencies(), coordinates[0], coordinates[1]);
