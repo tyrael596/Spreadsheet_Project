@@ -12,26 +12,35 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Class in charge of performing the postfixer of the formula introduced by the user
+ * Class in charge of performing the postfixer of the formula introduced by the
+ * user
+ *
  * @author Alex Eslava and Amaya Balaguer
  */
 public class Postfixer {
 
     List formulaList;
     static SpreadsheetToolkit toolkit = new SpreadsheetToolkit();
-/**
- *  This functions implements the Shunting Yard Algorithm to return a list containing all the different elements in the proper order to be calculated. 
- * @param input Linked List containing all the tokens of the formula to be computed. 
- * @param spreadsheet Cell object matrix containing the current Spreadsheet.
- * @return  Linked list with the tokens rearranged according to the Shunting Yard Algorithm.
- */
+    static LinkedList<String> dependencies;
+
+    /**
+     * This functions implements the Shunting Yard Algorithm to return a list
+     * containing all the different elements in the proper order to be
+     * calculated.
+     *
+     * @param input Linked List containing all the tokens of the formula to be
+     * computed.
+     * @param spreadsheet Cell object matrix containing the current Spreadsheet.
+     * @return Linked list with the tokens rearranged according to the Shunting
+     * Yard Algorithm.
+     */
     public static LinkedList shuntingYardAlgorithm(LinkedList<FormulaElement> input, Cell[][] spreadsheet) { // Consideramos que la función es válida 
         LinkedList<FormulaElement> operatorStack = new LinkedList();
         LinkedList<FormulaElement> numbersQueue = new LinkedList();
         LinkedList<FormulaElement> auxiliarList = new LinkedList();
         FormulaElement aux;
         FormulaElement aux2;
-
+        dependencies = new LinkedList();
         float number;
         // si es un simbolo y tiene menos preferencia que el ultimo del stack entonces saco el del stack y lo meto con los numeros y pongo el de menor preferencia en el stack 
         while (input.isEmpty() == false) {
@@ -60,6 +69,8 @@ public class Postfixer {
                     }
                 } else if (aux.getToken() == SpreadsheetToolkit.TOKENCELLREF) {
                     try {
+                        dependencies.push(aux.getSequence());
+                        System.out.println("He guardado la celda " + aux.getSequence());
                         aux2 = new Numeric(11, String.valueOf(SpreadsheetToolkit.getContent(aux.getSequence(), spreadsheet)));
                         numbersQueue.addLast(aux2);
                     } catch (NullPointerException ex) {
@@ -98,13 +109,16 @@ public class Postfixer {
         return numbersQueue;
     }
 
-/**
- * Function called whenever a function is found and that returns a list of all the arguments of that function. 
- * If a reference is found, the value of the cell content is returned in that list. 
- * @param input Linked list of the tokens of the formula inputed by the user. 
- * @param spreadsheetCell object matrix containing the current Spreadsheet.
- * @return list of all the arguments of that function
- */
+    /**
+     * Function called whenever a function is found and that returns a list of
+     * all the arguments of that function. If a reference is found, the value of
+     * the cell content is returned in that list.
+     *
+     * @param input Linked list of the tokens of the formula inputed by the
+     * user.
+     * @param spreadsheetCell object matrix containing the current Spreadsheet.
+     * @return list of all the arguments of that function
+     */
     static LinkedList getFunctionArguments(LinkedList<FormulaElement> input, Cell[][] spreadsheet) {
         LinkedList<FormulaElement> arguments = new LinkedList();
         LinkedList<FormulaElement> auxiliarList = new LinkedList();
@@ -127,6 +141,7 @@ public class Postfixer {
                 }
             }
             if (aux.getToken() == SpreadsheetToolkit.TOKENCELLREF) {
+                dependencies.push(aux.getSequence());
                 aux = new Numeric(11, String.valueOf(SpreadsheetToolkit.getContent(aux.getSequence(), spreadsheet)));
             }
             arguments.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición  
@@ -138,6 +153,13 @@ public class Postfixer {
         }
         arguments.addLast(aux);
         return arguments;
+    }
+    /**
+     * getter for the dependencies list
+     * @return dependencies list
+     */
+    public static LinkedList getDependencies(){
+        return Postfixer.dependencies;
     }
 
 }

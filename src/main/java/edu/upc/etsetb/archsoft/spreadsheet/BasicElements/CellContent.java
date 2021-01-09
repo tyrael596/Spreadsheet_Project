@@ -15,37 +15,56 @@ import java.util.LinkedList;
 public abstract class CellContent {
 
     public String content = " ";
-/**
- * 
- * @return 
- */
+    LinkedList<FormulaElement> list = new LinkedList(); // expresión
+    static LinkedList<String> dependencies = new LinkedList();
+
+    /**
+     *
+     * @return
+     */
     public abstract String getContent();
-  /**
-   * 
-   * @return 
-   */  
+
+    /**
+     *
+     * @return
+     */
     public abstract String getInput();
-/**
- * 
- * @param newContent 
- */
+
+    /**
+     *
+     * @param newContent
+     */
     public abstract void setContent(String newContent);
-/**
- * 
- * @param newContent
- * @param list 
- */
+
+    /**
+     *
+     * @param newContent
+     * @param list
+     */
     public abstract void setContent(String newContent, LinkedList<FormulaElement> list);
-/**
- * 
- * @param newContent 
- */
+
+    /**
+     *
+     * @param newContent
+     */
     public abstract void modifyContent(String newContent);
-/**
- * 
- * @param newContent
- * @param list 
- */
+
+    /**
+     *
+     * @param newContent
+     * @param list
+     */
     public abstract void modifyContent(String newContent, LinkedList<FormulaElement> list);
+
+    public abstract LinkedList getFormula();
+
+    public void modifyDependencies(String newContent) {
+        this.dependencies.push(newContent);
+        System.out.println("lo he guardado bien! " + dependencies);
+    }
+
+    public LinkedList<String> getDependencies() {
+        return this.dependencies;
+    }
 
 }

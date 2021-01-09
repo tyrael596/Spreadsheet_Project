@@ -51,4 +51,12 @@ public class ContentText extends CellContent {
         this.value = newContent;
     }
 
+    @Override
+    public LinkedList getFormula() {
+        return null;
+        
+    }
+
+
+
 }

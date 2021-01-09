@@ -6,7 +6,6 @@
 package edu.upc.etsetb.archsoft.spreadsheet.BasicElements;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Numeric;
 import java.util.LinkedList;
 
 /**
@@ -48,5 +47,13 @@ public class ContentNumeric extends CellContent {
     public void setContent(String newContent, LinkedList<FormulaElement> list) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public LinkedList getFormula() {
+        return null;
+        
+    }
+
+
 
 }

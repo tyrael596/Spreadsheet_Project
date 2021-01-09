@@ -15,25 +15,28 @@ import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownTypeException;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Class that controls the general behavior of the system. It is in charge of calling the right functions at every step
+ * Class that controls the general behavior of the system. It is in charge of
+ * calling the right functions at every step
+ *
  * @author Alex Eslava and Amaya Balaguer
  */
 public class Controller {
 
     static SpreadsheetFactory factory = new SpreadsheetFactory();
     static Spreadsheet spreadsheet = new Spreadsheet();
-/**
- * Function called when the user wants to create a new spreadsheet. When called, it checks if a spreadsheet is already in use before asking or not for confirmation.
- */
+    static Postfixer postfixer = new Postfixer();
+
+    /**
+     * Function called when the user wants to create a new spreadsheet. When
+     * called, it checks if a spreadsheet is already in use before asking or not
+     * for confirmation.
+     */
     public static void create() {
 
         if (Controller.spreadsheet.spreadsheet == null) {
@@ -55,17 +58,19 @@ public class Controller {
 
         }
     }
-/**
- * Function that loads a new spreadsheet
- * @param filename  String that contains the path of the to-be-loaded file
- */
+
+    /**
+     * Function that loads a new spreadsheet
+     *
+     * @param filename String that contains the path of the to-be-loaded file
+     */
     public static void load(String filename) {
 
         if (Controller.spreadsheet.spreadsheet == null) {
             try {
                 FileActor input = new FileActor();
                 spreadsheet.createSpreadsheet();
-                input.loadSpreadsheet(spreadsheet,filename);
+                input.loadSpreadsheet(spreadsheet, filename);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -77,7 +82,7 @@ public class Controller {
                 try {
                     FileActor input = new FileActor();
                     spreadsheet.createSpreadsheet();
-                    input.loadSpreadsheet(spreadsheet,filename);
+                    input.loadSpreadsheet(spreadsheet, filename);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -91,12 +96,17 @@ public class Controller {
 
         }
     }
-/**
- * Function called when the user wants to read all the following commands from a text file. 
- * This function reads the file that contains the commands and sends them to the PerformAction function one by one. 
- * @param file String containing the path of the file containing the commands to execute. 
- * @throws UnknownOptionException Exception thrown whenever there is an unknown command in the file. 
- */
+
+    /**
+     * Function called when the user wants to read all the following commands
+     * from a text file. This function reads the file that contains the commands
+     * and sends them to the PerformAction function one by one.
+     *
+     * @param file String containing the path of the file containing the
+     * commands to execute.
+     * @throws UnknownOptionException Exception thrown whenever there is an
+     * unknown command in the file.
+     */
     public static void readCommands(String file) throws UnknownOptionException {
         String command;
         LinkedList<String> commands = new LinkedList();
@@ -108,11 +118,15 @@ public class Controller {
 
         }
     }
-/**
- * Function checks if the coordinates are valid and edits the content of the cell according to it's new type. 
- * @param parts String containing the whole user's input. This string contains the cell reference as well as the new value or formula. 
- * @throws UnknownReferenceException 
- */
+
+    /**
+     * Function checks if the coordinates are valid and edits the content of the
+     * cell according to it's new type.
+     *
+     * @param parts String containing the whole user's input. This string
+     * contains the cell reference as well as the new value or formula.
+     * @throws UnknownReferenceException
+     */
     public static void editCell(String[] parts) throws UnknownReferenceException {
         int[] coordinates = null;
         try {
@@ -130,7 +144,7 @@ public class Controller {
                 if (parts[2].charAt(0) == '=') {
 
                     try {
-                        editFormula(parts, coordinates);
+                        editFormula(parts, parts[1]);
                     } catch (SyntaxErrorException ex) {
                         //Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                         System.out.println("Erroneous Formula Syntax");
@@ -148,11 +162,13 @@ public class Controller {
         }
 
     }
-/**
- * Function call to check if the coordinates are valid. 
- * @param input Coordinate inputed by the user
- * @throws UnknownReferenceException 
- */
+
+    /**
+     * Function call to check if the coordinates are valid.
+     *
+     * @param input Coordinate inputed by the user
+     * @throws UnknownReferenceException
+     */
     public static void validCell(String input) throws UnknownReferenceException {
         int[] coordinates = new int[2];
         try {
@@ -167,15 +183,22 @@ public class Controller {
         }
 
     }
-/**
- * Void that manages the process of computing a formula. It first checks if it is correct, then calls the tokenizer and the functions needed to perform the calculations.  
- * @param value String that contains the to-be-stored value
- * @param coordinates Array that contains the cell coordinates
- * @throws SyntaxErrorException Exception thrown when there is an error in the formula. 
- */
-    private static void editFormula(String[] parts, int[] coordinates) throws SyntaxErrorException {
+
+    /**
+     * Void that manages the process of computing a formula. It first checks if
+     * it is correct, then calls the tokenizer and the functions needed to
+     * perform the calculations.
+     *
+     * @param value String that contains the to-be-stored value
+     * @param coordinates Array that contains the cell coordinates
+     * @throws SyntaxErrorException Exception thrown when there is an error in
+     * the formula.
+     */
+    private static void editFormula(String[] parts, String cellReference) throws SyntaxErrorException {
         ExpressionCleaner exp = new ExpressionCleaner();
         PostfixEvaluator evaluator = new PostfixEvaluator();
+        System.out.println(cellReference);
+        int[] coordinates = CellReference.getCoordinates(cellReference);
         //comprobamos que las coordenadas son validas
         //realizamos el cálculo
         String formula = parts[2].substring(1);;
@@ -196,16 +219,20 @@ public class Controller {
         LinkedList<FormulaElement> auxTokens = new LinkedList<>(tokenList);
         LinkedList<FormulaElement> postfix = null;
         LinkedList<FormulaElement> contentList = tokenList;
-        postfix = Postfixer.shuntingYardAlgorithm(auxTokens, spreadsheet.getSpreadsheet());
+        postfix = postfixer.shuntingYardAlgorithm(auxTokens, spreadsheet.getSpreadsheet());
+        CircularReferencer.updateReferences(postfixer.getDependencies(), cellReference, spreadsheet);
+        // Aqui comprobamos si hay alguna referencia circular
         evaluator.setFactory(factory);
         float output;
         try {
+
             output = evaluator.evaluate(postfix);
             System.out.println("output " + output);
-
+            System.out.println("tengo lo siguiente en " + cellReference + spreadsheet.spreadsheet[5][5].content.getDependencies());
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentFormula();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), contentList);
-
+            //Update de todas las demas celdas
+            updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies(), coordinates[0], coordinates[1]);
             // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
         } catch (UnknownFunctionException ex2) {
             //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
@@ -213,11 +240,15 @@ public class Controller {
         }
 
     }
-/**
- *  Function called whenever the user wants to input a number in a cell. It edits the cell content type to be CotentNumeric and stores the indicated value in it.
- * @param value String that contains the to-be-stored value
- * @param coordinates Array that contains the cell coordinates
- */
+
+    /**
+     * Function called whenever the user wants to input a number in a cell. It
+     * edits the cell content type to be CotentNumeric and stores the indicated
+     * value in it.
+     *
+     * @param value String that contains the to-be-stored value
+     * @param coordinates Array that contains the cell coordinates
+     */
     private static void editNumeric(String value, int[] coordinates) {
         try {
             System.out.println("numero");
@@ -229,11 +260,15 @@ public class Controller {
         }
 
     }
-/**
- * Function called whenever the user wants to input text in a cell. It edits the cell content type to be CotentText and stores the indicated value in it.
- * @param value String that contains the to-be-stored value
- * @param coordinates Array that contains the cell coordinates
- */
+
+    /**
+     * Function called whenever the user wants to input text in a cell. It edits
+     * the cell content type to be CotentText and stores the indicated value in
+     * it.
+     *
+     * @param value String that contains the to-be-stored value
+     * @param coordinates Array that contains the cell coordinates
+     */
     private static void editText(String value, int[] coordinates) {
         try {
             System.out.println("texto");
@@ -244,20 +279,26 @@ public class Controller {
 
         }
     }
-/**
- * Void that saves the current spreadsheet
- * @param filename String containing the file name given by the user/ 
- */
+
+    /**
+     * Void that saves the current spreadsheet
+     *
+     * @param filename String containing the file name given by the user/
+     */
     public static void saveSpreadsheet(String filename) {
         FileActor output = new FileActor();
         output.exportSpreadsheet(spreadsheet, filename);
 
     }
-/**
- * Void in charge of calling the right function according to the action read on the file.
- * @param option action read on the file
- * @throws UnknownOptionException exception thrown when the action is unknown
- */
+
+    /**
+     * Void in charge of calling the right function according to the action read
+     * on the file.
+     *
+     * @param option action read on the file
+     * @throws UnknownOptionException exception thrown when the action is
+     * unknown
+     */
     private static void performAction(String option) throws UnknownOptionException {
         String[] parts = option.split("\\ ");
 
@@ -296,5 +337,42 @@ public class Controller {
 
         }
 
+    }
+
+    private static void updateDependentCells(LinkedList<String> dependencies, int row, int col) {
+        Postfixer newPostfixer = new Postfixer();
+        LinkedList<String> auxDependencies = new LinkedList<>(dependencies);
+        int[] coordinates;
+        float output;
+        LinkedList<FormulaElement> postfix = null;
+        System.out.println("Las dependencias de la celda " + row + col + " son " + auxDependencies.size());
+        while (!auxDependencies.isEmpty()) {
+
+            String cell = auxDependencies.pop();
+            System.out.println("dependencia " + cell);
+            coordinates = CellReference.getCoordinates(cell);
+            newPostfixer = new Postfixer();
+            if (spreadsheet.getSpreadsheet()[row][col].content.getFormula()!= null) {
+                output = 0;
+
+                System.out.println("formulita que tiene " + spreadsheet.getSpreadsheet()[row][col].content.getInput());
+                LinkedList<FormulaElement> aux = new LinkedList<>(spreadsheet.getSpreadsheet()[row][col].content.getFormula());
+
+                postfix = newPostfixer.shuntingYardAlgorithm(aux, spreadsheet.getSpreadsheet());
+
+                try {
+                    output = PostfixEvaluator.evaluate(postfix); //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
+                } catch (UnknownFunctionException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.out.println("resultado " + output);
+                spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output));
+                if (newPostfixer.getDependencies().isEmpty() == false && newPostfixer.getDependencies() != null) {
+                    updateDependentCells(newPostfixer.getDependencies(), coordinates[0], coordinates[1]);
+                }
+            }
+
+            // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
+        }
     }
 }
