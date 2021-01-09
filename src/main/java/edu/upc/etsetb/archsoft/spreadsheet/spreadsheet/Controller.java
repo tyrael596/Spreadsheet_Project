@@ -63,7 +63,7 @@ public class Controller {
 
         if (Controller.spreadsheet.spreadsheet == null) {
             try {
-                GPIO input = new GPIO();
+                FileActor input = new FileActor();
                 spreadsheet.createSpreadsheet();
                 input.loadSpreadsheet(spreadsheet,filename);
             } catch (FileNotFoundException ex) {
@@ -75,7 +75,7 @@ public class Controller {
 
             if (Character.toUpperCase(conf) == 'Y') {
                 try {
-                    GPIO input = new GPIO();
+                    FileActor input = new FileActor();
                     spreadsheet.createSpreadsheet();
                     input.loadSpreadsheet(spreadsheet,filename);
                 } catch (FileNotFoundException ex) {
@@ -100,7 +100,7 @@ public class Controller {
     public static void readCommands(String file) throws UnknownOptionException {
         String command;
         LinkedList<String> commands = new LinkedList();
-        GPIO.readTextfile(file, commands);
+        FileActor.readTextfile(file, commands);
         command = commands.poll();
         while (command != null) {
             performAction(command);
@@ -197,7 +197,6 @@ public class Controller {
         LinkedList<FormulaElement> postfix = null;
         LinkedList<FormulaElement> contentList = tokenList;
         postfix = Postfixer.shuntingYardAlgorithm(auxTokens, spreadsheet.getSpreadsheet());
-
         evaluator.setFactory(factory);
         float output;
         try {
@@ -250,7 +249,7 @@ public class Controller {
  * @param filename String containing the file name given by the user/ 
  */
     public static void saveSpreadsheet(String filename) {
-        GPIO output = new GPIO();
+        FileActor output = new FileActor();
         output.exportSpreadsheet(spreadsheet, filename);
 
     }

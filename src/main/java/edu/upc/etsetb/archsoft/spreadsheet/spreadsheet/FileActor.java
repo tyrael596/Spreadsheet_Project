@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author Usuario
  */
-public class GPIO {
+public class FileActor {
 
     public void exportSpreadsheet(Spreadsheet excel, String filename) {
 
@@ -40,7 +40,7 @@ public class GPIO {
             bw.flush();
             bw.close();
         } catch (IOException ex) {
-            Logger.getLogger(GPIO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileActor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
