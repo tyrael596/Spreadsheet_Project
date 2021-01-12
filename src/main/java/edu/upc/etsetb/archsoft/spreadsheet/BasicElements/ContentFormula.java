@@ -25,7 +25,7 @@ public class ContentFormula extends CellContent {
     @Override
     public void setContent(String newContent) {
 
-        this.content = newContent;
+        this.value = newContent;
 
     }
 

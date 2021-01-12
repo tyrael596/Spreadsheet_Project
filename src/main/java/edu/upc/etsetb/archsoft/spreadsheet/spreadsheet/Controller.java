@@ -349,21 +349,27 @@ public class Controller {
         float output;
         LinkedList<FormulaElement> postfix = null;
         while (!auxDependencies.isEmpty()) {
+
             String cell = auxDependencies.pop();
             coordinates = CellReference.getCoordinates(cell);
             newPostfixer = new Postfixer();
             if (spreadsheet.getSpreadsheet()[row][col].content.getFormula()!= null) {
+                
                 output = 0; 
                 LinkedList<FormulaElement> aux = new LinkedList<>(spreadsheet.getSpreadsheet()[row][col].content.getFormula());
                 postfix = newPostfixer.shuntingYardAlgorithm(aux, spreadsheet.getSpreadsheet());
                 try {
                     output = PostfixEvaluator.evaluate(postfix); //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
+    
+                    
                 } catch (UnknownFunctionException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output));
-                if (newPostfixer.getDependencies().isEmpty() == false && newPostfixer.getDependencies() != null) {
-                    updateDependentCells(newPostfixer.getDependencies(), coordinates[0], coordinates[1]);
+              
+                if (!spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies().isEmpty()) {
+ 
+                    updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies(), coordinates[0], coordinates[1]);
                 }
             }
 
