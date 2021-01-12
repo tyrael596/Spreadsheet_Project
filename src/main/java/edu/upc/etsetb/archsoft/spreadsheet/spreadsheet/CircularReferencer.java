@@ -11,15 +11,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Usuario
+ * Class containing all the functions needed to check circular references
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class CircularReferencer {
 
     public void checkCircularReference() {
 
     }
-
+/**
+ * Void that updates the list of references of each cell whenever its formula contain a reference. 
+ * @param dependencies list of dependencies 
+ * @param cell String containing the cell reference 
+ * @param excel current spreadsheet.
+ */
     public static void updateReferences(LinkedList<String> dependencies, String cell, Spreadsheet excel) {
         int[] coordinates;
         LinkedList<String> auxDependencies = new LinkedList<>(dependencies);

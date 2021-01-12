@@ -340,7 +340,12 @@ public class Controller {
         }
 
     }
-
+/**
+ * Void that checks if the edited cell has any dependency (another cell that includes the current one in its formula) and recalculates its new value with the modification
+ * @param dependencies list of dependent cells
+ * @param row integer containing the cell's row
+ * @param col  integer containing the cell's column
+ */
     private static void updateDependentCells(LinkedList<String> dependencies, int row, int col) {
         Postfixer newPostfixer = new Postfixer();
         
