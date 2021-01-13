@@ -5,11 +5,11 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentFormula;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentNumeric;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.ContentText;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.ContentFormula;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.ContentNumeric;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.ContentText;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.CellReference;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetFactory;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;

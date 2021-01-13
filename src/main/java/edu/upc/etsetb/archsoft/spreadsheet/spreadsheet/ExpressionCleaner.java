@@ -5,7 +5,7 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.FormulaElement;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;
 import java.util.LinkedList;

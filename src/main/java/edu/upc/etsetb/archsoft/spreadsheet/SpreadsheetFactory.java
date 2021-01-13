@@ -1,16 +1,16 @@
 
 package edu.upc.etsetb.archsoft.spreadsheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Numeric;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Operador;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.Punctuation;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.Function;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.MAX;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.MIN;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.PROMEDIO;
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function.SUMA;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.CellReference;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.FormulaElement;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.Numeric;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.Operador;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.Punctuation;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.function.Function;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.function.MAX;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.function.MIN;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.function.PROMEDIO;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.function.SUMA;
 import static java.lang.Integer.parseInt;
 import java.util.LinkedList;
 import java.util.regex.Matcher;

@@ -3,20 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.function;
-
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
-import java.util.List;
-
+package edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.function;
 
 /**
  *
  * @author Alex
  */
-public class RangeOfCell {
-   CellReference topLeft;
-   CellReference topRight;
-   List fullRange;
+public interface FunctionArgument {
+    static String sequence="";
+
   /*  abstract void Calculate();
     abstract void getError(); */
     

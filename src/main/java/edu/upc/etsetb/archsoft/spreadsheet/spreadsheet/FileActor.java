@@ -13,6 +13,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -46,14 +49,18 @@ public class FileActor {
     }
 
     public void loadSpreadsheet(Spreadsheet excel, String filename) throws FileNotFoundException {
-        Scanner read = new Scanner(new File(filename));
-        read.useDelimiter(";");
- 
+        Path path = Paths.get(filename);
 
-        for (int i = 1; i < SpreadsheetToolkit.MAXROW; i++) {
-            for (int j = 1; j < SpreadsheetToolkit.MAXCOL; j++) {
-                   excel.spreadsheet[i][j].content.setContent(read.next());
+        try ( BufferedReader br = Files.newBufferedReader(path)) {
+            for (int i = 1; i < SpreadsheetToolkit.MAXROW; i++) {
+                String line = br.readLine();
+                String[] content = line.split(";");
+                for (int j = 1; j < SpreadsheetToolkit.MAXCOL; j++) {
+                    excel.spreadsheet[i][j].content.setContent(content[j-1]);
+                }
             }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
     }
 

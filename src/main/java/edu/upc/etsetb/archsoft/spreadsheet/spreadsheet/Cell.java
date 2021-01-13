@@ -5,7 +5,7 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.CellContent;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.CellContent;
 import java.util.LinkedList;
 
 /**

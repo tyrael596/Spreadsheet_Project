@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.upc.etsetb.archsoft.spreadsheet.BasicElements;
+package edu.upc.etsetb.archsoft.spreadsheet.worksheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.FormulaElement;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.FormulaElement;
 import java.util.LinkedList;
 
 /**

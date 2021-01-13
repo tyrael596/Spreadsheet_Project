@@ -1,0 +1,16 @@
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\CellContent.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\ContentNumeric.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\function\MIN.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\function\Function.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\Operador.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\ContentFormula.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\CellReference.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\ContentText.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\function\PROMEDIO.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\Numeric.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\function\MAX.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\FormulaElement.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\function\RangeOfCell.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\function\SUMA.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\function\FunctionArgument.class
+edu\upc\etsetb\archsoft\spreadsheet\worksheet\formula\Punctuation.class

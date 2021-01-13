@@ -5,7 +5,7 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.CellReference;
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Cell;
 
 /**

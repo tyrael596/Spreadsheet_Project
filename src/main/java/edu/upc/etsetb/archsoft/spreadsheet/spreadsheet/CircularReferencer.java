@@ -5,7 +5,7 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
-import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
+import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.CellReference;
 import java.util.LinkedList;
 import java.util.TreeMap;
 import java.util.logging.Level;
