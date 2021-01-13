@@ -18,8 +18,7 @@ import java.util.LinkedList;
  * @author Alex
  */
 public class Spreadsheet {
-
-    LinkedList<Cell> affectedCells = new LinkedList(); //Cells being used by references
+  
     Cell[][] spreadsheet;
 
     public void exportSp() {

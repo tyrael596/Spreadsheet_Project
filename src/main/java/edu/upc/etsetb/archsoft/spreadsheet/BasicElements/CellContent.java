@@ -16,6 +16,7 @@ public abstract class CellContent {
 
     public String content = " ";
     LinkedList<FormulaElement> list = new LinkedList(); // expresión
+    LinkedList<String> dependentCells = new LinkedList();// Cells that use the value
     LinkedList<String> dependencies = new LinkedList();
 
     /**
@@ -58,16 +59,28 @@ public abstract class CellContent {
 
     public abstract LinkedList getFormula();
 
-    public void modifyDependencies(String newContent) {
-        this.dependencies.push(newContent);
+    public void modifyDependentCells(String newContent) {
+        this.dependentCells.push(newContent);
+    }
+
+    public LinkedList<String> getDependentCells() {
+        return this.dependentCells;
     }
 
     public LinkedList<String> getDependencies() {
         return this.dependencies;
     }
 
-    public void setDependencies(LinkedList<String> depens) {
-        this.dependencies=depens;
+    public void setDependencies(LinkedList<String> dependencies) {
+         this.dependencies = dependencies;
+    }
+
+    public void deleteDependency(String reference) {
+        this.dependentCells.remove(reference);
+    }
+
+    public void setDependentCells(LinkedList<String> depens) {
+        this.dependentCells = depens;
     }
 
 }

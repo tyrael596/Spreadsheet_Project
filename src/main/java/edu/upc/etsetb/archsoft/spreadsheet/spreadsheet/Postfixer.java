@@ -21,7 +21,7 @@ public class Postfixer {
 
     List formulaList;
     static SpreadsheetToolkit toolkit = new SpreadsheetToolkit();
-    static LinkedList<String> dependencies;
+    static LinkedList<String> dependentCells;
 
     /**
      * This functions implements the Shunting Yard Algorithm to return a list
@@ -40,7 +40,7 @@ public class Postfixer {
         LinkedList<FormulaElement> auxiliarList = new LinkedList();
         FormulaElement aux;
         FormulaElement aux2;
-        dependencies = new LinkedList();
+        dependentCells = new LinkedList();
         float number;
         // si es un simbolo y tiene menos preferencia que el ultimo del stack entonces saco el del stack y lo meto con los numeros y pongo el de menor preferencia en el stack 
         while (input.isEmpty() == false) {
@@ -69,7 +69,7 @@ public class Postfixer {
                     }
                 } else if (aux.getToken() == SpreadsheetToolkit.TOKENCELLREF) {
                     try {
-                        dependencies.push(aux.getSequence());
+                        dependentCells.push(aux.getSequence());
                         System.out.println("Hay dependencias en la formula:" + aux.getSequence());
                         aux2 = new Numeric(11, String.valueOf(SpreadsheetToolkit.getContent(aux.getSequence(), spreadsheet)));
                         numbersQueue.addLast(aux2);
@@ -141,7 +141,7 @@ public class Postfixer {
                 }
             }
             if (aux.getToken() == SpreadsheetToolkit.TOKENCELLREF) {
-                dependencies.push(aux.getSequence());
+                dependentCells.push(aux.getSequence());
                 aux = new Numeric(11, String.valueOf(SpreadsheetToolkit.getContent(aux.getSequence(), spreadsheet)));
             }
             arguments.addLast(aux);//si es un numero lo pongo en la cola de numeros en la última posición  
@@ -155,11 +155,11 @@ public class Postfixer {
         return arguments;
     }
     /**
-     * getter for the dependencies list
-     * @return dependencies list
+     * getter for the dependentCells list
+     * @return dependentCells list
      */
     public static LinkedList getDependencies(){
-        return dependencies;
+        return dependentCells;
     }
 
 }

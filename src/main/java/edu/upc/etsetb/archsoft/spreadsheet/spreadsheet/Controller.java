@@ -15,11 +15,11 @@ import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import edu.upc.etsetb.archsoft.spreadsheet.SyntaxErrorException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import edu.upc.etsetb.archsoft.spreadsheet.UnknownTypeException;
-import static edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Postfixer.dependencies;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Postfixer.dependentCells;
 
 /**
  * Class that controls the general behavior of the system. It is in charge of
@@ -139,7 +139,7 @@ public class Controller {
             try {
                 float number = Float.parseFloat(parts[2]);//miramos si es un numero
 
-                editNumeric(parts[2], coordinates);
+                editNumeric(parts[2], parts[1]);
             } catch (NumberFormatException e) {
 
                 if (parts[2].charAt(0) == '=') {
@@ -219,6 +219,7 @@ public class Controller {
         tokenList = token.tokens;
         LinkedList<FormulaElement> auxTokens = new LinkedList<>(tokenList);
         LinkedList<FormulaElement> postfix = null;
+        LinkedList<String> dependencies = null;
         LinkedList<FormulaElement> contentList = tokenList;
         postfix = postfixer.shuntingYardAlgorithm(auxTokens, spreadsheet.getSpreadsheet());
         CircularReferencer.updateReferences(postfixer.getDependencies(), cellReference, spreadsheet);
@@ -228,13 +229,17 @@ public class Controller {
         try {
 
             output = evaluator.evaluate(postfix);
+            dependentCells = new LinkedList();
             dependencies = new LinkedList();
+            dependentCells=spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells();
             dependencies=spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentFormula();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), contentList);
+            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setDependentCells(dependentCells);
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setDependencies(dependencies);
             //Update de todas las demas celdas
-            updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies(), coordinates[0], coordinates[1]);
+           
+            updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells(), coordinates[0], coordinates[1]);
             // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
         } catch (UnknownFunctionException ex2) {
             //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
@@ -251,9 +256,11 @@ public class Controller {
      * @param value String that contains the to-be-stored value
      * @param coordinates Array that contains the cell coordinates
      */
-    private static void editNumeric(String value, int[] coordinates) {
+    private static void editNumeric(String value, String cell) {
         try {
+             int[] coordinates = CellReference.getCoordinates(cell);
             System.out.println("numero");
+            CircularReferencer.deleteReferences( cell,  spreadsheet);
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentNumeric();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
         } catch (java.lang.NullPointerException e) {
@@ -353,11 +360,13 @@ public class Controller {
         int[] coordinates;
         float output;
         LinkedList<FormulaElement> postfix = null;
+        System.out.println("no se que estoy haciendo" + dependencies);
         while (!auxDependencies.isEmpty()) {
 
             String cell = auxDependencies.pop();
             coordinates = CellReference.getCoordinates(cell);
             newPostfixer = new Postfixer();
+            
             if (spreadsheet.getSpreadsheet()[row][col].content.getFormula()!= null) {
                 
                 output = 0; 
@@ -372,9 +381,9 @@ public class Controller {
                 }
                 spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output));
               
-                if (!spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies().isEmpty()) {
+                if (!spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells().isEmpty()) {
  
-                    updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies(), coordinates[0], coordinates[1]);
+                    updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells(), coordinates[0], coordinates[1]);
                 }
             }
 
