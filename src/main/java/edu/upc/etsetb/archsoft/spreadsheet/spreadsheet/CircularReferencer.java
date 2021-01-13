@@ -53,9 +53,9 @@ public class CircularReferencer {
         String reference;
         deleteReferences(cell, excel);
         coordinates = CellReference.getCoordinates(cell);
-        System.out.println("deberia guardarme ubn  "+ dependencies);
+
         excel.spreadsheet[coordinates[0]][coordinates[1]].content.setDependencies(dependencies);
-        System.out.println("Soy "+ cell+ " dependo de " + excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies());
+
         while (!auxDependencies.isEmpty()) {
             reference = auxDependencies.pop();
             try {
@@ -83,17 +83,16 @@ public class CircularReferencer {
         coordinates = CellReference.getCoordinates(cell);
      
         String reference;
-        System.out.println("Soy "+ cell+ " y dependo de " + excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies());
-        System.out.println("Soy " +cell+ " y  " +excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells()+ " dependen de mi" );
+       
         while (!excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies().isEmpty()) {
-            System.out.println("he entrado");
+           
             reference = excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies().pop();
-            System.out.println("soy " +reference + " y  " + excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells()+ " dependen de mi" );
+          
             coordinates = CellReference.getCoordinates(reference);
             excel.spreadsheet[coordinates[0]][coordinates[1]].content.deleteDependency(cell);
 
         }
-        System.out.println("las he borrado" + excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells());
+       
     }
      
 

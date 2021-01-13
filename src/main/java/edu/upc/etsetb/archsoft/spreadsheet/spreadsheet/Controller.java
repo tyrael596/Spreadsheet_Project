@@ -259,7 +259,7 @@ public class Controller {
     private static void editNumeric(String value, String cell) {
         try {
              int[] coordinates = CellReference.getCoordinates(cell);
-            System.out.println("numero");
+     
             CircularReferencer.deleteReferences( cell,  spreadsheet);
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentNumeric();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
