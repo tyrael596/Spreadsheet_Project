@@ -24,9 +24,10 @@ public class ExpressionCleaner {
     public List<FormulaElement> getTokens() {
         return null;
     }
+
     /**
-     * Check if the input string is syntactically correct
-     * all params are commented across the function
+     * Check if the input string is syntactically correct all params are
+     * commented across the function
      */
     public void check(LinkedList<FormulaElement> tokenized) throws SyntaxErrorException {
         int ttok;

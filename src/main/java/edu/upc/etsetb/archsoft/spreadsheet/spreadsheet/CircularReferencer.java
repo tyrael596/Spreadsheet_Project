@@ -7,7 +7,6 @@ package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.CellReference;
 import java.util.LinkedList;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -81,19 +80,18 @@ public class CircularReferencer {
     public static void deleteReferences(String cell, Spreadsheet excel) {
         int[] coordinates;
         coordinates = CellReference.getCoordinates(cell);
-     
+
         String reference;
-       
+
         while (!excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies().isEmpty()) {
-           
+
             reference = excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies().pop();
-          
+
             coordinates = CellReference.getCoordinates(reference);
             excel.spreadsheet[coordinates[0]][coordinates[1]].content.deleteDependency(cell);
 
         }
-       
+
     }
-     
 
 }

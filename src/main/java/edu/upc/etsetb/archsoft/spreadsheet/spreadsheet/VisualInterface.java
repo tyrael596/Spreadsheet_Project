@@ -5,28 +5,26 @@
  */
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
-import java.io.File;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import static edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.Controller.spreadsheet;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
  * Class that contains all the information and processes of the Visual Interface
+ *
  * @author Alex Eslava y Amaya Balaguer
  */
 public class VisualInterface {
 
     String userInput;
     Scanner scan = new Scanner(System.in);
-/**
- * Void that prints the menu and gets the user's input
- * @throws UnknownOptionException when there is a problem with the action introduced by the user. 
- */
+
+    /**
+     * Void that prints the menu and gets the user's input
+     *
+     * @throws UnknownOptionException when there is a problem with the action
+     * introduced by the user.
+     */
     public void printMenu() throws UnknownOptionException {
         System.out.println();
         System.out.println("Welcome to miniExcel what do you want to do? ");
@@ -46,10 +44,12 @@ public class VisualInterface {
         }
 
     }
-/**
- * It asks the user for confirmation to perform a certain action
- * @return returns the value inputed by the user
- */
+
+    /**
+     * It asks the user for confirmation to perform a certain action
+     *
+     * @return returns the value inputed by the user
+     */
     public static char askConfirmation() {
         Scanner scan = new Scanner(System.in);
         System.out.println();
@@ -69,11 +69,15 @@ public class VisualInterface {
         }
 
     }
-/**
- * Void in charge of calling the right function according to the action inputed by the user. 
- * @param option It contains the string written by the user
- * @throws UnknownOptionException  Thowed whenever the user enters an unknown option.
- */
+
+    /**
+     * Void in charge of calling the right function according to the action
+     * inputed by the user.
+     *
+     * @param option It contains the string written by the user
+     * @throws UnknownOptionException Thowed whenever the user enters an unknown
+     * option.
+     */
     public void performAction(String option) throws UnknownOptionException {
         String[] parts = option.split("\\ ");
 
@@ -123,9 +127,10 @@ public class VisualInterface {
         }
 
     }
-/**
- *  Void that prints the complete spreadsheet. 
- */
+
+    /**
+     * Void that prints the complete spreadsheet.
+     */
     public static void printSpreadsheet() {
         System.out.println();
 
@@ -145,6 +150,5 @@ public class VisualInterface {
         System.out.println("------------------------------------");
         System.out.println();
     }
-
 
 }

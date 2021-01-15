@@ -12,18 +12,15 @@ import java.util.LinkedList;
  *
  * @author Alex
  */
-public class Punctuation extends FormulaElement{
-
+public class Punctuation extends FormulaElement {
 
     public Punctuation(int token, String sequence) {
         super(token, sequence);
     }
 
-
-  
-        @Override
-    public float acceptVisitor(Visitador visitador,LinkedList input) {
-        return visitador.visitaPunctuation(this,input);
+    @Override
+    public float acceptVisitor(Visitador visitador, LinkedList input) {
+        return visitador.visitaPunctuation(this, input);
     }
 
 }

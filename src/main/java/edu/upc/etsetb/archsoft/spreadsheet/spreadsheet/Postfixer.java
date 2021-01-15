@@ -154,11 +154,13 @@ public class Postfixer {
         arguments.addLast(aux);
         return arguments;
     }
+
     /**
      * getter for the dependentCells list
+     *
      * @return dependentCells list
      */
-    public static LinkedList getDependencies(){
+    public static LinkedList getDependencies() {
         return dependentCells;
     }
 

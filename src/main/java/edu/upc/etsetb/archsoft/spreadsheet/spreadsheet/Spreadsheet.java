@@ -18,11 +18,11 @@ import java.util.LinkedList;
  * @author Alex
  */
 public class Spreadsheet {
-  
+
     Cell[][] spreadsheet;
 
     public void exportSp() {
-        
+
     }
 
     public void importSp() {
@@ -38,12 +38,12 @@ public class Spreadsheet {
         SpreadsheetFactory factory = new SpreadsheetFactory();
         spreadsheet = new Cell[SpreadsheetToolkit.MAXROW][SpreadsheetToolkit.MAXCOL];
         String[] a = CellReference.getString();
-        
+
         for (int col = 0; col < SpreadsheetToolkit.MAXCOL; col++) {
             for (int row = 0; row < SpreadsheetToolkit.MAXROW; row++) {
                 this.spreadsheet[row][col] = new Cell(new ContentNumeric());
                 if (col == 0) {
-                    
+
                     this.spreadsheet[row][col].content = new ContentText();
                     if (row == 0) {
                         this.spreadsheet[row][col].content.setContent(" ");
@@ -56,7 +56,7 @@ public class Spreadsheet {
                         this.spreadsheet[row][col].content.setContent(a[col]);
                         //this.spreadsheet[row][col].content.setContent(String.valueOf((char) ('A' + col-1)));
                     } else {
-                        
+
                         this.spreadsheet[row][col].content = new ContentNumeric();
                         this.spreadsheet[row][col].content.setContent(String.valueOf(row + 3));
                     }
@@ -81,6 +81,4 @@ public class Spreadsheet {
 
     // Metodo ModifyCell +++ 
     // Tokenizer -> ParserCleaner (formato correcto)  -> Postfixer
-    
 }
-

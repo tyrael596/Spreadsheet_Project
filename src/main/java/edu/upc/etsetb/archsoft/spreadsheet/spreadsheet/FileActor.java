@@ -8,7 +8,6 @@ package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,7 +54,7 @@ public class FileActor {
                 String line = br.readLine();
                 String[] content = line.split(";");
                 for (int j = 1; j < SpreadsheetToolkit.MAXCOL; j++) {
-                    excel.spreadsheet[i][j].content.setContent(content[j-1]);
+                    excel.spreadsheet[i][j].content.setContent(content[j - 1]);
                 }
             }
         } catch (IOException ioe) {

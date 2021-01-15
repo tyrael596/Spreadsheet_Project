@@ -12,8 +12,7 @@ import java.util.LinkedList;
  *
  * @author Alex
  */
-public class Operador extends FormulaElement{
-
+public class Operador extends FormulaElement {
 
     public Operador(int token, String sequence) {
         super(token, sequence);
@@ -21,31 +20,31 @@ public class Operador extends FormulaElement{
 
     public Operador() {
     }
-    
+
     public Operador(String op) {
-        
+
         this.sequence = op;
     }
-    
-    public float calculate(float operand1, float operand2){
-        
-       switch(sequence){
-           case "+":
+
+    public float calculate(float operand1, float operand2) {
+
+        switch (sequence) {
+            case "+":
                 return operand1 + operand2;
-           case "-":
-               
-                return operand1 - operand2; 
+            case "-":
+
+                return operand1 - operand2;
             case "*":
-                return operand1 * operand2;  
-            default: 
-                return operand1 / operand2;  
-       }
-           
+                return operand1 * operand2;
+            default:
+                return operand1 / operand2;
+        }
+
     }
-    
-        @Override
-    public float acceptVisitor(Visitador visitador,LinkedList input) {
-        return visitador.visitaOperador(this,input);
+
+    @Override
+    public float acceptVisitor(Visitador visitador, LinkedList input) {
+        return visitador.visitaOperador(this, input);
     }
 
 }

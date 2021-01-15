@@ -21,9 +21,12 @@ public abstract class FormulaElement {
     boolean isFunction;
 
     /**
-     * Returns a FormulaElement object with the given token and sequence assigned
+     * Returns a FormulaElement object with the given token and sequence
+     * assigned
+     *
      * @param token integer representing the formula element type
-     * @param sequence string with the sequence associated to the formula element
+     * @param sequence string with the sequence associated to the formula
+     * element
      */
     public FormulaElement(int token, String sequence) { //Token Variable int,string o otro?
         super();
@@ -40,23 +43,25 @@ public abstract class FormulaElement {
 
     /**
      * the sequence getter for the Formula element
-     * @return it returns a String containing the sequence of that element. 
+     *
+     * @return it returns a String containing the sequence of that element.
      */
     public String getSequence() {
         return this.sequence;
     }
 
     /**
-     *the token getter for the Formula element
+     * the token getter for the Formula element
+     *
      * @return it returns an int containing the token of that element.
      */
-
     public int getToken() {
         return this.token;
     }
 
     /**
-     *the sequence setter for the Formula element
+     * the sequence setter for the Formula element
+     *
      * @param newSequence String containing the new sequence od the object
      */
     public void changeSequence(String newSequence) {
@@ -65,7 +70,8 @@ public abstract class FormulaElement {
     }
 
     /**
-     *the token setter for the Formula element
+     * the token setter for the Formula element
+     *
      * @param newToken integer containing the new token of the object
      */
     public void changeToken(int newToken) {
@@ -73,15 +79,18 @@ public abstract class FormulaElement {
     }
 
     /**
-     * Function that returns true if the formula element is a function. False otherwise 
-     * @return boolean containing the result of the beforesaid comparison. 
+     * Function that returns true if the formula element is a function. False
+     * otherwise
+     *
+     * @return boolean containing the result of the beforesaid comparison.
      */
     public boolean isfunction() {
         return this.isFunction;
     }
 
     /**
-     * Setter of the function boolean. As it is only called when it is a function, it will be set to true.
+     * Setter of the function boolean. As it is only called when it is a
+     * function, it will be set to true.
      */
     public void setIsFunction() {
         this.isFunction = true;

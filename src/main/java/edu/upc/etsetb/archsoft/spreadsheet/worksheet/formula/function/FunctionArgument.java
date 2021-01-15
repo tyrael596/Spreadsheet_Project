@@ -10,9 +10,9 @@ package edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.function;
  * @author Alex
  */
 public interface FunctionArgument {
-    static String sequence="";
 
-  /*  abstract void Calculate();
+    static String sequence = "";
+
+    /*  abstract void Calculate();
     abstract void getError(); */
-    
 }

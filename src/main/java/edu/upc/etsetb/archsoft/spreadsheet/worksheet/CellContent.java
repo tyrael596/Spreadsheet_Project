@@ -72,7 +72,7 @@ public abstract class CellContent {
     }
 
     public void setDependencies(LinkedList<String> dependencies) {
-         this.dependencies = dependencies;
+        this.dependencies = dependencies;
     }
 
     public void deleteDependency(String reference) {

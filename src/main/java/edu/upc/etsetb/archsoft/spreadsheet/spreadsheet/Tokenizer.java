@@ -23,14 +23,15 @@ public class Tokenizer {
     private LinkedList<TokenInfo> tokenInfos;
 
     /**
-     * We will store inside the LinkedList of formula elements the tokens that 
+     * We will store inside the LinkedList of formula elements the tokens that
      * we find within the user input
      */
     public LinkedList<FormulaElement> tokens = new LinkedList<>();
     private SpreadsheetFactory factory;
 
     /**
-     *Set factory for current tokenizer object
+     * Set factory for current tokenizer object
+     *
      * @param factory
      */
     public void setFactory(SpreadsheetFactory factory) {
@@ -38,14 +39,16 @@ public class Tokenizer {
     }
 
     /**
-     *Constructor for Tokenizer. Initiates a tokenInfos
+     * Constructor for Tokenizer. Initiates a tokenInfos
      */
     public Tokenizer() {
         tokenInfos = new LinkedList<TokenInfo>();
     }
-/**
- * List of tokens with regex for each of the possible tokens to be found in input
- */
+
+    /**
+     * List of tokens with regex for each of the possible tokens to be found in
+     * input
+     */
     private class TokenInfo {
 
         public final Pattern regex;
@@ -57,22 +60,28 @@ public class Tokenizer {
             this.token = token;
         }
     }
-/**
- * Generic method for adding TokenInfos to list of possible tokens to be found in input
- * @param regex regular expression corresponding to each possible token
- * @param token numerical indicator for each token
- */
+
+    /**
+     * Generic method for adding TokenInfos to list of possible tokens to be
+     * found in input
+     *
+     * @param regex regular expression corresponding to each possible token
+     * @param token numerical indicator for each token
+     */
     public void add(String regex, int token) { //Token Variable int,string o otro?
         tokenInfos.add(new TokenInfo(Pattern.compile("^(" + regex + ")"), token));
     }
 
-/**
- * Transform user input string into a LinkedList of Tokens stored into Tokenizer's FormulaElements "tokens" List
- * @param dataInput user input string that needs to be broken down into strings
- * @throws UnknownTypeException
- * @throws UnknownFunctionException
- * @throws SyntaxErrorException 
- */
+    /**
+     * Transform user input string into a LinkedList of Tokens stored into
+     * Tokenizer's FormulaElements "tokens" List
+     *
+     * @param dataInput user input string that needs to be broken down into
+     * strings
+     * @throws UnknownTypeException
+     * @throws UnknownFunctionException
+     * @throws SyntaxErrorException
+     */
     public void getTokens(String dataInput) throws UnknownTypeException, UnknownFunctionException, SyntaxErrorException {
         while (!dataInput.equals("")) {
             boolean match = false;
@@ -93,10 +102,12 @@ public class Tokenizer {
             }
         }
     }
-/**
- * Add all tokeninfo possible tokens to be found to TokenInfos list 
- * @param tokenizer the object itself 
- */
+
+    /**
+     * Add all tokeninfo possible tokens to be found to TokenInfos list
+     *
+     * @param tokenizer the object itself
+     */
     public void addTokens(Tokenizer tokenizer) {
         tokenizer.add("\\(", 1); // open bracket
         tokenizer.add("\\)", 2); // close bracket

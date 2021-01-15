@@ -6,7 +6,6 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.worksheet.CellContent;
-import java.util.LinkedList;
 
 /**
  *
@@ -17,7 +16,6 @@ public class Cell {
     public CellContent content;
     int row;
     int col;
-    
 
     public Cell(CellContent content) {
         this.content = content;
@@ -27,6 +25,5 @@ public class Cell {
     public void modifyContent(String newContent) {
         this.content.setContent(newContent);
     }
-
 
 }

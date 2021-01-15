@@ -6,30 +6,25 @@
 package edu.upc.etsetb.archsoft.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.spreadsheet.VisualInterface;
+
 /**
  *
  * @author Alex
  */
 public class Main {
- public static boolean exit = false;
-   private static  VisualInterface vi = new VisualInterface();
+
+    public static boolean exit = false;
+    private static VisualInterface vi = new VisualInterface();
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
 
-        while(!exit){
-            vi.printMenu(); 
+        while (!exit) {
+            vi.printMenu();
         }
 
-
- 
-
-              
-         
-
-
-            
     }
 
 }

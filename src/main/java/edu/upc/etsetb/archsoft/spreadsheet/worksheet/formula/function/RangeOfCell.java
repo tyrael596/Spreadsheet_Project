@@ -8,16 +8,16 @@ package edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.function;
 import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.CellReference;
 import java.util.List;
 
-
 /**
  *
  * @author Alex
  */
 public class RangeOfCell {
-   CellReference topLeft;
-   CellReference topRight;
-   List fullRange;
-  /*  abstract void Calculate();
+
+    CellReference topLeft;
+    CellReference topRight;
+    List fullRange;
+    /*  abstract void Calculate();
     abstract void getError(); */
-    
+
 }

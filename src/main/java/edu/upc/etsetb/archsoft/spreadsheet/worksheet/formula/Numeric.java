@@ -12,17 +12,15 @@ import java.util.LinkedList;
  *
  * @author Alex
  */
-public class Numeric extends FormulaElement{
-    
+public class Numeric extends FormulaElement {
+
     @Override
-    public float acceptVisitor(Visitador visitador,LinkedList input) {
+    public float acceptVisitor(Visitador visitador, LinkedList input) {
         return visitador.visitaNumeric(this, input);
     }
 
     public Numeric(int token, String sequence) {
         super(token, sequence);
     }
-    
 
-    
 }
