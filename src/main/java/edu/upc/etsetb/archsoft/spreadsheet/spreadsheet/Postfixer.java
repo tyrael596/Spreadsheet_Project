@@ -70,15 +70,14 @@ public class Postfixer {
                 } else if (aux.getToken() == SpreadsheetToolkit.TOKENCELLREF) {
                     try {
                         dependentCells.push(aux.getSequence());
-                        System.out.println("Hay dependencias en la formula:" + aux.getSequence());
                         aux2 = new Numeric(11, String.valueOf(SpreadsheetToolkit.getContent(aux.getSequence(), spreadsheet)));
                         numbersQueue.addLast(aux2);
-                    } catch (NullPointerException ex) {
-                        System.out.println("Please cretae or load an spreadsheet");
-                        throw new NullPointerException();
+                    } catch (NullPointerException ex ) {
+                        System.out.println("Please create or load an spreadsheet");
                     }
+ 
 
-                } else {
+            }else {
                     aux2 = operatorStack.peekFirst();
                     if (aux2 != null) {
                         //si hay algo hay que mirar las precedencias
@@ -98,28 +97,29 @@ public class Postfixer {
                     }
                 }
 
-            }
         }
-        //llegados al final toca pasarlos todos 
-        //  System.out.println("vacio operadores" + operatorStack.size());
-        while (!operatorStack.isEmpty()) {
-            numbersQueue.addLast(operatorStack.pollFirst());
-        }
+    }
+    //llegados al final toca pasarlos todos 
+    //  System.out.println("vacio operadores" + operatorStack.size());
 
-        return numbersQueue;
+    while (!operatorStack.isEmpty () 
+        ) {
+            numbersQueue.addLast(operatorStack.pollFirst());
     }
 
-    /**
-     * Function called whenever a function is found and that returns a list of
-     * all the arguments of that function. If a reference is found, the value of
-     * the cell content is returned in that list.
-     *
-     * @param input Linked list of the tokens of the formula inputed by the
-     * user.
-     * @param spreadsheetCell object matrix containing the current Spreadsheet.
-     * @return list of all the arguments of that function
-     */
-    static LinkedList getFunctionArguments(LinkedList<FormulaElement> input, Cell[][] spreadsheet) {
+    return numbersQueue ;
+}
+
+/**
+ * Function called whenever a function is found and that returns a list of all
+ * the arguments of that function. If a reference is found, the value of the
+ * cell content is returned in that list.
+ *
+ * @param input Linked list of the tokens of the formula inputed by the user.
+ * @param spreadsheetCell object matrix containing the current Spreadsheet.
+ * @return list of all the arguments of that function
+ */
+static LinkedList getFunctionArguments(LinkedList<FormulaElement> input, Cell[][] spreadsheet) {
         LinkedList<FormulaElement> arguments = new LinkedList();
         LinkedList<FormulaElement> auxiliarList = new LinkedList();
         int precedence = 0;

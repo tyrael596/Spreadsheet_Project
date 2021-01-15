@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author Alex
+ * @author Alex & Amaya
  */
 public class ContentNumeric extends CellContent {
 

@@ -58,7 +58,7 @@ public class SpreadsheetToolkit {
         try {
             content = spreadsheet[coordinates[0]][coordinates[1]].content.getContent();
         } catch (NullPointerException e) {
-            System.out.println("Please cretae or load an spreadsheet");
+            System.out.println("Please create or load an spreadsheet");
             throw new NullPointerException();
         }
 

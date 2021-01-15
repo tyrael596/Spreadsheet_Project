@@ -165,11 +165,12 @@ public class SpreadsheetFactory {
         int n2 = parseInt(sequence.substring(start, end));
         while (!iteratingCell.equals(endCell)) {
             for (int x = n1; x <= n2; x++) {
-                FormulaElement current = new CellReference(SpreadsheetToolkit.TOKENCELLREF, iteratingCell);
+                FormulaElement current = new CellReference(SpreadsheetToolkit.TOKENCELLREF, iteratingCell + x);
                 tokens.add(current);
                 tokens.add(new Punctuation(SpreadsheetToolkit.TOKENPUNCT, ";"));
             }
             iteratingCell = incrementCell(iteratingCell);
+            
         }//La ultima columna entera menos el ultimo que va al return. Este codigo queda un poco feo pero tokenizer queda mas streamlined
         for (int x = n1; x <= n2 - 1; x++) {
             FormulaElement current = new CellReference(SpreadsheetToolkit.TOKENCELLREF, iteratingCell + x);

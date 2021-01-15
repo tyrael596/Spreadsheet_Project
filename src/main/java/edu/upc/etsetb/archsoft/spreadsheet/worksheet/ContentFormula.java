@@ -11,7 +11,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author Alex
+ * @author Alex & Amaya
  */
 public class ContentFormula extends CellContent {
 

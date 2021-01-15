@@ -47,7 +47,6 @@ public class Controller {
             char conf = VisualInterface.askConfirmation();
 
             if (Character.toUpperCase(conf) == 'Y') {
-                System.out.println("voy a crear ");
                 spreadsheet.createSpreadsheet();
             } else if (conf == 'x') {
                 while (conf == 'x') {
@@ -198,7 +197,6 @@ public class Controller {
     private static void editFormula(String[] parts, String cellReference) throws SyntaxErrorException {
         ExpressionCleaner exp = new ExpressionCleaner();
         PostfixEvaluator evaluator = new PostfixEvaluator();
-        System.out.println(cellReference);
         int[] coordinates = CellReference.getCoordinates(cellReference);
         //comprobamos que las coordenadas son validas
         //realizamos el cálculo
@@ -280,7 +278,6 @@ public class Controller {
      */
     private static void editText(String value, int[] coordinates) {
         try {
-            System.out.println("texto");
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentText();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
         } catch (java.lang.NullPointerException e) {
@@ -359,38 +356,39 @@ public class Controller {
      */
     private static void updateDependentCells(LinkedList<String> dependencies, int row, int col) {
         Postfixer newPostfixer = new Postfixer();
+        try {
+            LinkedList<String> auxDependencies = new LinkedList<>(dependencies);
+            int[] coordinates;
+            float output;
+            LinkedList<FormulaElement> postfix = null;
+            while (!auxDependencies.isEmpty()) {
 
-        LinkedList<String> auxDependencies = new LinkedList<>(dependencies);
-        int[] coordinates;
-        float output;
-        LinkedList<FormulaElement> postfix = null;
-        System.out.println("no se que estoy haciendo" + dependencies);
-        while (!auxDependencies.isEmpty()) {
+                String cell = auxDependencies.pop();
+                coordinates = CellReference.getCoordinates(cell);
+                newPostfixer = new Postfixer();
+                if (spreadsheet.getSpreadsheet()[row][col].content.getFormula() != null) {
 
-            String cell = auxDependencies.pop();
-            coordinates = CellReference.getCoordinates(cell);
-            newPostfixer = new Postfixer();
+                    output = 0;
+                    LinkedList<FormulaElement> aux = new LinkedList<>(spreadsheet.getSpreadsheet()[coordinates[0]][coordinates[1]].content.getFormula());
+                    postfix = newPostfixer.shuntingYardAlgorithm(aux, spreadsheet.getSpreadsheet());
+                    try {
+                        output = PostfixEvaluator.evaluate(postfix); //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
 
-            if (spreadsheet.getSpreadsheet()[row][col].content.getFormula() != null) {
+                    } catch (UnknownFunctionException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output));
 
-                output = 0;
-                LinkedList<FormulaElement> aux = new LinkedList<>(spreadsheet.getSpreadsheet()[row][col].content.getFormula());
-                postfix = newPostfixer.shuntingYardAlgorithm(aux, spreadsheet.getSpreadsheet());
-                try {
-                    output = PostfixEvaluator.evaluate(postfix); //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
+                    if (!spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells().isEmpty()) {
 
-                } catch (UnknownFunctionException ex) {
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells(), coordinates[0], coordinates[1]);
+                    }
                 }
-                spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output));
 
-                if (!spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells().isEmpty()) {
-
-                    updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells(), coordinates[0], coordinates[1]);
-                }
+                // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
             }
-
-            // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
+        } catch (StackOverflowError e) {
+            System.out.println("-> Circular Reference !! o.0 ");
         }
     }
 }

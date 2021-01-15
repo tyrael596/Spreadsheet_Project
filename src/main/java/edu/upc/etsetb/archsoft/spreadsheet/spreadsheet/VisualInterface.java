@@ -96,16 +96,20 @@ public class VisualInterface {
 
                 break;
             case "E":
-                if (parts.length < 3) {
-                    throw new UnknownOptionException();
+                if (Controller.spreadsheet.spreadsheet == null) {
+                    System.out.println("No current spreadsheet to work with!");
                 } else {
-                    // Falta comprobar que lo que me entran son coordenadas válidas pero supongamos que si
-                    try {
-                        Controller.validCell(parts[1]);
-                        Controller.editCell(parts);
-                    } catch (UnknownReferenceException e) {
-                        System.out.println("Enter a valid cell Reference ");
-                        break;
+                    if (parts.length < 3) {
+                        throw new UnknownOptionException();
+                    } else {
+                        // Falta comprobar que lo que me entran son coordenadas válidas pero supongamos que si
+                        try {
+                            Controller.validCell(parts[1]);
+                            Controller.editCell(parts);
+                        } catch (UnknownReferenceException e) {
+                            System.out.println("Enter a valid cell Reference ");
+                            break;
+                        }
                     }
                 }
                 break;
@@ -114,7 +118,11 @@ public class VisualInterface {
                 Controller.load(parts[1]);
                 break;
             case "S":
-                Controller.saveSpreadsheet(parts[1]);
+                if (Controller.spreadsheet.spreadsheet == null) {
+                    System.out.println("No current spreadsheet to work with!");
+                } else {
+                    Controller.saveSpreadsheet(parts[1]);
+                }
                 break;
             default:
                 throw new UnknownOptionException();
