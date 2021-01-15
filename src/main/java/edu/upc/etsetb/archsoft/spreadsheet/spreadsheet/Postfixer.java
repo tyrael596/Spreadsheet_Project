@@ -70,7 +70,7 @@ public class Postfixer {
                 } else if (aux.getToken() == SpreadsheetToolkit.TOKENCELLREF) {
                     try {
                         dependentCells.push(aux.getSequence());
-                        System.out.println("Hay dependencias en la formula:" + aux.getSequence());
+                        
                         aux2 = new Numeric(11, String.valueOf(SpreadsheetToolkit.getContent(aux.getSequence(), spreadsheet)));
                         numbersQueue.addLast(aux2);
                     } catch (NullPointerException ex) {

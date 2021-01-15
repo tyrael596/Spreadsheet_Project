@@ -222,28 +222,34 @@ public class Controller {
         LinkedList<String> dependencies = null;
         LinkedList<FormulaElement> contentList = tokenList;
         postfix = postfixer.shuntingYardAlgorithm(auxTokens, spreadsheet.getSpreadsheet());
-        CircularReferencer.updateReferences(postfixer.getDependencies(), cellReference, spreadsheet);
-        // Aqui comprobamos si hay alguna referencia circular
-        evaluator.setFactory(factory);
-        float output;
         try {
+            CircularReferencer.updateReferences(postfixer.getDependencies(), cellReference, spreadsheet);
+            CircularReferencer.checkCircularReference(postfixer.getDependencies(), spreadsheet, cellReference);
 
-            output = evaluator.evaluate(postfix);
-            dependentCells = new LinkedList();
-            dependencies = new LinkedList();
-            dependentCells=spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells();
-            dependencies=spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies();
-            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentFormula();
-            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), contentList);
-            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setDependentCells(dependentCells);
-            spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setDependencies(dependencies);
-            //Update de todas las demas celdas
-           
-            updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells(), coordinates[0], coordinates[1]);
-            // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
-        } catch (UnknownFunctionException ex2) {
-            //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
-            System.out.println("Linea 110 for Controller");
+            evaluator.setFactory(factory);
+            float output;
+            try {
+
+                output = evaluator.evaluate(postfix);
+                dependentCells = new LinkedList();
+                dependencies = new LinkedList();
+                dependentCells = spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells();
+                dependencies = spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies();
+                spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentFormula();
+                spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output), contentList);
+                spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setDependentCells(dependentCells);
+                spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setDependencies(dependencies);
+                //Update de todas las demas celdas
+
+                updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells(), coordinates[0], coordinates[1]);
+                // System.out.println("cell " + spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getContent());
+            } catch (UnknownFunctionException ex2) {
+                //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
+                System.out.println("Linea 110 for Controller");
+            }
+
+        } catch (CircularReferenceException ex7) {
+
         }
 
     }
@@ -258,9 +264,9 @@ public class Controller {
      */
     private static void editNumeric(String value, String cell) {
         try {
-             int[] coordinates = CellReference.getCoordinates(cell);
-     
-            CircularReferencer.deleteReferences( cell,  spreadsheet);
+            int[] coordinates = CellReference.getCoordinates(cell);
+
+            CircularReferencer.deleteReferences(cell, spreadsheet);
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content = new ContentNumeric();
             spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(value);
         } catch (java.lang.NullPointerException e) {
@@ -347,42 +353,45 @@ public class Controller {
         }
 
     }
-/**
- * Void that checks if the edited cell has any dependency (another cell that includes the current one in its formula) and recalculates its new value with the modification
- * @param dependencies list of dependent cells
- * @param row integer containing the cell's row
- * @param col  integer containing the cell's column
- */
+
+    /**
+     * Void that checks if the edited cell has any dependency (another cell that
+     * includes the current one in its formula) and recalculates its new value
+     * with the modification
+     *
+     * @param dependencies list of dependent cells
+     * @param row integer containing the cell's row
+     * @param col integer containing the cell's column
+     */
     private static void updateDependentCells(LinkedList<String> dependencies, int row, int col) {
         Postfixer newPostfixer = new Postfixer();
-        
+
         LinkedList<String> auxDependencies = new LinkedList<>(dependencies);
         int[] coordinates;
         float output;
         LinkedList<FormulaElement> postfix = null;
-        System.out.println("no se que estoy haciendo" + dependencies);
+
         while (!auxDependencies.isEmpty()) {
 
             String cell = auxDependencies.pop();
             coordinates = CellReference.getCoordinates(cell);
             newPostfixer = new Postfixer();
-            
-            if (spreadsheet.getSpreadsheet()[row][col].content.getFormula()!= null) {
-                
-                output = 0; 
+
+            if (spreadsheet.getSpreadsheet()[row][col].content.getFormula() != null) {
+
+                output = 0;
                 LinkedList<FormulaElement> aux = new LinkedList<>(spreadsheet.getSpreadsheet()[row][col].content.getFormula());
                 postfix = newPostfixer.shuntingYardAlgorithm(aux, spreadsheet.getSpreadsheet());
                 try {
                     output = PostfixEvaluator.evaluate(postfix); //Logger.getLogger(VisualInterface.class.getName()).log(Level.SEVERE, null, ex2);
-    
-                    
+
                 } catch (UnknownFunctionException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.setContent(String.valueOf(output));
-              
+
                 if (!spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells().isEmpty()) {
- 
+
                     updateDependentCells(spreadsheet.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells(), coordinates[0], coordinates[1]);
                 }
             }

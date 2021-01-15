@@ -7,7 +7,6 @@ package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 import edu.upc.etsetb.archsoft.spreadsheet.BasicElements.formula.CellReference;
 import java.util.LinkedList;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,25 +17,35 @@ import java.util.logging.Logger;
  */
 public class CircularReferencer {
 
-    public void checkCircularReference(LinkedList<String> dependencies, String cell, Spreadsheet excel) {
-        int[] coordinates;
+    public static void checkCircularReference(LinkedList<String> dependencies, Spreadsheet excel, String cell) throws CircularReferenceException {
+        int[] coordinates = null;
+
         LinkedList<String> auxDependencies = new LinkedList<>(dependencies);
-        String reference;
+        try{
+            
+        
+        LinkedList<String> auxDependentCells = new LinkedList<>(excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells());
+        String reference, ref;
         while (!auxDependencies.isEmpty()) {
             reference = auxDependencies.pop();
-            try {
-                Controller.validCell(reference);
-                coordinates = CellReference.getCoordinates(reference);
-                if (excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells().contains(reference)) {
+            System.out.println("Soy " + cell + " Estoy comprobando " + reference);
+            coordinates = CellReference.getCoordinates(reference);
+            if (excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies().contains(cell) == true) {
+                System.out.println("Soy " + reference + " tengo " + excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies());
+                throw new CircularReferenceException();
+            } else {
+                while (!auxDependentCells.isEmpty()) {
+                    ref = auxDependentCells.pop();
+                    System.out.println("Soy " + cell + " Estoy comprobando " + ref);
+                    coordinates = CellReference.getCoordinates(ref);
+                    if (excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells().contains(reference) == true) {
 
+                        throw new CircularReferenceException();
+                    }
                 }
-            } catch (java.lang.NumberFormatException e) {
-
-            } catch (UnknownReferenceException ex) {
-                Logger.getLogger(CircularReferencer.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
+        }catch( java.lang.NullPointerException ex){}
     }
 
     /**
@@ -81,19 +90,18 @@ public class CircularReferencer {
     public static void deleteReferences(String cell, Spreadsheet excel) {
         int[] coordinates;
         coordinates = CellReference.getCoordinates(cell);
-     
+
         String reference;
-       
+
         while (!excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies().isEmpty()) {
-           
+
             reference = excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependencies().pop();
-          
+
             coordinates = CellReference.getCoordinates(reference);
             excel.spreadsheet[coordinates[0]][coordinates[1]].content.deleteDependency(cell);
 
         }
-       
+
     }
-     
 
 }
