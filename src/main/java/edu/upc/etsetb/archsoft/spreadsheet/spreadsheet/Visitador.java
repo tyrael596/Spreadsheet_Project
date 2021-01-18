@@ -17,7 +17,7 @@ import edu.upc.etsetb.archsoft.spreadsheet.UnknownFunctionException;
 import java.util.LinkedList;
 
 /**
- *
+ * Visitor class created for the multiple functionalities required for the spreadsheet
  * @author Alex Eslava and Amaya Balaguer
  */
 public class Visitador {
@@ -30,9 +30,9 @@ public class Visitador {
      * Visitador of the Cell Reference object. It returns the value contained in
      * that cell reference
      *
-     * @param aThis
-     * @param input
-     * @return
+     * @param aThis cell reference which we act upon
+     * @param input linkedList to obtain the numeric float value from the cell
+     * @return number added to the list is returned as float
      */
     public float visitaCellReference(CellReference aThis, LinkedList<FormulaElement> input) {
         aux = input.pop();
@@ -43,10 +43,10 @@ public class Visitador {
     }
 
     /**
-     *
-     * @param aThis
-     * @param input
-     * @return
+     *Visitador of a  Numeric object. Returns contained numeric in the aThis cell reference
+     * @param aThis cell reference which we act upon
+     * @param input linkedlist upon which we act
+     * @return numeric value we return
      */
     public float visitaNumeric(Numeric aThis, LinkedList<FormulaElement> input) {
         aux = input.pop();
@@ -56,10 +56,10 @@ public class Visitador {
     }
 
     /**
-     *
-     * @param aThis
-     * @param input
-     * @return
+     *Visitador of operator object. Returns calculus of the operands in list and returns float calculated
+     * @param aThis operador being used
+     * @param input input linkedlist upon which we perform calculations
+     * @return result of operation 
      */
     public float visitaOperador(Operador aThis, LinkedList<FormulaElement> input) {
         aux = input.pop();
@@ -79,11 +79,11 @@ public class Visitador {
     }
 
     /**
-     *
-     * @param aThis
-     * @param input
-     * @return
-     * @throws UnknownFunctionException
+     *Visitador of a function object. Returns result of respective function calculus
+     * @param aThis given function
+     * @param input input list of formulaelements on which we're calculating the postfix
+     * @return result of given function calculus
+     * @throws UnknownFunctionException if function type is unknown 
      */
     public float visitaFunction(Function aThis, LinkedList<FormulaElement> input) throws UnknownFunctionException {
         aux = input.pop();
@@ -93,11 +93,11 @@ public class Visitador {
     }
 
     /**
-     *
-     * @param input
-     * @param type
-     * @return
-     * @throws UnknownFunctionException
+     *Calculation of function depending on the type of function
+     * @param input list of formulaElements that go into the calculus proccess
+     * @param type type of function we're doing
+     * @return result of the calculus performed
+     * @throws UnknownFunctionException if function type is unknown 
      */
     private float calculateFunction(LinkedList<FormulaElement> input, String type) throws UnknownFunctionException {
         float output = 0;
@@ -131,9 +131,9 @@ public class Visitador {
     }
 
     /**
-     *
-     * @param aThis
-     * @return
+     *Visitador for punctuation object
+     * @param aThis punctuation object in case
+     * @return 1 to postfixer to evaluate this
      */
     public float visitaPunctuation(Punctuation aThis, LinkedList input) {
         return 1;

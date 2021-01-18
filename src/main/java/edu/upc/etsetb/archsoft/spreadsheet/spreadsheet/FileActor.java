@@ -20,11 +20,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Used for handling input-output operations Export / Load Spreadsheet
  *
  * @author Alex Eslava and Amaya Balaguer
  */
 public class FileActor {
 
+    /**
+     * Save spreadsheet currently in use into a file with name filename
+     * following the S2V format presented in the proposal of the project.
+     *
+     * @param excel Current Spreadsheet in use
+     * @param filename Name to store the file as (can include a path)
+     */
     public void exportSpreadsheet(Spreadsheet excel, String filename) {
 
         BufferedWriter bw;
@@ -46,6 +54,17 @@ public class FileActor {
 
     }
 
+    /**
+     * Load from a given file with name filename and correct format the
+     * spreadsheet is then updated with the new corresponding cell contents
+     *
+     * @param excel current empty spreadsheet in use where to update
+     * cellcontents read from file
+     * @param filename name of file to find in project's working directory (can
+     * include a path)
+     * @throws FileNotFoundException exception if we can't find the given
+     * filename file
+     */
     public void loadSpreadsheet(Spreadsheet excel, String filename) throws FileNotFoundException {
         Path path = Paths.get(filename);
 
@@ -62,6 +81,12 @@ public class FileActor {
         }
     }
 
+    /**
+     * Used to read commands from a text file
+     *
+     * @param location filename to read (can include a path)
+     * @param commands List of commands obtained from parsing the file
+     */
     public static void readTextfile(String location, LinkedList<String> commands) {
         // pass the path to the file as a parameter 
 
