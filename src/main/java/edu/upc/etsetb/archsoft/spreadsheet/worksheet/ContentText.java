@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author Alex
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class ContentText extends CellContent {
 

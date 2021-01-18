@@ -18,14 +18,6 @@ import java.util.List;
 public class ExpressionCleaner {
 
     /**
-     *
-     * @return
-     */
-    public List<FormulaElement> getTokens() {
-        return null;
-    }
-
-    /**
      * Check if the input string is syntactically correct all params are
      * commented across the function
      */

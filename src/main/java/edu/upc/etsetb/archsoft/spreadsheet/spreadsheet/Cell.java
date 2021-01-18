@@ -9,7 +9,7 @@ import edu.upc.etsetb.archsoft.spreadsheet.worksheet.CellContent;
 
 /**
  *
- * @author Alex
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class Cell {
 

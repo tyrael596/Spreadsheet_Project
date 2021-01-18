@@ -9,8 +9,8 @@ import edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.CellReference;
 import java.util.List;
 
 /**
- *
- * @author Alex
+ * Object RangeOfCell that can transform into a list of CellReferences when parsed
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class RangeOfCell {
 

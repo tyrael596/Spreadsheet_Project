@@ -15,24 +15,11 @@ import java.util.LinkedList;
 
 /**
  *
- * @author Alex
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class Spreadsheet {
 
     Cell[][] spreadsheet;
-
-    public void exportSp() {
-
-    }
-
-    public void importSp() {
-    }
-
-    public void printSp() {
-    }
-
-    public void updateSp() {
-    }
 
     public void createSpreadsheet() {
         SpreadsheetFactory factory = new SpreadsheetFactory();
@@ -79,6 +66,4 @@ public class Spreadsheet {
 
     }
 
-    // Metodo ModifyCell +++ 
-    // Tokenizer -> ParserCleaner (formato correcto)  -> Postfixer
 }

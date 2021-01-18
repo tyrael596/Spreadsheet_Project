@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Usuario
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class FileActor {
 

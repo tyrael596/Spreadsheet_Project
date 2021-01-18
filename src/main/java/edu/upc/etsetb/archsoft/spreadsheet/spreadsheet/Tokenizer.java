@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author Alex
+ * @author Alex Eslava and Amaya Balaguer
  */
 public class Tokenizer {
 
