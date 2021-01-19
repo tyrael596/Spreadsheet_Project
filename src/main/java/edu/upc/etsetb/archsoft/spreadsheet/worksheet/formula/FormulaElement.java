@@ -97,10 +97,9 @@ public abstract class FormulaElement {
     }
 
     /**
-     *
-     * @param visitador
-     * @param input
-     * @return
+     * Accept visitor function. 
+     * @param visitador Visitador of the Element
+     * @param input Linked List containing the element
      */
     public abstract float acceptVisitor(Visitador visitador, LinkedList input);
 }

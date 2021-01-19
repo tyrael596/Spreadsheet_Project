@@ -17,26 +17,6 @@ import java.util.logging.Logger;
  */
 public class CircularReferencer {
 
-    public void checkCircularReference(LinkedList<String> dependencies, String cell, Spreadsheet excel) {
-        int[] coordinates;
-        LinkedList<String> auxDependencies = new LinkedList<>(dependencies);
-        String reference;
-        while (!auxDependencies.isEmpty()) {
-            reference = auxDependencies.pop();
-            try {
-                Controller.validCell(reference);
-                coordinates = CellReference.getCoordinates(reference);
-                if (excel.spreadsheet[coordinates[0]][coordinates[1]].content.getDependentCells().contains(reference)) {
-
-                }
-            } catch (java.lang.NumberFormatException e) {
-
-            } catch (UnknownReferenceException ex) {
-                Logger.getLogger(CircularReferencer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-    }
 
     /**
      * Void that updates the list of references of each cell whenever its

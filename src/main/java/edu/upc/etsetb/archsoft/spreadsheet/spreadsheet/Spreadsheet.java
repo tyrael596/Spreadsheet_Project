@@ -14,6 +14,8 @@ import edu.upc.etsetb.archsoft.spreadsheet.SpreadsheetToolkit;
 import java.util.LinkedList;
 
 /**
+ * Class containing the main functions of the spreadhseet itself.It includes:
+ * creating a spreadsheet, modifying the cell and a, spreadhseet getter.
  *
  * @author Alex Eslava and Amaya Balaguer
  */
@@ -21,6 +23,12 @@ public class Spreadsheet {
 
     Cell[][] spreadsheet;
 
+    /**
+     * Function that creates an empty spreadsheet. The cells have a text type
+     * content by default and contain a blank space. The first row of the
+     * Spreadsheet contains the Letters indicating the column and the first row
+     * it's corresponding number.
+     */
     public void createSpreadsheet() {
         SpreadsheetFactory factory = new SpreadsheetFactory();
         spreadsheet = new Cell[SpreadsheetToolkit.MAXROW][SpreadsheetToolkit.MAXCOL];
@@ -41,11 +49,11 @@ public class Spreadsheet {
                     if (row == 0 && col != 0) {
                         this.spreadsheet[row][col].content = new ContentText();
                         this.spreadsheet[row][col].content.setContent(a[col]);
-                        //this.spreadsheet[row][col].content.setContent(String.valueOf((char) ('A' + col-1)));
+
                     } else {
 
                         this.spreadsheet[row][col].content = new ContentNumeric();
-                        this.spreadsheet[row][col].content.setContent(String.valueOf(row + 3));
+                        this.spreadsheet[row][col].content.setContent(" ");
                     }
                 }
 
@@ -53,14 +61,31 @@ public class Spreadsheet {
         }
     }
 
+    /**
+     * Spreadsheet getter. It returns the current spreadsheet (cell matrix)
+     * @return
+     */
     public Cell[][] getSpreadsheet() {
         return spreadsheet;
     }
 
+    /**
+     * Functions that modifies the content of any given cell. 
+     * @param row: integer containing the numeric representation of the row
+     * @param col integer containing the numeric representation of the column
+     * @param content String containing the new content of the cell.
+     */
     public void modifyCell(int row, int col, String content) {
         this.spreadsheet[row][col].content.modifyContent(content);
     }
 
+    /**
+     * Functions that modifies the content of a ContentFormula type content.
+     * @param row: integer containing the numeric representation of the row
+     * @param col integer containing the numeric representation of the column
+     * @param content String containing the new content of the cell.
+     * @param postfix Linked List containing the elements of the formula introduced by the user. 
+     */
     public void modifyCell(int row, int col, String content, LinkedList<FormulaElement> postfix) {
         this.spreadsheet[row][col].content.modifyContent(content, postfix);
 
