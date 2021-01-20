@@ -6,7 +6,7 @@
 package edu.upc.etsetb.archsoft.spreadsheet;
 
 /**
- *
+ * Used when detecting type not matching any of the expected
  * @author Alex Eslava and Amaya Balaguer
  */
 public class UnknownTypeException extends Exception {

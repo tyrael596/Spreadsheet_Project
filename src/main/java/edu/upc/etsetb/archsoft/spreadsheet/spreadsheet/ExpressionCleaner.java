@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
+ *Used to revise mathematical syntax correctness for formulas
  * @author Alex Eslava and Amaya Balaguer
  */
 public class ExpressionCleaner {

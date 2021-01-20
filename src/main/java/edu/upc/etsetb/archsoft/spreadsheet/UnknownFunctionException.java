@@ -6,7 +6,7 @@
 package edu.upc.etsetb.archsoft.spreadsheet;
 
 /**
- *
+ * Used when we can't find matching function to given input
  * @author Alex Eslava and Amaya Balaguer
  */
 public class UnknownFunctionException extends Exception {

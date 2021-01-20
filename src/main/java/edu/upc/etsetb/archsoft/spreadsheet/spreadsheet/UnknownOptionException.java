@@ -6,7 +6,7 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 /**
- *
+ * Used when given user input option does not match any of the expected
  * @author Alex Eslava and Amaya Balaguer
  */
 public class UnknownOptionException extends Exception {

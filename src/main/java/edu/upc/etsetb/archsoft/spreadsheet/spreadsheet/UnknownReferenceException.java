@@ -6,7 +6,7 @@
 package edu.upc.etsetb.archsoft.spreadsheet.spreadsheet;
 
 /**
- *
+ * Used when given reference does not exist or can't be found
  * @author Alex Eslava and Amaya Balaguer
  */
 public class UnknownReferenceException extends Exception {

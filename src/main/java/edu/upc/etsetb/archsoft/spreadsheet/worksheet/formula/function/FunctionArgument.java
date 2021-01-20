@@ -6,7 +6,7 @@
 package edu.upc.etsetb.archsoft.spreadsheet.worksheet.formula.function;
 
 /**
- *
+ * Unused
  * @author Alex Eslava and Amaya Balaguer
  */
 public interface FunctionArgument {

@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
+ * Class used to break down the input string into list of tokens
  * @author Alex Eslava and Amaya Balaguer
  */
 public class Tokenizer {
